@@ -3,142 +3,1584 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thuê Xe VinFast VF3 Độ VIP | thuevf3.click</title>
-  <meta name="description" content="Dịch vụ thuê xe VinFast VF3 độ VIP với màn hình Samsung Dex 14 inch 2K, âm thanh Hi-End, cách âm SIP, ghế Nappa, phuộc KYB và hướng dẫn sử dụng chi tiết." />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Thuê VF3 Click chuyên cho thuê VinFast VF3 đi phố, xe điện nhỏ gọn, cá tính, dễ lái. Hỗ trợ thêm VF 8, KIA K5, xe hoa và xe siêu sang tại Tân Uyên, TP. Hồ Chí Minh." />
+  <meta name="keywords" content="thuê VF3, thuê VinFast VF3, thuê xe VF3, thuê VF3 tự lái, thuê xe điện VF3, thuê VF3 Tân Uyên, thuê VF3 TP HCM" />
+  <meta name="author" content="Thuê VF3 Click" />
+
+  <meta property="og:title" content="Thuê VF3 Click | Thuê VF3 đi phố – Nhỏ gọn, cá tính, cực tiện" />
+  <meta property="og:description" content="Chuyên thuê VinFast VF3 đi phố, đi làm, đi chơi và trải nghiệm xe điện. Mở rộng thêm VF 8, KIA K5, xe hoa và xe cao cấp theo nhu cầu." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thuevf3.click/" />
+  <!-- TODO: Thay ảnh thumbnail thật khi có ảnh xe -->
+  <meta property="og:image" content="https://thuevf3.click/assets/images/og-thue-vf3-click.jpg" />
+
+  <title>Thuê VF3 Click | Thuê VF3 đi phố – Nhỏ gọn, cá tính, cực tiện</title>
+
+  <!-- Font hiện đại, dễ đọc. Nếu muốn tối ưu tuyệt đối, có thể tải font về local sau. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       THUÊ VF3 CLICK - INDEX.HTML
+       Gộp CSS trong file để dễ test.
+       Khi đưa lên hosting thật, có thể tách sang assets/css/style.css
+    ========================================================= */
+
+    :root {
+      --blue: #0b7cff;
+      --blue-dark: #075fcc;
+      --blue-soft: #eaf4ff;
+      --blue-soft-2: #f5faff;
+      --black: #0f172a;
+      --black-soft: #1e293b;
+      --gray: #64748b;
+      --gray-2: #94a3b8;
+      --gray-light: #f1f5f9;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --green: #10b981;
+      --orange: #f59e0b;
+      --shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 10px 35px rgba(15, 23, 42, 0.06);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+      --container: 1160px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-soft {
+      background: linear-gradient(180deg, var(--blue-soft-2), #ffffff);
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 36px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.045em;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    .text-blue {
+      color: var(--blue);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 850;
+      line-height: 1;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      min-height: 52px;
+      padding: 0 22px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--blue), #00a3ff);
+      box-shadow: 0 14px 30px rgba(11, 124, 255, 0.26);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(11, 124, 255, 0.34);
+    }
+
+    .btn-outline {
+      min-height: 52px;
+      padding: 0 22px;
+      color: var(--black);
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      color: var(--blue);
+      border-color: rgba(11, 124, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-dark {
+      min-height: 48px;
+      padding: 0 18px;
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .btn-dark:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.86);
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--blue), var(--black));
+      box-shadow: 0 14px 28px rgba(11, 124, 255, 0.22);
+      letter-spacing: -0.08em;
+    }
+
+    .desktop-menu {
+      display: none;
+      align-items: center;
+      gap: 22px;
+      color: var(--gray);
+      font-size: 0.94rem;
+      font-weight: 750;
+    }
+
+    .desktop-menu a {
+      position: relative;
+      padding: 26px 0;
+    }
+
+    .desktop-menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 18px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--blue);
+      transition: width 0.22s ease;
+    }
+
+    .desktop-menu a:hover,
+    .desktop-menu a.active {
+      color: var(--blue);
+    }
+
+    .desktop-menu a:hover::after,
+    .desktop-menu a.active::after {
+      width: 100%;
+    }
+
+    .header-cta {
+      display: none;
+    }
+
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--white);
+      color: var(--black);
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    .mobile-menu {
+      display: none;
+      padding: 0 16px 16px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu.is-open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 13px 4px;
+      color: var(--black-soft);
+      font-weight: 800;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-menu .mobile-hotline {
+      margin-top: 14px;
+      width: 100%;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      padding: 58px 0 76px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(11, 124, 255, 0.16), transparent 32%),
+        radial-gradient(circle at 92% 18%, rgba(0, 163, 255, 0.16), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -12% -28% -12%;
+      height: 330px;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(11, 124, 255, 0.12), transparent 60%);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      max-width: 780px;
+      margin-bottom: 18px;
+      font-size: clamp(2.45rem, 10vw, 5.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.075em;
+    }
+
+    .hero-copy p {
+      max-width: 680px;
+      margin-bottom: 26px;
+      color: var(--gray);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 620px;
+    }
+
+    .stat-item {
+      padding: 14px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.04);
+    }
+
+    .stat-item strong {
+      display: block;
+      color: var(--black);
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .stat-item span {
+      display: block;
+      margin-top: 4px;
+      color: var(--gray);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 340px;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-car-card {
+      position: relative;
+      width: min(100%, 560px);
+      padding: 18px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-car-frame {
+      position: relative;
+      min-height: 290px;
+      display: grid;
+      place-items: center;
+      border-radius: 30px;
+      overflow: hidden;
+      color: var(--white);
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(11, 124, 255, 0.86)),
+        url("assets/images/vf3-hero.jpg") center/cover no-repeat;
+    }
+
+    /* TODO: Thay ảnh hero VF3 tại assets/images/vf3-hero.jpg */
+
+    .hero-car-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.2));
+    }
+
+    .hero-car-text {
+      position: relative;
+      z-index: 1;
+      padding: 24px;
+    }
+
+    .hero-car-text .vf3-big {
+      display: block;
+      font-size: clamp(4rem, 22vw, 8rem);
+      line-height: 0.88;
+      font-weight: 950;
+      letter-spacing: -0.09em;
+    }
+
+    .hero-car-text .vf3-sub {
+      display: block;
+      margin-top: 8px;
+      font-weight: 750;
+      opacity: 0.94;
+    }
+
+    .hero-badge {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      z-index: 2;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--blue-dark);
+      font-weight: 900;
+      font-size: 0.82rem;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+    }
+
+    .hero-feature-chip {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2;
+      max-width: 230px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--black);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.16);
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    /* =========================
+       WHY VF3
+    ========================== */
+    .why-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .why-card,
+    .fleet-card,
+    .service-card,
+    .process-card,
+    .policy-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .why-card:hover,
+    .fleet-card:hover,
+    .service-card:hover,
+    .process-card:hover,
+    .policy-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(11, 124, 255, 0.28);
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.09);
+    }
+
+    .why-card {
+      padding: 22px;
+    }
+
+    .icon-box {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 18px;
+      color: var(--blue);
+      background: linear-gradient(135deg, var(--blue-soft), #ffffff);
+      border: 1px solid rgba(11, 124, 255, 0.12);
+      font-size: 1.45rem;
+    }
+
+    .why-card h3,
+    .fleet-card h3,
+    .service-card h3,
+    .process-card h3,
+    .policy-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.16rem;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+    }
+
+    .why-card p,
+    .fleet-card p,
+    .service-card p,
+    .process-card p,
+    .policy-card p {
+      color: var(--gray);
+      font-size: 0.96rem;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+      color: var(--gray);
+      font-size: 0.92rem;
+    }
+
+    .feature-list li {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ecfdf5;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 950;
+      margin-top: 2px;
+    }
+
+    /* =========================
+       FLEET
+    ========================== */
+    .fleet-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .fleet-card {
+      overflow: hidden;
+    }
+
+    .fleet-card.is-featured {
+      border-color: rgba(11, 124, 255, 0.38);
+      box-shadow: 0 22px 60px rgba(11, 124, 255, 0.12);
+    }
+
+    .fleet-image {
+      min-height: 210px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(11, 124, 255, 0.78)),
+        var(--image) center/cover no-repeat;
+    }
+
+    .fleet-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent, rgba(15, 23, 42, 0.16));
+    }
+
+    .fleet-name-visual {
+      position: relative;
+      z-index: 1;
+      font-size: 2.8rem;
+      font-weight: 950;
+      letter-spacing: -0.07em;
+    }
+
+    .badge {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--blue-dark);
+      font-size: 0.78rem;
+      font-weight: 950;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+    }
+
+    .fleet-body {
+      padding: 22px;
+    }
+
+    .fleet-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+
+    .fleet-tags span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--gray-light);
+      color: var(--black-soft);
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    .fleet-card.is-featured .fleet-tags span:first-child {
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+    }
+
+    /* =========================
+       SERVICES
+    ========================== */
+    .service-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 26px;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(11, 124, 255, 0.08);
+    }
+
+    .service-card .icon-box {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card .btn-outline {
+      margin-top: 18px;
+      min-height: 46px;
+    }
+
+    /* =========================
+       PROCESS
+    ========================== */
+    .process-grid {
+      display: grid;
+      gap: 18px;
+      counter-reset: process;
+    }
+
+    .process-card {
+      position: relative;
+      padding: 26px;
+      overflow: hidden;
+      counter-increment: process;
+    }
+
+    .process-card::after {
+      content: "0" counter(process);
+      position: absolute;
+      right: 20px;
+      bottom: -10px;
+      color: rgba(11, 124, 255, 0.08);
+      font-size: 5.8rem;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+    }
+
+    .process-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =========================
+       POLICY SUMMARY
+    ========================== */
+    .policy-wrap {
+      display: grid;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .policy-card {
+      padding: 26px;
+    }
+
+    .policy-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .policy-list li {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--gray);
+      font-size: 0.96rem;
+    }
+
+    .policy-list li::before {
+      content: "•";
+      width: 24px;
+      height: 24px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 1.2rem;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .policy-highlight {
+      min-height: 100%;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      color: var(--white);
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.22), transparent 34%),
+        linear-gradient(135deg, var(--black), var(--blue-dark));
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.16);
+    }
+
+    .policy-highlight h3 {
+      margin-bottom: 10px;
+      font-size: clamp(1.55rem, 4vw, 2.1rem);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+    }
+
+    .policy-highlight p {
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .policy-highlight .btn-primary {
+      background: var(--white);
+      color: var(--blue-dark);
+      box-shadow: none;
+    }
+
+    .policy-highlight .btn-primary:hover {
+      box-shadow: 0 14px 30px rgba(255,255,255,0.16);
+    }
+
+    /* =========================
+       CONTACT STRIP
+    ========================== */
+    .contact-strip {
+      padding: 64px 0;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(11, 124, 255, 0.38), transparent 34%),
+        linear-gradient(135deg, #07111f, #0f172a);
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact-grid h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-grid p {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .contact-link strong,
+    .contact-link span {
+      display: block;
+    }
+
+    .contact-link span {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.88rem;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    .site-footer {
+      padding: 30px 0;
+      background: #050b14;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.92rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    /* =========================
+       FLOATING BUTTON
+    ========================== */
+    .floating-contact {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1200;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .float-main,
+    .float-item {
+      border: 0;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.24);
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .float-main {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--blue), #00a3ff);
+      font-size: 1.45rem;
+      animation: pulse 1.7s infinite, phoneShake 2.6s infinite;
+    }
+
+    .float-main:hover {
+      transform: scale(1.06);
+    }
+
+    .float-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(14px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .floating-contact:hover .float-menu,
+    .floating-contact.is-open .float-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .float-item {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      font-size: 1rem;
+      font-weight: 950;
+    }
+
+    .float-item:hover {
+      transform: translateY(-3px) scale(1.04);
+    }
+
+    .float-zalo { background: #0068ff; }
+    .float-messenger { background: #8b5cf6; }
+    .float-hotline { background: #10b981; }
+
+    .float-label {
+      position: absolute;
+      right: 62px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 850;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .float-item:hover .float-label {
+      opacity: 1;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(11, 124, 255, 0.48), 0 14px 30px rgba(15, 23, 42, 0.24);
+      }
+      70% {
+        box-shadow: 0 0 0 17px rgba(11, 124, 255, 0), 0 14px 30px rgba(15, 23, 42, 0.24);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(11, 124, 255, 0), 0 14px 30px rgba(15, 23, 42, 0.24);
+      }
+    }
+
+    @keyframes phoneShake {
+      0%, 82%, 100% { transform: rotate(0deg); }
+      85% { transform: rotate(8deg); }
+      88% { transform: rotate(-8deg); }
+      91% { transform: rotate(6deg); }
+      94% { transform: rotate(-6deg); }
+      97% { transform: rotate(3deg); }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+    @media (min-width: 560px) {
+      .hero-actions {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .why-grid,
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .service-grid,
+      .contact-actions {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 820px) {
+      .section {
+        padding: 92px 0;
+      }
+
+      .desktop-menu,
+      .header-cta {
+        display: flex;
+      }
+
+      .menu-toggle,
+      .mobile-menu {
+        display: none !important;
+      }
+
+      .hero {
+        padding: 88px 0 104px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 48px;
+      }
+
+      .hero-copy p {
+        font-size: 1.13rem;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .fleet-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .policy-wrap {
+        grid-template-columns: 1fr 0.82fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1.1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+      }
+
+      .footer-links {
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .container {
+        width: min(100% - 24px, var(--container));
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-feature-chip {
+        left: 12px;
+        right: 12px;
+        max-width: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container nav">
-      <a href="#home" class="logo" aria-label="Trang chủ thuevf3.click"><span class="logo-icon">VF3</span><span>thuevf3.click</span></a>
-      <nav class="menu" id="menu">
-        <a href="#home">Trang chủ</a>
-        <a href="#car-info">Thông tin xe</a>
-        <a href="#policy">Chính sách</a>
-        <a href="#guide">Hướng dẫn</a>
-        <a href="#contact" class="menu-cta">Đặt xe ngay</a>
+  <!-- =========================================================
+       HEADER STICKY
+  ========================================================== -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a class="brand" href="index.html" aria-label="Về trang chủ Thuê VF3 Click">
+        <span class="brand-mark">VF3</span>
+        <span>Thuê VF3 Click</span>
+      </a>
+
+      <nav class="desktop-menu" aria-label="Menu chính">
+        <a class="active" href="index.html">Trang chủ</a>
+        <a href="vf3.html">Thuê VF3</a>
+        <a href="#dan-xe">Dàn xe</a>
+        <a href="#dich-vu">Dịch vụ</a>
+        <a href="chinh-sach.html">Chính sách</a>
+        <a href="lien-he.html">Liên hệ</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
+
+      <!-- TODO: Thay số hotline thật ở cả href và nội dung hiển thị -->
+      <a class="btn btn-primary header-cta" href="tel:0900000000">☎ Hotline đặt xe</a>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu điều hướng">
+        ☰
+      </button>
     </div>
+
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
+      <a href="index.html">Trang chủ</a>
+      <a href="vf3.html">Thuê VF3</a>
+      <a href="#dan-xe">Dàn xe</a>
+      <a href="#dich-vu">Dịch vụ</a>
+      <a href="chinh-sach.html">Chính sách</a>
+      <a href="lien-he.html">Liên hệ</a>
+      <a class="btn btn-primary mobile-hotline" href="tel:0900000000">☎ Hotline đặt xe</a>
+    </nav>
   </header>
 
   <main>
-    <section class="hero" id="home">
+    <!-- =========================================================
+         HERO BANNER - TẬP TRUNG VF3
+    ========================================================== -->
+    <section class="hero" id="trang-chu">
       <div class="container hero-grid">
-        <div class="hero-content">
-          <p class="eyebrow">⚡ VinFast VF3 bản độ cực VIP</p>
-          <h1>Thuê Xe VinFast VF3 <span>"Độ"</span> Độc Nhất Việt Nam</h1>
-          <p class="hero-desc">Trải nghiệm di chuyển đô thị cực đỉnh với không gian giải trí cao cấp, âm thanh Hi-End và khả năng vận hành êm ái vượt trội so với xe nguyên bản.</p>
+        <div class="hero-copy">
+          <div class="eyebrow">⚡ Chuyên thuê VinFast VF3 đi phố</div>
+          <h1>Thuê VF3 đi phố – <span class="text-blue">Nhỏ gọn, cá tính, cực tiện.</span></h1>
+          <p>
+            Thuê VF3 Click chuyên cung cấp dịch vụ thuê VinFast VF3 cho nhu cầu đi phố, đi làm, đi chơi và trải nghiệm xe điện. Ngoài VF3, chúng tôi còn hỗ trợ thêm VF 8, KIA K5, xe hoa và xe cao cấp theo nhu cầu.
+          </p>
+
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Liên hệ đặt xe ngay</a>
-            <a href="#car-info" class="btn btn-outline">Xem điểm độ VIP</a>
+            <!-- TODO: Có thể đổi href sang Zalo/Messenger nếu muốn bấm là nhắn ngay -->
+            <a class="btn btn-primary" href="lien-he.html">Đặt thuê VF3 ngay</a>
+            <a class="btn btn-outline" href="#dan-xe">Xem dàn xe khác</a>
+          </div>
+
+          <div class="hero-stats" aria-label="Thông tin nổi bật">
+            <div class="stat-item">
+              <strong>VF3</strong>
+              <span>Sản phẩm mũi nhọn</span>
+            </div>
+            <div class="stat-item">
+              <strong>Đi phố</strong>
+              <span>Gọn, dễ xoay trở</span>
+            </div>
+            <div class="stat-item">
+              <strong>Option</strong>
+              <span>Nâng cấp trải nghiệm</span>
+            </div>
+            <div class="stat-item">
+              <strong>Tân Uyên</strong>
+              <span>Hỗ trợ TP.HCM</span>
+            </div>
           </div>
         </div>
-        <div class="hero-image-card">
-          <!-- Thay bằng ảnh thật: <img src="images/vf3-do.jpg" alt="VinFast VF3 độ VIP"> -->
-          <div class="image-placeholder"><div><span class="placeholder-title">VF3 ĐỘ VIP</span><p>Chèn ảnh xe của bạn tại đây</p></div></div>
-          <div class="floating-badge">🔥 Bản độ giải trí & âm thanh cao cấp</div>
-        </div>
-      </div>
-    </section>
 
-    <section class="specs" aria-label="Thông số cơ bản">
-      <div class="container specs-grid">
-        <div class="spec-card"><div class="spec-icon">🕹️</div><p>Truyền động</p><h3>Số tự động</h3></div>
-        <div class="spec-card"><div class="spec-icon">💺</div><p>Số ghế</p><h3>4 ghế</h3></div>
-        <div class="spec-card"><div class="spec-icon">🔋</div><p>Phạm vi hoạt động</p><h3>210 km / 1 lần sạc đầy</h3></div>
-      </div>
-    </section>
-
-    <section class="section" id="car-info">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">🔥 Điểm nhấn độc quyền</p>
-          <h2>ĐIỂM NHẤN "ĐỘ" ĐỘC QUYỀN CHỈ CÓ TẠI ĐÂY</h2>
-          <p>Không chỉ là một chiếc VF3 nguyên bản, xe được nâng cấp mạnh về giải trí, âm thanh, cách âm, ánh sáng, nội thất và cảm giác vận hành.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card"><div class="feature-icon">📺</div><h3>Công nghệ & Giải trí</h3><p>Màn hình Samsung Dex 14 inch độ phân giải 2K sắc nét. Xe có sẵn sim 4G tốc độ cao, tích hợp YouTube Premium xem mượt mà không quảng cáo và bản quyền bản đồ Vietmap Live.</p></article>
-          <article class="feature-card"><div class="feature-icon">🔊</div><h3>Âm thanh & Cách âm</h3><p>Dàn loa Hi-End trị giá 25 triệu đồng kết hợp cùng vật liệu cách âm cửa SIP, mang đến không gian âm nhạc sống động, tách biệt tốt hơn với tiếng ồn bên ngoài.</p></article>
-          <article class="feature-card"><div class="feature-icon">💡</div><h3>Ánh sáng & An toàn</h3><p>Nâng cấp đèn pha GPNE siêu sáng. Kính xe được phủ Nano Ceramic chống bám nước, đảm bảo tầm nhìn rõ nét hơn khi di chuyển dưới trời mưa.</p></article>
-          <article class="feature-card"><div class="feature-icon">🪑</div><h3>Nội thất cao cấp</h3><p>Ghế bọc da Nappa êm ái, ốp lưng ghế B-Factory và thảm sàn Huvi, tạo cảm giác sạch sẽ, chỉn chu và cao cấp hơn khi sử dụng.</p></article>
-          <article class="feature-card feature-wide"><div class="feature-icon">🛞</div><h3>Vận hành êm ái</h3><p>Cảm giác lái cực êm qua gờ giảm tốc nhờ nâng cấp phuộc KYB và lò xo cải tiến. Xe còn được độ thêm cốp chứa đồ phía trước tiện lợi cho nhu cầu di chuyển hằng ngày.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-soft" id="guide">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">🎬 Hướng dẫn sử dụng & Khắc phục lỗi</p>
-          <h2>Xem nhanh hướng dẫn trước khi nhận xe</h2>
-          <p>Khu vực này được thiết kế để bạn gắn video thực tế, hình ảnh hướng dẫn và các mẹo xử lý nhanh khi sử dụng VF3 bản độ.</p>
-        </div>
-        <div class="guide-grid">
-          <article class="guide-card"><div class="video-frame"><video controls><source src="" type="video/mp4" />Trình duyệt của bạn không hỗ trợ video.</video></div><div class="guide-content"><span class="guide-tag">Màn hình</span><h3>Cách sử dụng màn hình Dex</h3><p>Hướng dẫn kết nối, mở ứng dụng giải trí và đa nhiệm trên màn hình 14 inch 2K.</p></div></article>
-          <article class="guide-card"><div class="video-frame"><video controls><source src="" type="video/mp4" />Trình duyệt của bạn không hỗ trợ video.</video></div><div class="guide-content"><span class="guide-tag">Khắc phục lỗi</span><h3>Cách xử lý khi màn hình bị xanh</h3><p>Mẹo reset nhanh hệ thống màn hình khi gặp sự cố.</p></div></article>
-          <article class="guide-card"><div class="video-frame"><video controls><source src="" type="video/mp4" />Trình duyệt của bạn không hỗ trợ video.</video></div><div class="guide-content"><span class="guide-tag">Âm thanh</span><h3>Cách chuyển âm thanh qua VF3</h3><p>Hướng dẫn kết nối âm thanh chuẩn từ màn hình qua dàn loa độ.</p></div></article>
-          <article class="guide-card"><div class="video-frame"><video controls><source src="" type="video/mp4" />Trình duyệt của bạn không hỗ trợ video.</video></div><div class="guide-content"><span class="guide-tag">An toàn</span><h3>Cách xử lý xe khi bị thủng lốp</h3><p>Quy trình xử lý nhanh và an toàn khi lốp gặp sự cố.</p></div></article>
-          <article class="guide-card"><div class="video-frame"><video controls><source src="" type="video/mp4" />Trình duyệt của bạn không hỗ trợ video.</video></div><div class="guide-content"><span class="guide-tag">Trạm sạc</span><h3>Cách tìm trạm sạc VinFast</h3><p>Định vị nhanh các trạm sạc xung quanh vị trí của bạn.</p></div></article>
-        </div>
-        <div class="gallery-heading"><h3>Thư viện ảnh thực tế</h3><p>Thay các khung ảnh bên dưới bằng ảnh thật của xe, nội thất, màn hình, âm thanh và các chi tiết độ.</p></div>
-        <div class="image-gallery">
-          <div class="gallery-item"><div class="gallery-placeholder">Ảnh màn hình Dex</div></div>
-          <div class="gallery-item"><div class="gallery-placeholder">Ảnh loa / âm thanh</div></div>
-          <div class="gallery-item"><div class="gallery-placeholder">Ảnh ghế Nappa</div></div>
-          <div class="gallery-item"><div class="gallery-placeholder">Ảnh đèn GPNE</div></div>
-          <div class="gallery-item"><div class="gallery-placeholder">Ảnh cốp trước</div></div>
-          <div class="gallery-item"><div class="gallery-placeholder">Ảnh ngoại thất VF3</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="policy">
-      <div class="container policy-grid">
-        <div class="policy-box">
-          <p class="eyebrow">📄 Chính sách thuê xe</p><h2>Điều khoản sử dụng</h2>
-          <ul class="check-list"><li>Khách hàng cam kết sử dụng xe đúng mục đích.</li><li>Nghiêm cấm sử dụng xe thuê vào các mục đích phi pháp, trái pháp luật.</li><li>Không sử dụng xe thuê để cầm cố, thế chấp dưới mọi hình thức.</li></ul>
-        </div>
-        <div class="fee-box">
-          <h2>Bảng phụ phí phát sinh</h2>
-          <div class="fee-list">
-            <div class="fee-item"><div><h3>Phí vượt giới hạn</h3><p>Khi vượt quá 300 km / 1 ngày thuê</p></div><strong>3.000đ / km</strong></div>
-            <div class="fee-item"><div><h3>Phí quá giờ</h3><p>Trễ quá 5 giờ tính thêm 1 ngày thuê</p></div><strong>80.000đ / giờ</strong></div>
-            <div class="fee-item"><div><h3>Phí vệ sinh</h3><p>Khi xe trả không đảm bảo vệ sinh</p></div><strong>100.000đ</strong></div>
-            <div class="fee-item"><div><h3>Phí khử mùi</h3><p>Xe bị ám mùi thuốc lá, thực phẩm...</p></div><strong>400.000đ</strong></div>
-            <div class="fee-item"><div><h3>Phí sạc pin</h3><p>Thanh toán khoản chênh lệch pin thực tế</p></div><strong>Theo thực tế</strong></div>
+        <div class="hero-visual" aria-label="Hình ảnh minh họa VinFast VF3">
+          <div class="hero-car-card">
+            <div class="hero-car-frame">
+              <span class="hero-badge">Nổi bật nhất</span>
+              <div class="hero-car-text">
+                <span class="vf3-big">VF3</span>
+                <span class="vf3-sub">Xe điện đô thị nhỏ gọn, dễ thuê, dễ đi</span>
+              </div>
+              <div class="hero-feature-chip">Samsung Dex • Subwoofer • Cách âm SIP/STP • Không gian sạch tự nhiên</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="contact-section" id="contact">
+    <!-- =========================================================
+         VÌ SAO VF3 ĐANG ĐƯỢC CHỌN THUÊ
+    ========================================================== -->
+    <section class="section" id="vi-sao-vf3">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">🚗 Vì sao nên thuê VF3?</div>
+          <h2>VF3 đang là lựa chọn hợp lý cho nhu cầu di chuyển đô thị.</h2>
+          <p>
+            Không chỉ vì thiết kế nhỏ gọn, VF3 còn phù hợp với nhóm khách muốn trải nghiệm xe điện mới, thuê ngắn ngày và cần một chiếc xe linh hoạt trong phố.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          <article class="why-card">
+            <div class="icon-box">🏙️</div>
+            <h3>Nhỏ gọn, dễ đi phố</h3>
+            <p>Phù hợp đường đô thị, hẻm nhỏ, bãi đỗ hạn chế và các chuyến đi hằng ngày trong khu vực gần.</p>
+          </article>
+
+          <article class="why-card">
+            <div class="icon-box">⚡</div>
+            <h3>Trải nghiệm xe điện mới</h3>
+            <p>Phù hợp khách muốn thử cảm giác lái xe điện trước khi mua hoặc đơn giản là muốn đổi gió khi đi chơi.</p>
+          </article>
+
+          <article class="why-card">
+            <div class="icon-box">💳</div>
+            <h3>Chi phí dễ kiểm soát</h3>
+            <p>Phù hợp thuê ngắn ngày, đi phố, đi làm, đi chơi và chủ động kiểm soát lịch trình sử dụng xe.</p>
+          </article>
+
+          <article class="why-card">
+            <div class="icon-box">✨</div>
+            <h3>Trải nghiệm nâng cấp</h3>
+            <p>VF3 không chỉ nguyên bản mà được chú trọng thêm về giải trí, âm thanh, cách âm và không gian sạch.</p>
+            <ul class="feature-list">
+              <li>Màn hình Samsung Dex thông minh.</li>
+              <li>Subwoofer DLS/Alpine/Focal.</li>
+              <li>Cách âm chuyên dụng SIP/STP.</li>
+              <li>Không dùng máy tạo mùi thơm hóa chất.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         DÀN XE NỔI BẬT
+    ========================================================== -->
+    <section class="section section-soft" id="dan-xe">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">🚘 Dàn xe nổi bật</div>
+          <h2>VF3 là trọng tâm, các dòng xe khác hỗ trợ thêm theo nhu cầu.</h2>
+          <p>
+            Bạn có thể bắt đầu với VF3 để đi phố, hoặc chọn VF 8, KIA K5 cho những lịch trình cần không gian, hình ảnh và sự thoải mái cao hơn.
+          </p>
+        </div>
+
+        <div class="fleet-grid">
+          <article class="fleet-card is-featured">
+            <div class="fleet-image" style="--image: url('assets/images/vf3.jpg');">
+              <span class="badge">⭐ Nổi bật nhất</span>
+              <span class="fleet-name-visual">VF3</span>
+            </div>
+            <div class="fleet-body">
+              <h3>VinFast VF 3</h3>
+              <p>Xe điện đô thị nhỏ gọn, cá tính, full option nâng cấp giải trí, âm thanh và cách âm.</p>
+              <div class="fleet-tags">
+                <span>Samsung Dex</span>
+                <span>Subwoofer</span>
+                <span>Cách âm SIP/STP</span>
+              </div>
+              <a class="btn btn-primary" href="vf3.html">Xem chi tiết</a>
+            </div>
+          </article>
+
+          <article class="fleet-card">
+            <div class="fleet-image" style="--image: url('assets/images/vf8.jpg');">
+              <span class="badge">SUV điện</span>
+              <span class="fleet-name-visual">VF8</span>
+            </div>
+            <div class="fleet-body">
+              <h3>VinFast VF 8</h3>
+              <p>SUV điện rộng rãi, công nghệ cao, phù hợp đi xa, du lịch gia đình hoặc lịch trình cần không gian thoải mái.</p>
+              <div class="fleet-tags">
+                <span>Rộng rãi</span>
+                <span>Đi xa</span>
+                <span>Gia đình</span>
+              </div>
+              <a class="btn btn-outline" href="vf8.html">Xem chi tiết</a>
+            </div>
+          </article>
+
+          <article class="fleet-card">
+            <div class="fleet-image" style="--image: url('assets/images/kia-k5.jpg');">
+              <span class="badge">Sedan công tác</span>
+              <span class="fleet-name-visual">K5</span>
+            </div>
+            <div class="fleet-body">
+              <h3>KIA K5</h3>
+              <p>Sedan thể thao, lịch sự, nội thất sang trọng, chuyên phục vụ công tác, gặp khách hàng và các dịp cần hình ảnh chỉn chu.</p>
+              <div class="fleet-tags">
+                <span>Lịch sự</span>
+                <span>Công tác</span>
+                <span>Gặp khách hàng</span>
+              </div>
+              <a class="btn btn-outline" href="kia-k5.html">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         DỊCH VỤ MỞ RỘNG
+    ========================================================== -->
+    <section class="section" id="dich-vu">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">💼 Dịch vụ mở rộng</div>
+          <h2>Không chỉ thuê VF3, bạn còn có thêm lựa chọn cho các dịp đặc biệt.</h2>
+          <p>
+            Các dịch vụ mở rộng giúp Thuê VF3 Click phục vụ nhiều nhu cầu hơn, từ cưới hỏi, sự kiện đến tiếp khách cao cấp.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="icon-box">💐</div>
+            <h3>Dịch vụ Xe Hoa</h3>
+            <p>Xe sạch đẹp, trang trí chỉn chu, đúng giờ. Phù hợp lễ cưới, lễ hỏi, chụp ảnh và các dịp cần hình ảnh trang trọng.</p>
+            <a class="btn btn-outline" href="xe-hoa.html">Xem dịch vụ xe hoa</a>
+          </article>
+
+          <article class="service-card">
+            <div class="icon-box">👑</div>
+            <h3>Xe Siêu Sang Sự Kiện</h3>
+            <p>Hỗ trợ đưa đón VIP, tiếp khách doanh nhân, phục vụ sự kiện, quay chụp quảng cáo hoặc nhu cầu hình ảnh cao cấp.</p>
+            <a class="btn btn-outline" href="xe-sieu-sang.html">Xem xe siêu sang</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         QUY TRÌNH THUÊ XE
+    ========================================================== -->
+    <section class="section section-soft" id="quy-trinh">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">🧭 Quy trình thuê xe</div>
+          <h2>3 bước đơn giản để bắt đầu hành trình.</h2>
+          <p>
+            Quy trình được thiết kế gọn gàng, dễ hiểu để khách hàng nhanh chóng chọn được xe hoặc dịch vụ phù hợp.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <div class="icon-box">🔎</div>
+            <h3>Chọn xe hoặc dịch vụ phù hợp</h3>
+            <p>Chọn thuê VF3, VF 8, KIA K5, xe hoa hoặc xe siêu sang tùy theo nhu cầu di chuyển, công tác hay sự kiện.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="icon-box">📋</div>
+            <h3>Xác nhận lịch, thủ tục và chi phí</h3>
+            <p>Trao đổi thời gian thuê, khu vực giao nhận, thủ tục cần chuẩn bị và các chi phí liên quan trước khi nhận xe.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="icon-box">🚗</div>
+            <h3>Nhận xe bàn giao và bắt đầu hành trình</h3>
+            <p>Kiểm tra tình trạng xe, xác nhận bàn giao và sử dụng xe theo đúng thỏa thuận ban đầu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CHÍNH SÁCH & PHỤ PHÍ TÓM TẮT
+    ========================================================== -->
+    <section class="section" id="chinh-sach-tom-tat">
+      <div class="container policy-wrap">
+        <article class="policy-card">
+          <div class="eyebrow">📄 Chính sách rõ ràng</div>
+          <h2>Minh bạch điều khoản để khách yên tâm trước khi thuê.</h2>
+          <ul class="policy-list">
+            <li>Minh bạch phí quá giờ, phí vượt km và các khoản phát sinh nếu có.</li>
+            <li>Phí sạc pin được tính theo thực tế sử dụng, dễ đối chiếu khi trả xe.</li>
+            <li>Phí vệ sinh/khử mùi chỉ áp dụng khi xe bẩn, ám mùi thuốc lá, hải sản hoặc mùi khó xử lý.</li>
+            <li>Tuyệt đối không sử dụng xe sai mục đích, không dùng vào mục đích phi pháp, không cầm cố hoặc thế chấp xe.</li>
+          </ul>
+        </article>
+
+        <aside class="policy-highlight">
+          <h3>Cần xem đầy đủ điều khoản và phụ phí?</h3>
+          <p>
+            Trước khi đặt xe, bạn có thể đọc trang chính sách để nắm rõ giới hạn km/ngày, phí quá giờ, phí vệ sinh, phí khử mùi và phí sạc pin.
+          </p>
+          <a class="btn btn-primary" href="chinh-sach.html">Đọc chi tiết Điều khoản & Phụ phí</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         LIÊN HỆ NHANH
+    ========================================================== -->
+    <section class="contact-strip" id="lien-he-nhanh">
       <div class="container contact-grid">
-        <div><p class="eyebrow light">📞 Liên hệ đặt xe</p><h2>Sẵn sàng trải nghiệm VF3 bản độ cực VIP?</h2><p>Liên hệ ngay để kiểm tra lịch xe, địa chỉ nhận xe và được tư vấn chi tiết trước khi thuê.</p></div>
-        <div class="contact-card">
-          <div class="contact-row"><span>📍</span><div><p>Địa chỉ nhận xe</p><strong>Tân Uyên, Bình Dương / TP. Hồ Chí Minh</strong></div></div>
-          <div class="contact-row"><span>☎</span><div><p>Hotline đặt xe</p><strong>0837892579 (Thuận)</strong><strong>0328520813 (Ngọc)</strong></div></div>
-          <div class="contact-buttons"><a href="tel:0837892579" class="btn btn-primary">Gọi Thuận</a><a href="tel:0328520813" class="btn btn-orange">Gọi Ngọc</a><a href="https://zalo.me/0837892579" target="_blank" class="btn btn-zalo">Zalo</a><a href="https://m.me/yourpage" target="_blank" class="btn btn-fb">Facebook</a></div>
+        <div>
+          <div class="eyebrow">📞 Liên hệ đặt xe</div>
+          <h2>Sẵn sàng thuê VF3 cho chuyến đi tiếp theo?</h2>
+          <p>
+            Liên hệ Thuê VF3 Click để kiểm tra lịch xe, khu vực giao nhận và tư vấn mẫu xe phù hợp với nhu cầu của bạn.
+          </p>
+        </div>
+
+        <div class="contact-actions">
+          <!-- TODO: Thay link Zalo bằng số điện thoại Zalo thật -->
+          <a class="contact-link" href="https://zalo.me/0900000000" target="_blank" rel="noopener">
+            <span>💬</span>
+            <div>
+              <strong>Zalo</strong>
+              <span>Nhắn tin kiểm tra lịch xe</span>
+            </div>
+          </a>
+
+          <!-- TODO: Thay link Messenger bằng link fanpage/m.me thật -->
+          <a class="contact-link" href="https://m.me/yourpage" target="_blank" rel="noopener">
+            <span>📩</span>
+            <div>
+              <strong>Messenger</strong>
+              <span>Tư vấn nhanh qua Facebook</span>
+            </div>
+          </a>
+
+          <!-- TODO: Thay số hotline thật -->
+          <a class="contact-link" href="tel:0900000000">
+            <span>☎</span>
+            <div>
+              <strong>Hotline</strong>
+              <span>0900 000 000</span>
+            </div>
+          </a>
+
+          <a class="contact-link" href="lien-he.html">
+            <span>📍</span>
+            <div>
+              <strong>Khu vực hoạt động</strong>
+              <span>Giao nhận xe tại Tân Uyên và TP. Hồ Chí Minh</span>
+            </div>
+          </a>
         </div>
       </div>
-      <footer class="footer"><p>© 2026 thuevf3.click. All rights reserved.</p></footer>
     </section>
   </main>
 
-  <div class="floating-contact" id="floatingContact">
-    <div class="floating-menu"><a href="tel:0837892579" class="float-item call" aria-label="Gọi Thuận">☎<span>Gọi Thuận</span></a><a href="https://zalo.me/0837892579" target="_blank" class="float-item zalo" aria-label="Zalo">Z<span>Zalo</span></a><a href="https://m.me/yourpage" target="_blank" class="float-item messenger" aria-label="Messenger">M<span>Messenger</span></a></div>
-    <button class="float-main" id="floatMain" aria-label="Mở liên hệ nhanh">☎</button>
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">Thuê VF3 Click</div>
+        <p>Hotline: <a href="tel:0900000000">0900 000 000</a></p>
+        <p>Khu vực hoạt động: Giao nhận xe tại Tân Uyên và TP. Hồ Chí Minh.</p>
+        <p>Copyright © 2026 Thuê VF3 Click.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Liên kết chân trang">
+        <a href="index.html">Trang chủ</a>
+        <a href="vf3.html">Thuê VF3</a>
+        <a href="#dan-xe">Dàn xe</a>
+        <a href="#dich-vu">Dịch vụ</a>
+        <a href="chinh-sach.html">Chính sách</a>
+        <a href="lien-he.html">Liên hệ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       FLOATING BUTTON
+  ========================================================== -->
+  <div class="floating-contact" id="floatingContact" aria-label="Liên hệ nhanh">
+    <div class="float-menu">
+      <!-- TODO: Thay số Zalo thật -->
+      <a class="float-item float-zalo" href="https://zalo.me/0900000000" target="_blank" rel="noopener" aria-label="Liên hệ Zalo">
+        Z
+        <span class="float-label">Zalo</span>
+      </a>
+
+      <!-- TODO: Thay link Messenger thật -->
+      <a class="float-item float-messenger" href="https://m.me/yourpage" target="_blank" rel="noopener" aria-label="Liên hệ Messenger">
+        M
+        <span class="float-label">Messenger</span>
+      </a>
+
+      <!-- TODO: Thay số hotline thật -->
+      <a class="float-item float-hotline" href="tel:0900000000" aria-label="Gọi hotline">
+        ☎
+        <span class="float-label">Hotline</span>
+      </a>
+    </div>
+
+    <button class="float-main" id="floatMain" type="button" aria-label="Mở nút liên hệ nhanh">
+      ☎
+    </button>
   </div>
 
   <script>
+    /* =========================================================
+       THUÊ VF3 CLICK - MAIN JS
+       Gộp JS trong file để dễ test.
+       Khi đưa lên hosting thật, có thể tách sang assets/js/main.js
+    ========================================================= */
+
+    // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', () => menu.classList.toggle('active'));
-    document.querySelectorAll('.menu a').forEach(link => link.addEventListener('click', () => menu.classList.remove('active')));
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+    });
+
+    // Đóng menu mobile sau khi chọn link
+    document.querySelectorAll('.mobile-menu a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+      });
+    });
+
+    // Floating contact toggle trên mobile/click
     const floatingContact = document.getElementById('floatingContact');
     const floatMain = document.getElementById('floatMain');
-    floatMain.addEventListener('click', (e) => { e.stopPropagation(); floatingContact.classList.toggle('active'); });
-    document.addEventListener('click', (e) => { if (!floatingContact.contains(e.target)) floatingContact.classList.remove('active'); });
+
+    floatMain.addEventListener('click', (event) => {
+      event.stopPropagation();
+      floatingContact.classList.toggle('is-open');
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedInside = floatingContact.contains(event.target);
+      if (!clickedInside) {
+        floatingContact.classList.remove('is-open');
+      }
+    });
+
+    // Thêm trạng thái active đơn giản cho menu theo hash section trên trang chủ
+    const sectionLinks = document.querySelectorAll('.desktop-menu a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+
+      sectionLinks.forEach((link) => {
+        const section = document.querySelector(link.getAttribute('href'));
+        if (!section) return;
+
+        const top = section.offsetTop - 110;
+        const bottom = top + section.offsetHeight;
+
+        if (scrollY >= top && scrollY < bottom) {
+          document.querySelectorAll('.desktop-menu a').forEach((item) => item.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+
+      if (scrollY < 220) {
+        document.querySelectorAll('.desktop-menu a').forEach((item) => item.classList.remove('active'));
+        const homeLink = document.querySelector('.desktop-menu a[href="index.html"]');
+        if (homeLink) homeLink.classList.add('active');
+      }
+    });
   </script>
 </body>
 </html>
