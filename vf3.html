@@ -10,15 +10,15 @@
 <body>
   <header class="header">
     <div class="container nav">
-      <a href="https://blue0602.github.io/thuexe/" class="logo" aria-label="Trang chủ thuevf3.click"><span class="logo-icon">VF3</span><span>thuevf3.click</span></a>
+      <a href="index.html" class="logo" aria-label="Trang chủ thuevf3.click"><span class="logo-icon">VF3</span><span>thuevf3.click</span></a>
       <nav class="menu" id="menu">
-        <a href="https://blue0602.github.io/thuexe/">Trang chủ</a>
+        <a href="index.html">Trang chủ</a>
         <a href="#car-info">Thông tin xe</a>
         <a href="#policy">Chính sách</a>
         <a href="#guide">Hướng dẫn</a>
         <a href="#contact" class="menu-cta">Đặt xe ngay</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu">☰</button>
     </div>
   </header>
 
@@ -115,9 +115,14 @@
       <div class="container contact-grid">
         <div><p class="eyebrow light">📞 Liên hệ đặt xe</p><h2>Sẵn sàng trải nghiệm VF3 bản độ cực VIP?</h2><p>Liên hệ ngay để kiểm tra lịch xe, địa chỉ nhận xe và được tư vấn chi tiết trước khi thuê.</p></div>
         <div class="contact-card">
-          <div class="contact-row"><span>📍</span><div><p>Địa chỉ nhận xe</p><strong>Tân Uyên, Bình Dương / TP. Hồ Chí Minh</strong></div></div>
+          <div class="contact-row"><span>📍</span><div><p>Địa chỉ nhận xe</p><strong>Tân Uyên, Bình Dương / Chu Văn An, Bình Thạnh, TP.HCM</strong></div></div>
           <div class="contact-row"><span>☎</span><div><p>Hotline đặt xe</p><strong>0837892579 (Thuận)</strong><strong>0328520813 (Ngọc)</strong></div></div>
-          <div class="contact-buttons"><a href="tel:0837892579" class="btn btn-primary">Gọi Thuận</a><a href="tel:0328520813" class="btn btn-orange">Gọi Ngọc</a><a href="https://zalo.me/0837892579" target="_blank" class="btn btn-zalo">Zalo</a><a href="https://m.me/yourpage" target="_blank" class="btn btn-fb">Facebook</a></div>
+          <div class="contact-buttons">
+            <a href="tel:0837892579" class="btn btn-primary">Gọi Thuận</a>
+            <a href="tel:0328520813" class="btn btn-orange">Gọi Ngọc</a>
+            <a href="https://zalo.me/0837892579" target="_blank" rel="noopener" class="btn btn-zalo">Zalo Thuận</a>
+            <a href="https://zalo.me/0328520813" target="_blank" rel="noopener" class="btn btn-zalo">Zalo Ngọc</a>
+          </div>
         </div>
       </div>
       <footer class="footer"><p>© 2026 thuevf3.click. All rights reserved.</p></footer>
@@ -125,8 +130,26 @@
   </main>
 
   <div class="floating-contact" id="floatingContact">
-    <div class="floating-menu"><a href="tel:0837892579" class="float-item call" aria-label="Gọi Thuận">☎<span>Gọi Thuận</span></a><a href="https://zalo.me/0837892579" target="_blank" class="float-item zalo" aria-label="Zalo">Z<span>Zalo</span></a><a href="https://m.me/yourpage" target="_blank" class="float-item messenger" aria-label="Messenger">M<span>Messenger</span></a></div>
-    <button class="float-main" id="floatMain" aria-label="Mở liên hệ nhanh">☎</button>
+    <div class="floating-menu">
+      <a href="tel:0837892579" class="float-item call" aria-label="Gọi Thuận">
+        ☎
+        <span>Gọi Thuận</span>
+      </a>
+
+      <a href="https://zalo.me/0837892579" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Thuận">
+        Z
+        <span>Zalo Thuận</span>
+      </a>
+
+      <a href="https://zalo.me/0328520813" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Ngọc">
+        Z
+        <span>Zalo Ngọc</span>
+      </a>
+    </div>
+
+    <button class="float-main" id="floatMain" type="button" aria-label="Mở liên hệ nhanh">
+      ☎
+    </button>
   </div>
 
   <script>
