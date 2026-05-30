@@ -56,11 +56,16 @@
     .quote-card{padding:22px;border-radius:var(--r-lg);background:var(--blue-soft);border:1px solid rgba(11,124,255,.16)}.quote-card strong{display:block;color:var(--blue-dark);font-size:1.1rem;margin-bottom:6px}.quote-card span{color:var(--gray)}
     /* VIDEO */
     .showcase-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:44px 0 18px}.showcase-title h3{font-size:clamp(1.45rem,4vw,2.1rem);line-height:1.15;letter-spacing:-1px}.showcase-title p{color:var(--gray);font-size:.95rem}
-    .video-slider{display:flex;gap:16px;overflow-x:auto;padding:2px 2px 18px;scroll-snap-type:x mandatory;scrollbar-width:thin}
-    .video-card{flex:0 0 280px;scroll-snap-align:start;overflow:hidden;border-radius:24px;border:1px solid var(--border);background:#fff;box-shadow:var(--soft);transition:.25s}.video-card:hover{transform:translateY(-4px);border-color:rgba(11,124,255,.28);box-shadow:0 18px 44px rgba(11,124,255,.12)}
-    .video-card.horizontal{flex-basis:420px}.video-frame{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(11,124,255,.62)),repeating-linear-gradient(45deg,rgba(255,255,255,.08),rgba(255,255,255,.08) 10px,transparent 10px,transparent 20px)}
-    .vertical .video-frame{aspect-ratio:9/16}.horizontal .video-frame{aspect-ratio:16/9}.video-frame:before{content:"Chèn video tại đây";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:900;z-index:1;text-align:center;padding:14px}.video-frame video,.video-frame iframe{position:relative;z-index:2;width:100%;height:100%;border:0;object-fit:cover}
-    .video-info{padding:16px}.video-info h4{font-size:1rem;margin-bottom:4px}.video-info p{color:var(--gray);font-size:.92rem}
+    .video-slider{display:flex;gap:24px;overflow-x:auto;padding:4px 4px 24px;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}
+    .video-slider::-webkit-scrollbar{display:none}
+    .video-card{flex:0 0 260px;scroll-snap-align:start;overflow:hidden;border-radius:18px;border:1px solid var(--border);background:#fff;box-shadow:0 14px 38px rgba(15,23,42,.08);transition:.25s ease}
+    .video-card.horizontal{flex-basis:420px}
+    .video-card:hover{transform:translateY(-5px);border-color:rgba(11,124,255,.30);box-shadow:0 22px 55px rgba(11,124,255,.14)}
+    .video-frame{position:relative;height:420px;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(11,124,255,.62)),repeating-linear-gradient(45deg,rgba(255,255,255,.08),rgba(255,255,255,.08) 10px,transparent 10px,transparent 20px)}
+    .horizontal .video-frame{height:420px}
+    .video-frame:before{content:"Chèn video tại đây";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:900;z-index:1;text-align:center;padding:14px;pointer-events:none}
+    .video-frame video,.video-frame iframe{position:relative;z-index:2;width:100%;height:100%;border:0;object-fit:cover}
+    .video-info{padding:16px 18px 18px;background:#fff}.video-info h4{font-size:1.02rem;margin-bottom:4px;line-height:1.25;letter-spacing:-.2px}.video-info p{color:var(--gray);font-size:.92rem}
     /* MASONRY */
     .masonry-gallery{columns:1;column-gap:16px;margin-top:18px}.masonry-item{break-inside:avoid;margin-bottom:16px;border-radius:24px;overflow:hidden;border:1px solid var(--border);background:#fff;box-shadow:var(--soft);transition:.25s}
     .masonry-item:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(15,23,42,.10)}.masonry-item img{width:100%;height:auto;transition:.3s}.masonry-item:hover img{transform:scale(1.035)}
@@ -75,15 +80,44 @@
     .float-main{width:62px;height:62px;font-size:1.45rem;background:linear-gradient(135deg,var(--blue),#00a3ff);animation:pulse 1.7s infinite,shake 2.8s infinite}.floating-menu{display:flex;flex-direction:column;gap:10px;opacity:0;pointer-events:none;transform:translateY(16px);transition:.25s}.floating-contact:hover .floating-menu,.floating-contact.active .floating-menu{opacity:1;pointer-events:auto;transform:translateY(0)}
     .float-item{position:relative;width:50px;height:50px;font-weight:900;transition:.2s}.float-item:hover{transform:translateY(-3px) scale(1.05)}.float-item span{position:absolute;right:62px;padding:7px 10px;border-radius:999px;background:var(--black);color:#fff;font-size:.78rem;opacity:0;pointer-events:none;white-space:nowrap;transition:.2s}.float-item:hover span{opacity:1}.call{background:var(--green)}.zalo{background:#0068ff}
     @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(11,124,255,.45),0 14px 30px rgba(16,24,40,.24)}70%{box-shadow:0 0 0 18px rgba(11,124,255,0),0 14px 30px rgba(16,24,40,.24)}100%{box-shadow:0 0 0 0 rgba(11,124,255,0),0 14px 30px rgba(16,24,40,.24)}}@keyframes shake{0%,82%,100%{transform:rotate(0)}85%{transform:rotate(8deg)}88%{transform:rotate(-8deg)}91%{transform:rotate(6deg)}94%{transform:rotate(-6deg)}97%{transform:rotate(3deg)}}
+
+    /* ROMANTIC FALLING HEARTS / PETALS */
+    .romance-layer{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
+    .romance-piece{position:absolute;top:-40px;opacity:.72;filter:blur(.1px);animation:romanceFall linear forwards;will-change:transform,opacity;user-select:none}
+    @keyframes romanceFall{0%{transform:translate3d(0,-40px,0) rotate(0deg);opacity:0}10%{opacity:.72}100%{transform:translate3d(var(--drift),110vh,0) rotate(360deg);opacity:0}}
+    /* WELCOME MODAL */
+    .wedding-modal{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:20px;background:rgba(15,23,42,.52);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .45s ease}
+    .wedding-modal.show{opacity:1;pointer-events:auto}
+    .wedding-modal-card{position:relative;width:min(100%,560px);padding:32px 24px 26px;border-radius:30px;background:radial-gradient(circle at top left,rgba(244,114,182,.18),transparent 32%),radial-gradient(circle at bottom right,rgba(245,181,68,.16),transparent 35%),linear-gradient(135deg,#fff,#fff7fb);box-shadow:0 30px 90px rgba(15,23,42,.26);border:1px solid rgba(244,114,182,.20);text-align:center;transform:translateY(18px) scale(.96);transition:transform .45s ease;overflow:hidden}
+    .wedding-modal.show .wedding-modal-card{transform:translateY(0) scale(1)}
+    .wedding-modal-card:before,.wedding-modal-card:after{content:"❀";position:absolute;color:rgba(244,114,182,.25);font-size:4.5rem;line-height:1}
+    .wedding-modal-card:before{left:-12px;top:-18px;transform:rotate(-16deg)}.wedding-modal-card:after{right:-10px;bottom:-18px;transform:rotate(18deg)}
+    .modal-close{position:absolute;right:14px;top:14px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.72);color:#be185d;font-size:1.2rem;cursor:pointer;box-shadow:0 8px 22px rgba(15,23,42,.08);z-index:2}
+    .modal-title{position:relative;z-index:1;margin-bottom:14px;color:#be185d;font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,7vw,3.2rem);line-height:1.05;letter-spacing:-1px}
+    .modal-text{position:relative;z-index:1;color:#475569;font-size:1.02rem;margin-bottom:22px}
+    .modal-action{position:relative;z-index:1;background:linear-gradient(135deg,#f472b6,#fb7185);color:#fff;box-shadow:0 14px 32px rgba(244,114,182,.28)}
+
     @media(min-width:560px){.hero-actions{flex-direction:row;flex-wrap:wrap}.contact-buttons{grid-template-columns:repeat(2,1fr)}.masonry-gallery{columns:2}}
     @media(min-width:760px){.segment-head{grid-template-columns:1fr 320px}.masonry-gallery{columns:3}}
     @media(min-width:900px){.menu,.header-cta{display:flex}.menu-toggle,.mobile-menu{display:none!important}.hero-grid{grid-template-columns:1.08fr .92fr;gap:54px}.masonry-gallery{columns:4}.contact-grid{grid-template-columns:1fr .95fr}}
     @media(min-width:1200px){.masonry-gallery{columns:5}}
-    @media(max-width:420px){.container{width:min(100% - 24px,var(--container))}.section{padding:64px 0}.hero{padding:70px 0 76px}.hero h1{letter-spacing:-2px}.btn{width:100%}.video-card{flex-basis:245px}.video-card.horizontal{flex-basis:320px}.float-item span{display:none}}
+    @media(max-width:420px){.container{width:min(100% - 24px,var(--container))}.section{padding:64px 0}.hero{padding:70px 0 76px}.hero h1{letter-spacing:-2px}.btn{width:100%}.video-card{flex-basis:245px}.video-card.horizontal{flex-basis:330px}.video-frame,.horizontal .video-frame{height:380px}.float-item span{display:none}}
   </style>
 </head>
 
 <body>
+
+<div class="romance-layer" id="romanceLayer" aria-hidden="true"></div>
+
+<div class="wedding-modal" id="weddingModal" role="dialog" aria-modal="true" aria-labelledby="weddingModalTitle">
+  <div class="wedding-modal-card">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Đóng popup">×</button>
+    <h2 class="modal-title" id="weddingModalTitle">💖 Chúc Mừng Hạnh Phúc 💖</h2>
+    <p class="modal-text">Kính chúc hai bạn trăm năm tình viên mãn, bạc đầu nghĩa phu thê! Cảm ơn bạn đã ghé thăm dịch vụ xe hoa của chúng tôi. Hãy để những chiếc xe sang trọng nhất đồng hành cùng bạn trong khoảnh khắc thiêng liêng này nhé.</p>
+    <button class="btn modal-action" id="modalExplore" type="button">Khám phá ngay</button>
+  </div>
+</div>
+
 <header class="header">
   <div class="container nav">
     <a href="index.html" class="logo"><span class="logo-icon">VF3</span><span>Thuê VF3 Click</span></a>
@@ -167,7 +201,7 @@
 <section class="section tab-panel" id="tab-normal">
   <div class="container">
     <div class="segment-head">
-      <div><p class="eyebrow">🌟 Linh hoạt, trẻ trung, dễ tiếp cận</p><h2>Hạng Bình Thường – Vẫn đẹp, vẫn chỉn chu, dễ tối ưu ngân sách</h2><p>Dành cho khách muốn xe hoa sạch đẹp, hình ảnh hiện đại, chi phí dễ chịu nhưng vẫn có điểm nhấn riêng.</p><div class="car-list"><span class="car-chip">Honda Civic Gen 11 <span class="badge gold">Bản Độ VIP 200tr</span></span><span class="car-chip">Kia K3</span><span class="car-chip">Kia K5 <span class="badge">Sedan hạng D</span></span><span class="car-chip">VinFast VF8 <span class="badge green">Không Mùi Xăng</span></span><span class="car-chip">VinFast VF3 <span class="badge pink">Nhỏ gọn, cá tính</span></span></div></div>
+      <div><p class="eyebrow">🌟 Linh hoạt, trẻ trung, dễ tiếp cận</p><h2>Hạng Bình Thường – Vẫn đẹp, vẫn chỉn chu, dễ tối ưu ngân sách</h2><p>Dành cho khách muốn xe hoa sạch đẹp, hình ảnh hiện đại, chi phí dễ chịu nhưng vẫn có điểm nhấn riêng.</p><div class="car-list"><span class="car-chip">Honda Civic Gen 11 <span class="badge gold">Bản Độ VIP 200tr</span></span><span class="car-chip">Kia K3 (Bản độ 200tr) <span class="badge gold">Nổi bật</span></span><span class="car-chip">Kia K5 <span class="badge">Sedan hạng D</span></span><span class="car-chip">VinFast VF8 <span class="badge green">Không Mùi Xăng</span></span><span class="car-chip">VinFast VF3 <span class="badge pink">Nhỏ gọn, cá tính</span></span></div></div>
       <div class="quote-card"><strong>Phân khúc Bình Thường</strong><span>Tối ưu chi phí nhưng vẫn có nhiều lựa chọn đẹp, sạch, hiện đại và dễ trang trí.</span></div>
     </div>
     <div class="showcase-title"><div><h3>Video showcase Bình Thường</h3><p>Phù hợp đăng Reels/TikTok và video review nhanh.</p></div></div>
@@ -241,6 +275,34 @@
   const floatMain = document.getElementById("floatMain");
   floatMain.addEventListener("click", e => { e.stopPropagation(); floatingContact.classList.toggle("active"); });
   document.addEventListener("click", e => { if (!floatingContact.contains(e.target)) floatingContact.classList.remove("active"); });
+
+  // Hiệu ứng cánh hoa / trái tim rơi nhẹ
+  const romanceLayer = document.getElementById("romanceLayer");
+  const romanceSymbols = ["💗", "🌸", "💮", "💕"];
+  function createRomancePiece(){
+    if(!romanceLayer) return;
+    const piece = document.createElement("span");
+    piece.className = "romance-piece";
+    piece.textContent = romanceSymbols[Math.floor(Math.random() * romanceSymbols.length)];
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.fontSize = (14 + Math.random() * 16) + "px";
+    piece.style.setProperty("--drift", ((Math.random() * 140) - 70) + "px");
+    piece.style.animationDuration = (7 + Math.random() * 6) + "s";
+    romanceLayer.appendChild(piece);
+    setTimeout(() => piece.remove(), 14000);
+  }
+  setInterval(createRomancePiece, window.innerWidth < 560 ? 900 : 550);
+
+  // Popup chúc mừng hạnh phúc
+  const weddingModal = document.getElementById("weddingModal");
+  const modalClose = document.getElementById("modalClose");
+  const modalExplore = document.getElementById("modalExplore");
+  function closeWeddingModal(){ weddingModal.classList.remove("show"); }
+  window.addEventListener("load", () => { setTimeout(() => weddingModal.classList.add("show"), 1000); });
+  modalClose.addEventListener("click", closeWeddingModal);
+  modalExplore.addEventListener("click", closeWeddingModal);
+  weddingModal.addEventListener("click", (event) => { if(event.target === weddingModal) closeWeddingModal(); });
+
 </script>
 </body>
 </html>
