@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dịch Vụ Xe Hoa Cưới | Thuê VF3 Click</title>
+  <meta name="description" content="Dịch vụ xe hoa cưới thuộc hệ thống thuevf3.click với nhiều phân khúc VVIP, VIP và Bình Thường. Thư viện ảnh Masonry Grid, video showcase và báo giá nhanh." />
+  <style>
+    :root{
+      --blue:#0b7cff;--blue-dark:#075fcc;--blue-soft:#eaf4ff;--bg:#f5faff;
+      --black:#0f172a;--gray:#64748b;--border:#e2e8f0;--white:#fff;
+      --green:#12b76a;--gold:#f5b544;--pink:#f472b6;
+      --shadow:0 20px 60px rgba(15,23,42,.08);--soft:0 10px 35px rgba(15,23,42,.06);
+      --r-xl:32px;--r-lg:24px;--container:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:92px}
+    body{font-family:Arial,Helvetica,sans-serif;color:var(--black);line-height:1.65;background:#fff;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}button{font:inherit}
+    img,video,iframe{display:block;max-width:100%}
+    .container{width:min(100% - 32px,var(--container));margin:auto}
+    .section{padding:84px 0}.section-soft{background:linear-gradient(180deg,#fff,var(--bg))}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;margin-bottom:14px;padding:8px 14px;border-radius:999px;color:var(--blue-dark);background:var(--blue-soft);font-size:.9rem;font-weight:850}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;border-radius:999px;border:0;font-weight:850;cursor:pointer;transition:.25s;text-align:center;white-space:nowrap}
+    .btn-primary{color:#fff;background:linear-gradient(135deg,var(--blue),#00a3ff);box-shadow:0 14px 30px rgba(11,124,255,.26)}
+    .btn-outline{background:#fff;border:1px solid var(--border);color:var(--black)}
+    .btn-zalo{background:#0068ff;color:#fff}.btn:hover{transform:translateY(-2px)}
+    /* HEADER */
+    .header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(226,232,240,.88)}
+    .nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:inline-flex;align-items:center;gap:10px;font-size:1.08rem;font-weight:900;letter-spacing:-.6px}
+    .logo-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:18px;color:#fff;background:linear-gradient(135deg,#0f172a,var(--blue));box-shadow:0 14px 28px rgba(11,124,255,.22);font-size:.85rem}
+    .menu{display:none;align-items:center;gap:24px;color:var(--gray);font-weight:800;font-size:.95rem}
+    .menu a{position:relative;padding:26px 0}.menu a.active,.menu a:hover{color:var(--blue)}
+    .menu a:after{content:"";position:absolute;left:0;bottom:18px;width:0;height:2px;background:var(--blue);border-radius:99px;transition:.22s}.menu a:hover:after,.menu a.active:after{width:100%}
+    .header-cta{display:none;color:#fff;background:linear-gradient(135deg,var(--blue),#00a3ff);min-height:50px;padding:0 22px;border-radius:999px;font-weight:900;align-items:center;box-shadow:0 14px 30px rgba(11,124,255,.22)}
+    .menu-toggle{width:44px;height:44px;border:1px solid var(--border);border-radius:14px;background:#fff;cursor:pointer;font-size:1.3rem}
+    .mobile-menu{display:none;padding:0 16px 16px;background:#fff;border-bottom:1px solid var(--border)}.mobile-menu.active{display:block}
+    .mobile-menu a{display:block;padding:13px 4px;border-bottom:1px solid #f1f5f9;font-weight:800}.mobile-menu a.active{color:var(--blue)}
+    .mobile-cta{margin-top:14px;text-align:center;border-radius:999px;color:#fff!important;background:linear-gradient(135deg,var(--blue),#00a3ff)}
+    /* HERO */
+    .hero{padding:84px 0 96px;background:radial-gradient(circle at top left,rgba(11,124,255,.14),transparent 34%),radial-gradient(circle at bottom right,rgba(244,114,182,.12),transparent 36%),linear-gradient(180deg,#fff,var(--bg));overflow:hidden}
+    .hero-grid{display:grid;gap:36px;align-items:center}.hero h1{max-width:880px;margin-bottom:18px;font-size:clamp(2.35rem,8vw,5rem);line-height:.98;letter-spacing:-3px}.hero h1 span{color:var(--blue)}
+    .hero p{max-width:760px;color:var(--gray);font-size:1.08rem;margin-bottom:26px}.hero-actions{display:flex;flex-direction:column;gap:12px}
+    .hero-card{padding:30px;border-radius:var(--r-xl);background:radial-gradient(circle at top right,rgba(255,255,255,.25),transparent 38%),linear-gradient(135deg,#16233a,var(--blue));color:#fff;box-shadow:var(--shadow)}
+    .hero-card-icon{width:60px;height:60px;display:grid;place-items:center;margin-bottom:18px;border-radius:20px;background:rgba(255,255,255,.14);font-size:1.8rem}
+    .hero-card h2{font-size:clamp(1.6rem,4vw,2.25rem);line-height:1.12;letter-spacing:-1px;margin-bottom:12px}.hero-card p{margin:0;color:rgba(255,255,255,.76)}
+    /* TABS */
+    .tabs-wrap{position:sticky;top:78px;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .segment-tabs{display:flex;gap:10px;overflow-x:auto;padding:14px 0;scrollbar-width:thin}.segment-tab{flex:0 0 auto;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--gray);font-weight:900;cursor:pointer;transition:.25s}
+    .segment-tab.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--blue),#00a3ff);box-shadow:0 12px 28px rgba(11,124,255,.22)}
+    .tab-panel{display:none}.tab-panel.active{display:block}
+    .segment-head{display:grid;gap:20px;align-items:end;margin-bottom:30px}.segment-head h2{font-size:clamp(1.9rem,5vw,3.1rem);line-height:1.12;letter-spacing:-1.5px;margin-bottom:10px}.segment-head p{color:var(--gray);max-width:760px}
+    .car-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.car-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:#fff;border:1px solid var(--border);box-shadow:0 8px 22px rgba(15,23,42,.04);font-weight:850}
+    .badge{display:inline-flex;align-items:center;min-height:22px;padding:0 8px;border-radius:999px;background:var(--blue-soft);color:var(--blue-dark);font-size:.72rem;font-weight:900}.gold{background:#fff7e6;color:#9a6200}.green{background:#ecfdf3;color:#047857}.pink{background:#fff0f7;color:#be185d}
+    .quote-card{padding:22px;border-radius:var(--r-lg);background:var(--blue-soft);border:1px solid rgba(11,124,255,.16)}.quote-card strong{display:block;color:var(--blue-dark);font-size:1.1rem;margin-bottom:6px}.quote-card span{color:var(--gray)}
+    /* VIDEO */
+    .showcase-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:44px 0 18px}.showcase-title h3{font-size:clamp(1.45rem,4vw,2.1rem);line-height:1.15;letter-spacing:-1px}.showcase-title p{color:var(--gray);font-size:.95rem}
+    .video-slider{display:flex;gap:16px;overflow-x:auto;padding:2px 2px 18px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+    .video-card{flex:0 0 280px;scroll-snap-align:start;overflow:hidden;border-radius:24px;border:1px solid var(--border);background:#fff;box-shadow:var(--soft);transition:.25s}.video-card:hover{transform:translateY(-4px);border-color:rgba(11,124,255,.28);box-shadow:0 18px 44px rgba(11,124,255,.12)}
+    .video-card.horizontal{flex-basis:420px}.video-frame{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(11,124,255,.62)),repeating-linear-gradient(45deg,rgba(255,255,255,.08),rgba(255,255,255,.08) 10px,transparent 10px,transparent 20px)}
+    .vertical .video-frame{aspect-ratio:9/16}.horizontal .video-frame{aspect-ratio:16/9}.video-frame:before{content:"Chèn video tại đây";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:900;z-index:1;text-align:center;padding:14px}.video-frame video,.video-frame iframe{position:relative;z-index:2;width:100%;height:100%;border:0;object-fit:cover}
+    .video-info{padding:16px}.video-info h4{font-size:1rem;margin-bottom:4px}.video-info p{color:var(--gray);font-size:.92rem}
+    /* MASONRY */
+    .masonry-gallery{columns:1;column-gap:16px;margin-top:18px}.masonry-item{break-inside:avoid;margin-bottom:16px;border-radius:24px;overflow:hidden;border:1px solid var(--border);background:#fff;box-shadow:var(--soft);transition:.25s}
+    .masonry-item:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(15,23,42,.10)}.masonry-item img{width:100%;height:auto;transition:.3s}.masonry-item:hover img{transform:scale(1.035)}
+    .photo-placeholder{display:grid;place-items:center;min-height:220px;padding:18px;text-align:center;color:var(--gray);font-weight:900;background:linear-gradient(135deg,#fff,var(--bg)),repeating-linear-gradient(45deg,rgba(15,23,42,.04),rgba(15,23,42,.04) 10px,transparent 10px,transparent 20px)}
+    .tall .photo-placeholder{min-height:360px}.medium .photo-placeholder{min-height:280px}.short .photo-placeholder{min-height:190px}
+    .tab-cta{margin-top:34px;padding:26px;border-radius:var(--r-xl);background:radial-gradient(circle at top right,rgba(11,124,255,.12),transparent 36%),linear-gradient(135deg,#fff,var(--bg));border:1px solid rgba(11,124,255,.16);box-shadow:var(--soft);text-align:center}.tab-cta h3{font-size:clamp(1.4rem,4vw,2rem);line-height:1.15;letter-spacing:-1px;margin-bottom:10px}.tab-cta p{color:var(--gray);margin-bottom:18px}
+    /* FOOTER */
+    .contact-footer{color:#fff;background:radial-gradient(circle at top left,rgba(11,124,255,.35),transparent 35%),linear-gradient(135deg,#0b1220,#101828)}.contact-grid{display:grid;gap:26px;align-items:center;padding:72px 0}.contact-grid h2{margin-bottom:12px;font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;letter-spacing:-2px}.contact-grid p{color:rgba(255,255,255,.72)}
+    .contact-card{padding:24px;border-radius:var(--r-xl);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px)}.contact-row{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}.contact-row span{font-size:1.35rem}.contact-row p{font-size:.9rem}.contact-row strong{display:block;color:#fff}.contact-buttons{display:grid;gap:10px;margin-top:18px}.footer-bottom{padding:20px 16px;text-align:center;color:rgba(255,255,255,.65);border-top:1px solid rgba(255,255,255,.1)}
+    /* FLOATING */
+    .floating-contact{position:fixed;right:18px;bottom:18px;z-index:999;display:flex;flex-direction:column-reverse;align-items:center;gap:12px}.float-main,.float-item{border:none;border-radius:50%;color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 14px 30px rgba(16,24,40,.24)}
+    .float-main{width:62px;height:62px;font-size:1.45rem;background:linear-gradient(135deg,var(--blue),#00a3ff);animation:pulse 1.7s infinite,shake 2.8s infinite}.floating-menu{display:flex;flex-direction:column;gap:10px;opacity:0;pointer-events:none;transform:translateY(16px);transition:.25s}.floating-contact:hover .floating-menu,.floating-contact.active .floating-menu{opacity:1;pointer-events:auto;transform:translateY(0)}
+    .float-item{position:relative;width:50px;height:50px;font-weight:900;transition:.2s}.float-item:hover{transform:translateY(-3px) scale(1.05)}.float-item span{position:absolute;right:62px;padding:7px 10px;border-radius:999px;background:var(--black);color:#fff;font-size:.78rem;opacity:0;pointer-events:none;white-space:nowrap;transition:.2s}.float-item:hover span{opacity:1}.call{background:var(--green)}.zalo{background:#0068ff}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(11,124,255,.45),0 14px 30px rgba(16,24,40,.24)}70%{box-shadow:0 0 0 18px rgba(11,124,255,0),0 14px 30px rgba(16,24,40,.24)}100%{box-shadow:0 0 0 0 rgba(11,124,255,0),0 14px 30px rgba(16,24,40,.24)}}@keyframes shake{0%,82%,100%{transform:rotate(0)}85%{transform:rotate(8deg)}88%{transform:rotate(-8deg)}91%{transform:rotate(6deg)}94%{transform:rotate(-6deg)}97%{transform:rotate(3deg)}}
+    @media(min-width:560px){.hero-actions{flex-direction:row;flex-wrap:wrap}.contact-buttons{grid-template-columns:repeat(2,1fr)}.masonry-gallery{columns:2}}
+    @media(min-width:760px){.segment-head{grid-template-columns:1fr 320px}.masonry-gallery{columns:3}}
+    @media(min-width:900px){.menu,.header-cta{display:flex}.menu-toggle,.mobile-menu{display:none!important}.hero-grid{grid-template-columns:1.08fr .92fr;gap:54px}.masonry-gallery{columns:4}.contact-grid{grid-template-columns:1fr .95fr}}
+    @media(min-width:1200px){.masonry-gallery{columns:5}}
+    @media(max-width:420px){.container{width:min(100% - 24px,var(--container))}.section{padding:64px 0}.hero{padding:70px 0 76px}.hero h1{letter-spacing:-2px}.btn{width:100%}.video-card{flex-basis:245px}.video-card.horizontal{flex-basis:320px}.float-item span{display:none}}
+  </style>
+</head>
+
+<body>
+<header class="header">
+  <div class="container nav">
+    <a href="index.html" class="logo"><span class="logo-icon">VF3</span><span>Thuê VF3 Click</span></a>
+    <nav class="menu">
+      <a href="index.html">Trang chủ</a><a href="vf3.html">Thuê VF3</a><a href="index.html#dan-xe">Dàn xe</a><a href="index.html#dich-vu" class="active">Dịch vụ</a><a href="chinh-sach.html">Chính sách</a><a href="lien-he.html">Liên hệ</a>
+    </nav>
+    <a class="header-cta" href="tel:0837892579">☎ Hotline đặt xe</a>
+    <button class="menu-toggle" id="menuToggle" type="button">☰</button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Trang chủ</a><a href="vf3.html">Thuê VF3</a><a href="index.html#dan-xe">Dàn xe</a><a href="index.html#dich-vu" class="active">Dịch vụ</a><a href="chinh-sach.html">Chính sách</a><a href="lien-he.html">Liên hệ</a><a href="tel:0837892579" class="mobile-cta">☎ Hotline đặt xe</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">💍 Dịch vụ xe hoa cưới</p>
+      <h1>Xe Hoa Ngày Cưới – <span>Trọn Vẹn Khoảnh Khắc Khởi Đầu</span></h1>
+      <p>Một trang được thiết kế như “bữa tiệc thị giác”, giúp khách xem thật nhiều hình ảnh và video thực tế của từng phân khúc xe hoa trước khi chốt lịch.</p>
+      <div class="hero-actions"><a href="#segment-tabs" class="btn btn-primary">Xem bộ sưu tập xe hoa</a><a href="#contact" class="btn btn-outline">Nhận báo giá nhanh</a></div>
+    </div>
+    <aside class="hero-card"><div class="hero-card-icon">👰</div><h2>Ảnh thật, video thật, chọn xe dễ hơn</h2><p>Phân loại theo VVIP, VIP và Bình Thường. Mỗi phân khúc có khu video riêng, thư viện ảnh Masonry Grid và CTA báo giá nhanh.</p></aside>
+  </div>
+</section>
+
+<div class="tabs-wrap" id="segment-tabs">
+  <div class="container">
+    <div class="segment-tabs">
+      <button class="segment-tab active" type="button" data-tab="vvip">👑 Hạng VVIP</button>
+      <button class="segment-tab" type="button" data-tab="vip">💎 Hạng VIP</button>
+      <button class="segment-tab" type="button" data-tab="normal">🌟 Hạng Bình Thường</button>
+    </div>
+  </div>
+</div>
+
+<!-- VVIP -->
+<section class="section tab-panel active" id="tab-vvip">
+  <div class="container">
+    <div class="segment-head">
+      <div><p class="eyebrow">👑 Phân khúc cao cấp nhất</p><h2>Hạng VVIP – Xe hoa nổi bật cho ngày cưới thật khác biệt</h2><p>Phù hợp các cặp đôi muốn hình ảnh sang trọng, nổi bật và tạo dấu ấn mạnh trong ngày cưới.</p><div class="car-list"><span class="car-chip">Porsche Panamera <span class="badge gold">Sang trọng</span></span><span class="car-chip">Mini Cooper Mui Trần <span class="badge pink">Cá tính</span></span></div></div>
+      <div class="quote-card"><strong>Phân khúc VVIP</strong><span>Ưu tiên xe nổi bật, hình ảnh khác biệt, phù hợp quay/chụp cưới và đoàn rước cao cấp.</span></div>
+    </div>
+    <div class="showcase-title"><div><h3>Video showcase VVIP</h3><p>Thay source video hoặc iframe YouTube bên dưới.</p></div></div>
+    <div class="video-slider">
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Reels xe VVIP 01</h4><p>Khung dọc 9:16.</p></div></article>
+      <article class="video-card horizontal"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Video ngang lễ cưới</h4><p>Khung ngang 16:9.</p></div></article>
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Reels trang trí hoa</h4><p>Quay cận chi tiết.</p></div></article>
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Khoảnh khắc rước dâu</h4><p>Video thực tế.</p></div></article>
+      <article class="video-card horizontal"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Toàn cảnh đoàn xe</h4><p>Video ngang.</p></div></article>
+    </div>
+    <div class="showcase-title"><div><h3>Thư viện ảnh VVIP</h3><p>Masonry Grid: có thể đổ nhiều ảnh dọc/ngang, bố cục tự xếp so le.</p></div></div>
+    <div class="masonry-gallery" data-gallery="vvip"></div>
+    <div class="tab-cta"><h3>Muốn xe hoa thật nổi bật trong ngày cưới?</h3><p>Gửi hình mẫu trang trí hoặc lịch cưới để được tư vấn gói VVIP phù hợp.</p><a href="tel:0837892579" class="btn btn-primary">Nhận Báo Giá Trọn Gói Phân Khúc Này</a></div>
+  </div>
+</section>
+
+<!-- VIP -->
+<section class="section tab-panel" id="tab-vip">
+  <div class="container">
+    <div class="segment-head">
+      <div><p class="eyebrow">💎 Lịch sự, sang và dễ chọn</p><h2>Hạng VIP – Xe hoa sang trọng, phù hợp nhiều phong cách cưới</h2><p>Lựa chọn cân bằng giữa hình ảnh cao cấp, chi phí hợp lý và độ phù hợp với nhiều concept cưới.</p><div class="car-list"><span class="car-chip">Mercedes E300 <span class="badge gold">Lịch lãm</span></span><span class="car-chip">Mercedes E200</span><span class="car-chip">Mercedes C300</span><span class="car-chip">Mercedes C200</span><span class="car-chip">BMW 3 Series <span class="badge">Thể thao</span></span><span class="car-chip">Audi A4</span></div></div>
+      <div class="quote-card"><strong>Phân khúc VIP</strong><span>Phù hợp lễ cưới hiện đại, lịch sự, cần xe đẹp nhưng không quá phô trương.</span></div>
+    </div>
+    <div class="showcase-title"><div><h3>Video showcase VIP</h3><p>Cuộn ngang để xem nhiều video hơn.</p></div></div>
+    <div class="video-slider">
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Reels Mercedes 01</h4><p>Khung dọc 9:16.</p></div></article>
+      <article class="video-card horizontal"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Video đoàn xe VIP</h4><p>Khung ngang 16:9.</p></div></article>
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Reels trang trí hoa</h4><p>Video thực tế.</p></div></article>
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Xe trước sảnh tiệc</h4><p>Góc quay cận.</p></div></article>
+      <article class="video-card horizontal"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Video tổng hợp VIP</h4><p>Khung ngang.</p></div></article>
+    </div>
+    <div class="showcase-title"><div><h3>Thư viện ảnh VIP</h3><p>Thay các ô mẫu bằng ảnh thật của Mercedes, BMW, Audi.</p></div></div>
+    <div class="masonry-gallery" data-gallery="vip"></div>
+    <div class="tab-cta"><h3>Cần xe hoa sang trọng, chi phí hợp lý?</h3><p>Chọn phân khúc VIP để có hình ảnh chỉn chu, lịch sự và phù hợp nhiều phong cách cưới.</p><a href="tel:0837892579" class="btn btn-primary">Nhận Báo Giá Trọn Gói Phân Khúc Này</a></div>
+  </div>
+</section>
+
+<!-- NORMAL -->
+<section class="section tab-panel" id="tab-normal">
+  <div class="container">
+    <div class="segment-head">
+      <div><p class="eyebrow">🌟 Linh hoạt, trẻ trung, dễ tiếp cận</p><h2>Hạng Bình Thường – Vẫn đẹp, vẫn chỉn chu, dễ tối ưu ngân sách</h2><p>Dành cho khách muốn xe hoa sạch đẹp, hình ảnh hiện đại, chi phí dễ chịu nhưng vẫn có điểm nhấn riêng.</p><div class="car-list"><span class="car-chip">Honda Civic Gen 11 <span class="badge gold">Bản Độ VIP 200tr</span></span><span class="car-chip">Kia K3</span><span class="car-chip">Kia K5 <span class="badge">Sedan hạng D</span></span><span class="car-chip">VinFast VF8 <span class="badge green">Không Mùi Xăng</span></span><span class="car-chip">VinFast VF3 <span class="badge pink">Nhỏ gọn, cá tính</span></span></div></div>
+      <div class="quote-card"><strong>Phân khúc Bình Thường</strong><span>Tối ưu chi phí nhưng vẫn có nhiều lựa chọn đẹp, sạch, hiện đại và dễ trang trí.</span></div>
+    </div>
+    <div class="showcase-title"><div><h3>Video showcase Bình Thường</h3><p>Phù hợp đăng Reels/TikTok và video review nhanh.</p></div></div>
+    <div class="video-slider">
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Reels Civic</h4><p>Khung dọc 9:16.</p></div></article>
+      <article class="video-card horizontal"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Video VF8 xe hoa</h4><p>Khung ngang 16:9.</p></div></article>
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Reels Kia K5</h4><p>Video thực tế.</p></div></article>
+      <article class="video-card vertical"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>VF3 trang trí hoa</h4><p>Góc quay trẻ trung.</p></div></article>
+      <article class="video-card horizontal"><div class="video-frame"><video controls><source src="" type="video/mp4"></video></div><div class="video-info"><h4>Tổng hợp phân khúc</h4><p>Khung ngang.</p></div></article>
+    </div>
+    <div class="showcase-title"><div><h3>Thư viện ảnh Bình Thường</h3><p>Nơi đăng nhiều hình thật để khách thấy xe vẫn đẹp và chỉn chu.</p></div></div>
+    <div class="masonry-gallery" data-gallery="normal"></div>
+    <div class="tab-cta"><h3>Muốn xe hoa đẹp nhưng tối ưu ngân sách?</h3><p>Phân khúc Bình Thường phù hợp khi bạn cần xe sạch, đẹp, dễ trang trí và chi phí dễ chịu.</p><a href="tel:0837892579" class="btn btn-primary">Nhận Báo Giá Trọn Gói Phân Khúc Này</a></div>
+  </div>
+</section>
+
+<section class="contact-footer" id="contact">
+  <div class="container contact-grid">
+    <div><p class="eyebrow light">📞 Liên hệ tư vấn xe hoa</p><h2>Gửi lịch cưới để nhận báo giá nhanh hơn</h2><p>Cho chúng tôi biết ngày cưới, địa điểm, phân khúc xe mong muốn và phong cách trang trí hoa để được tư vấn nhanh.</p></div>
+    <div class="contact-card">
+      <div class="contact-row"><span>📍</span><div><p>Địa chỉ nhận xe</p><strong>Tân Uyên, Bình Dương / Chu Văn An, Bình Thạnh, TP.HCM</strong></div></div>
+      <div class="contact-row"><span>☎</span><div><p>Hotline đặt xe</p><strong>0837892579 (Thuận)</strong><strong>0328520813 (Ngọc)</strong></div></div>
+      <div class="contact-buttons"><a href="tel:0837892579" class="btn btn-primary">Gọi Thuận</a><a href="tel:0328520813" class="btn btn-outline">Gọi Ngọc</a><a href="https://zalo.me/0837892579" target="_blank" rel="noopener" class="btn btn-zalo">Zalo Thuận</a><a href="https://zalo.me/0328520813" target="_blank" rel="noopener" class="btn btn-zalo">Zalo Ngọc</a></div>
+    </div>
+  </div>
+  <footer class="footer-bottom"><p>© 2026 Thuê VF3 Click. Dịch vụ xe hoa cưới thuộc hệ thống thuevf3.click.</p></footer>
+</section>
+</main>
+
+<div class="floating-contact" id="floatingContact">
+  <div class="floating-menu">
+    <a href="tel:0837892579" class="float-item call" aria-label="Gọi Thuận">☎<span>Gọi Thuận</span></a>
+    <a href="https://zalo.me/0837892579" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Thuận">Z<span>Zalo Thuận</span></a>
+    <a href="https://zalo.me/0328520813" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Ngọc">Z<span>Zalo Ngọc</span></a>
+  </div>
+  <button class="float-main" id="floatMain" type="button">☎</button>
+</div>
+
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuToggle.addEventListener("click", () => mobileMenu.classList.toggle("active"));
+  document.querySelectorAll(".mobile-menu a").forEach(link => link.addEventListener("click", () => mobileMenu.classList.remove("active")));
+
+  // Tạo 15 placeholder ảnh cho mỗi tab để HTML gọn hơn, sau này có thể thay bằng <img>
+  document.querySelectorAll(".masonry-gallery").forEach(gallery => {
+    const label = gallery.dataset.gallery === "vvip" ? "VVIP" : gallery.dataset.gallery === "vip" ? "VIP" : "Bình Thường";
+    const sizes = ["tall","medium","short","tall","medium","short","tall","medium","short","tall","medium","short","tall","medium","short"];
+    gallery.innerHTML = sizes.map((size, index) => `
+      <div class="masonry-item ${size}">
+        <div class="photo-placeholder">Ảnh ${label} ${String(index + 1).padStart(2, "0")}</div>
+      </div>
+    `).join("");
+  });
+
+  // Segment tabs
+  const tabs = document.querySelectorAll(".segment-tab");
+  const panels = { vvip: document.getElementById("tab-vvip"), vip: document.getElementById("tab-vip"), normal: document.getElementById("tab-normal") };
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(item => item.classList.remove("active"));
+      tab.classList.add("active");
+      Object.values(panels).forEach(panel => panel.classList.remove("active"));
+      panels[tab.dataset.tab].classList.add("active");
+    });
+  });
+
+  // Floating contact
+  const floatingContact = document.getElementById("floatingContact");
+  const floatMain = document.getElementById("floatMain");
+  floatMain.addEventListener("click", e => { e.stopPropagation(); floatingContact.classList.toggle("active"); });
+  document.addEventListener("click", e => { if (!floatingContact.contains(e.target)) floatingContact.classList.remove("active"); });
+</script>
+</body>
+</html>
