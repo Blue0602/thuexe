@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Dịch Vụ Xe Sự Kiện Siêu Sang | thuevf3.click</title>
+  <title>Dịch Vụ Xe Sự Kiện Siêu Sang | Thuê VF3 Click</title>
   <meta name="description" content="Dịch vụ xe sự kiện siêu sang, chauffeur riêng, đưa đón doanh nhân, sân bay, thảm đỏ, roadshow và truyền thông tại thuevf3.click." />
 
   <style>
@@ -12,10 +12,8 @@
       --black: #050505;
       --charcoal: #0d0f12;
       --charcoal-2: #14171d;
-      --charcoal-3: #1b2028;
       --gold: #d6b15e;
       --gold-light: #f5dc9a;
-      --gold-dark: #8f6a22;
       --white: #ffffff;
       --muted: #a5adba;
       --border: rgba(214, 177, 94, 0.28);
@@ -24,7 +22,6 @@
       --shadow-dark: 0 24px 80px rgba(0, 0, 0, 0.45);
       --radius-xl: 32px;
       --radius-lg: 24px;
-      --radius-md: 16px;
       --container: 1180px;
     }
 
@@ -60,12 +57,6 @@
     select,
     textarea {
       font: inherit;
-    }
-
-    img,
-    video {
-      display: block;
-      max-width: 100%;
     }
 
     .container {
@@ -177,7 +168,6 @@
       transform: translateY(-3px);
     }
 
-    /* SCROLL ANIMATION */
     .reveal {
       opacity: 0;
       transform: translateY(34px);
@@ -189,7 +179,6 @@
       transform: translateY(0);
     }
 
-    /* HEADER */
     .lux-header {
       position: fixed;
       top: 14px;
@@ -305,7 +294,6 @@
       background: rgba(214, 177, 94, 0.08);
     }
 
-    /* HERO */
     .hero {
       min-height: 100vh;
       display: grid;
@@ -381,7 +369,6 @@
       font-weight: 800;
     }
 
-    /* SERVICES */
     .service-grid {
       display: grid;
       gap: 18px;
@@ -428,7 +415,6 @@
       color: var(--muted);
     }
 
-    /* FLEET */
     .fleet {
       background:
         radial-gradient(circle at 20% 0%, rgba(214,177,94,.12), transparent 30%),
@@ -552,19 +538,12 @@
       font-size: 0.95rem;
     }
 
-    .car-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
     .mini-btn {
       min-height: 42px;
       padding: 0 14px;
       font-size: 0.82rem;
     }
 
-    /* PRIVILEGES */
     .privilege-grid {
       display: grid;
       gap: 18px;
@@ -599,7 +578,6 @@
       font-size: 0.95rem;
     }
 
-    /* FORM + FOOTER */
     .contact {
       background:
         radial-gradient(circle at top right, rgba(214,177,94,.12), transparent 32%),
@@ -690,7 +668,6 @@
       font-weight: 950;
     }
 
-    /* FLOATING */
     .floating-contact {
       position: fixed;
       right: 18px;
@@ -794,7 +771,6 @@
     }
 
     @media (min-width: 560px) {
-      .hero-actions,
       .form-actions {
         display: flex;
         flex-wrap: wrap;
@@ -878,11 +854,10 @@
 </head>
 
 <body>
-  <!-- GLOBAL HEADER -->
   <header class="lux-header">
     <div class="nav-wrap">
       <div class="nav">
-        <a href="index.html" class="logo" aria-label="Về trang chủ Thuê VF3 Click">
+        <a href="index.html" class="logo">
           <span class="logo-mark">VIP</span>
           <span>Thuê VF3 Click</span>
         </a>
@@ -897,8 +872,7 @@
         </nav>
 
         <a href="tel:0837892579" class="btn btn-gold-outline nav-cta">Hotline VIP</a>
-
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Mở menu">☰</button>
+        <button class="menu-toggle" id="menuToggle" type="button">☰</button>
       </div>
     </div>
 
@@ -914,12 +888,8 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
-      <div class="hero-bg-placeholder">
-        <!-- PLACEHOLDER ẢNH NỀN:
-             Sau này có thể thay bằng ảnh xe nền bằng CSS background-image hoặc đặt <img> phủ toàn màn hình. -->
-      </div>
+      <div class="hero-bg-placeholder"></div>
 
       <div class="container hero-content reveal">
         <p class="eyebrow">Private Chauffeur • VIP Event Transfer</p>
@@ -939,7 +909,6 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section class="section">
       <div class="container">
         <div class="section-heading reveal">
@@ -970,7 +939,6 @@
       </div>
     </section>
 
-    <!-- FLEET -->
     <section class="section fleet" id="fleet">
       <div class="container">
         <div class="section-heading reveal">
@@ -979,63 +947,102 @@
           <p>Chọn hạng xe phù hợp với vị thế khách mời, quy mô sự kiện và phong cách xuất hiện.</p>
         </div>
 
-        <div class="fleet-tabs reveal" role="tablist" aria-label="Bộ sưu tập xe sự kiện">
+        <div class="fleet-tabs reveal">
           <button class="fleet-tab active" type="button" data-fleet="executive">Executive Sedan</button>
           <button class="fleet-tab" type="button" data-fleet="flagship">Super Luxury & Flagship</button>
           <button class="fleet-tab" type="button" data-fleet="mpv">First-Class MPV</button>
           <button class="fleet-tab" type="button" data-fleet="suv">Premium SUV & MPV</button>
         </div>
 
-        <!-- Executive Sedan -->
         <div class="fleet-panel active" id="fleet-executive">
           <p class="fleet-intro reveal">Dành cho lịch trình doanh nhân, gặp đối tác, đưa đón khách quan trọng với hình ảnh lịch sự và kín đáo.</p>
           <div class="car-grid">
             <article class="car-card reveal">
-              <div class="car-image"><!-- <img src="images/su-kien/bmw-5-series.jpg" alt="BMW 5 Series"> --></div>
-              <div class="car-body"><h3>BMW 5 Series</h3><p>Executive sedan lịch lãm, phù hợp đưa đón doanh nhân và khách VIP.</p><div class="car-actions"><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></div>
+              <div class="car-image">
+                <!-- Chèn ảnh: <img src="images/su-kien/bmw-5-series.jpg" alt="BMW 5 Series"> -->
+              </div>
+              <div class="car-body">
+                <h3>BMW 5 Series</h3>
+                <p>Executive sedan lịch lãm, phù hợp đưa đón doanh nhân và khách VIP.</p>
+                <a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a>
+              </div>
             </article>
+
             <article class="car-card reveal">
-              <div class="car-image"><!-- <img src="images/su-kien/mercedes-e-class.jpg" alt="Mercedes E-Class"> --></div>
-              <div class="car-body"><h3>Mercedes E-Class</h3><p>Biểu tượng sedan sang trọng, cân bằng giữa đẳng cấp, sự thoải mái và tính chuyên nghiệp.</p><div class="car-actions"><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></div>
+              <div class="car-image">
+                <!-- Chèn ảnh: <img src="images/su-kien/mercedes-e-class.jpg" alt="Mercedes E-Class"> -->
+              </div>
+              <div class="car-body">
+                <h3>Mercedes E-Class</h3>
+                <p>Biểu tượng sedan sang trọng, cân bằng giữa đẳng cấp, sự thoải mái và tính chuyên nghiệp.</p>
+                <a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a>
+              </div>
             </article>
           </div>
         </div>
 
-        <!-- Flagship -->
         <div class="fleet-panel" id="fleet-flagship">
           <p class="fleet-intro reveal">Dành riêng cho giới tinh hoa, khách VVIP, sự kiện thảm đỏ và các lịch trình yêu cầu hình ảnh cực kỳ cao cấp.</p>
           <div class="car-grid">
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/maybach.jpg" alt="Mercedes-Maybach"> --></div><div class="car-body"><h3>Mercedes-Maybach</h3><p>Đỉnh cao của sự riêng tư, quyền lực và trải nghiệm ghế sau hạng nhất.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/s-class.jpg" alt="Mercedes S-Class"> --></div><div class="car-body"><h3>Mercedes S-Class</h3><p>Flagship sedan lịch lãm, phù hợp tiếp đón khách cấp cao và đối tác chiến lược.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/bmw-7-series.jpg" alt="BMW 7 Series"> --></div><div class="car-body"><h3>BMW 7 Series</h3><p>Phong thái hiện đại, mạnh mẽ, phù hợp doanh nhân yêu thích sự khác biệt.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/porsche-panamera.jpg" alt="Porsche Panamera"> --></div><div class="car-body"><h3>Porsche Panamera Tứ 5</h3><p>Xe thể thao hạng sang, phù hợp sự kiện cá tính, quay chụp và xuất hiện nổi bật.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal">
+              <div class="car-image"></div>
+              <div class="car-body">
+                <h3>Mercedes-Maybach</h3>
+                <p>Đỉnh cao của sự riêng tư, quyền lực và trải nghiệm ghế sau hạng nhất.</p>
+                <a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a>
+              </div>
+            </article>
+
+            <article class="car-card reveal">
+              <div class="car-image"></div>
+              <div class="car-body">
+                <h3>Mercedes S-Class</h3>
+                <p>Flagship sedan lịch lãm, phù hợp tiếp đón khách cấp cao và đối tác chiến lược.</p>
+                <a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a>
+              </div>
+            </article>
+
+            <article class="car-card reveal">
+              <div class="car-image"></div>
+              <div class="car-body">
+                <h3>BMW 7 Series</h3>
+                <p>Phong thái hiện đại, mạnh mẽ, phù hợp doanh nhân yêu thích sự khác biệt.</p>
+                <a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a>
+              </div>
+            </article>
+
+            <article class="car-card reveal">
+              <div class="car-image"></div>
+              <div class="car-body">
+                <h3>Porsche Panamera Tứ 5</h3>
+                <p>Xe thể thao hạng sang, phù hợp sự kiện cá tính, quay chụp và xuất hiện nổi bật.</p>
+                <a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a>
+              </div>
+            </article>
           </div>
         </div>
 
-        <!-- MPV -->
         <div class="fleet-panel" id="fleet-mpv">
-          <p class="fleet-intro reveal">“Chuyên cơ mặt đất” dành cho khách cần khoang thương gia rộng rãi, riêng tư và thoải mái trong suốt lịch trình.</p>
+          <p class="fleet-intro reveal">“Chuyên cơ mặt đất” dành cho khách cần khoang thương gia rộng rãi, riêng tư và thoải mái.</p>
           <div class="car-grid">
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/lexus-lm350.jpg" alt="Lexus LM350"> --></div><div class="car-body"><h3>Lexus LM350</h3><p>First-Class MPV với không gian thương gia, phù hợp khách VVIP và lịch trình riêng tư.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/toyota-alphard.jpg" alt="Toyota Alphard"> --></div><div class="car-body"><h3>Toyota Alphard</h3><p>MPV cao cấp, nổi tiếng về độ êm ái, riêng tư và hình ảnh sang trọng.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/mercedes-v250.jpg" alt="Mercedes V250"> --></div><div class="car-body"><h3>Mercedes V250</h3><p>Không gian rộng, lịch sự, phù hợp đoàn khách VIP hoặc đội ngũ điều hành sự kiện.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/mercedes-v250-maybach.jpg" alt="Mercedes V250 Maybach"> --></div><div class="car-body"><h3>Mercedes V250 Maybach</h3><p>Phong cách thương gia nâng cấp, phù hợp lịch trình cần sự khác biệt và riêng tư.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>Lexus LM350</h3><p>First-Class MPV với không gian thương gia, phù hợp khách VVIP.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>Toyota Alphard</h3><p>MPV cao cấp, nổi tiếng về độ êm ái, riêng tư và hình ảnh sang trọng.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>Mercedes V250</h3><p>Không gian rộng, lịch sự, phù hợp đoàn khách VIP hoặc đội ngũ điều hành sự kiện.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>Mercedes V250 Maybach</h3><p>Phong cách thương gia nâng cấp, phù hợp lịch trình cần sự khác biệt.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
           </div>
         </div>
 
-        <!-- SUV -->
         <div class="fleet-panel" id="fleet-suv">
-          <p class="fleet-intro reveal">Đa dụng, mạnh mẽ, cao cấp. Phù hợp đoàn nhỏ, lịch trình dài, sự kiện cần không gian rộng và hình ảnh hiện đại.</p>
+          <p class="fleet-intro reveal">Đa dụng, mạnh mẽ, cao cấp. Phù hợp đoàn nhỏ, lịch trình dài, sự kiện cần không gian rộng.</p>
           <div class="car-grid">
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/kia-carnival.jpg" alt="Kia Carnival"> --></div><div class="car-body"><h3>Kia Carnival</h3><p>MPV rộng rãi, tiện nghi, phù hợp gia đình VIP, đoàn khách nhỏ và lịch trình sự kiện.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/vinfast-vf8.jpg" alt="VinFast VF8"> --></div><div class="car-body"><h3>VinFast VF8</h3><p>SUV điện hiện đại, sạch mùi, phù hợp khách yêu thích trải nghiệm xanh và sang trọng.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
-            <article class="car-card reveal"><div class="car-image"><!-- <img src="images/su-kien/vinfast-vf9.jpg" alt="VinFast VF9"> --></div><div class="car-body"><h3>VinFast VF9</h3><p>SUV điện cỡ lớn, mạnh mẽ, phù hợp lịch trình cao cấp và đoàn khách cần không gian rộng.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>Kia Carnival</h3><p>MPV rộng rãi, tiện nghi, phù hợp gia đình VIP, đoàn khách nhỏ và lịch trình sự kiện.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>VinFast VF8</h3><p>SUV điện hiện đại, sạch mùi, phù hợp khách yêu thích trải nghiệm xanh và sang trọng.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
+            <article class="car-card reveal"><div class="car-image"></div><div class="car-body"><h3>VinFast VF9</h3><p>SUV điện cỡ lớn, mạnh mẽ, phù hợp lịch trình cao cấp và đoàn khách cần không gian rộng.</p><a href="tel:0837892579" class="btn btn-gold mini-btn">Nhận Báo Giá</a></div></article>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PRIVILEGES -->
     <section class="section">
       <div class="container">
         <div class="section-heading reveal">
@@ -1050,16 +1057,19 @@
             <h3>Tài xế Chauffeur tinh hoa</h3>
             <p>Mặc vest, tác phong chuẩn mực, lịch sự, đúng giờ và ưu tiên trải nghiệm của khách.</p>
           </article>
+
           <article class="privilege-card reveal">
             <div class="privilege-icon">◈</div>
             <h3>Bảo mật tuyệt đối lịch trình VIP</h3>
             <p>Thông tin chuyến đi, thời gian, điểm đón và lịch trình được xử lý kín đáo.</p>
           </article>
+
           <article class="privilege-card reveal">
             <div class="privilege-icon">✦</div>
             <h3>Không gian xe sạch, êm ái</h3>
             <p>Xe được vệ sinh kỹ, kiểm tra trước khi phục vụ, tạo cảm giác thoải mái và an tâm.</p>
           </article>
+
           <article class="privilege-card reveal">
             <div class="privilege-icon">✧</div>
             <h3>Tiện ích cao cấp</h3>
@@ -1069,7 +1079,6 @@
       </div>
     </section>
 
-    <!-- PRIVATE FORM -->
     <section class="section contact" id="private-request">
       <div class="container contact-grid">
         <div class="reveal">
@@ -1137,18 +1146,30 @@
     </div>
   </footer>
 
-  <!-- FLOATING CONTACT - Không dùng Messenger -->
   <div class="floating-contact" id="floatingContact">
     <div class="floating-menu">
-      <a href="tel:0837892579" class="float-item call" aria-label="Gọi Thuận">☎<span>Gọi Thuận</span></a>
-      <a href="https://zalo.me/0837892579" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Thuận">Z<span>Zalo Thuận</span></a>
-      <a href="https://zalo.me/0328520813" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Ngọc">Z<span>Zalo Ngọc</span></a>
+      <a href="tel:0837892579" class="float-item call" aria-label="Gọi Thuận">
+        ☎
+        <span>Gọi Thuận</span>
+      </a>
+
+      <a href="https://zalo.me/0837892579" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Thuận">
+        Z
+        <span>Zalo Thuận</span>
+      </a>
+
+      <a href="https://zalo.me/0328520813" target="_blank" rel="noopener" class="float-item zalo" aria-label="Zalo Ngọc">
+        Z
+        <span>Zalo Ngọc</span>
+      </a>
     </div>
-    <button class="float-main" id="floatMain" type="button" aria-label="Mở liên hệ nhanh">☎</button>
+
+    <button class="float-main" id="floatMain" type="button" aria-label="Mở liên hệ nhanh">
+      ☎
+    </button>
   </div>
 
   <script>
-    // Mobile menu
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
 
@@ -1157,10 +1178,11 @@
     });
 
     document.querySelectorAll(".mobile-menu a").forEach(link => {
-      link.addEventListener("click", () => mobileMenu.classList.remove("active"));
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+      });
     });
 
-    // Fleet tabs
     const fleetTabs = document.querySelectorAll(".fleet-tab");
     const fleetPanels = {
       executive: document.getElementById("fleet-executive"),
@@ -1174,7 +1196,10 @@
         fleetTabs.forEach(item => item.classList.remove("active"));
         tab.classList.add("active");
 
-        Object.values(fleetPanels).forEach(panel => panel.classList.remove("active"));
+        Object.values(fleetPanels).forEach(panel => {
+          panel.classList.remove("active");
+        });
+
         fleetPanels[tab.dataset.fleet].classList.add("active");
 
         document.querySelectorAll(".fleet-panel.active .reveal").forEach(el => {
@@ -1183,8 +1208,8 @@
       });
     });
 
-    // Scroll reveal
     const revealEls = document.querySelectorAll(".reveal");
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1196,7 +1221,6 @@
 
     revealEls.forEach(el => observer.observe(el));
 
-    // Form SMS/Gmail
     function getVipMessage() {
       const name = document.getElementById("clientName").value.trim() || "Chưa nhập";
       const car = document.getElementById("carRequest").value;
@@ -1225,7 +1249,6 @@ Vui lòng tư vấn giúp tôi.`;
       window.location.href = `mailto:thanhthuan8558@gmail.com?subject=${subject}&body=${body}`;
     });
 
-    // Floating contact
     const floatingContact = document.getElementById("floatingContact");
     const floatMain = document.getElementById("floatMain");
 
