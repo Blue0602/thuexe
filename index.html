@@ -1130,6 +1130,24 @@
       background: rgba(255, 255, 255, 0.16) !important;
     }
   </style>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1132336169756807');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1132336169756807&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -1583,6 +1601,34 @@
 
       luxuryCard.addEventListener("mouseleave", () => {
         document.body.classList.remove("spotlight-active");
+      });
+    }
+
+    // ==========================================
+    // META PIXEL CONVERSION TRACKING (TỐI ƯU SALE)
+    // ==========================================
+    if (typeof fbq === "function") {
+      // 1. Theo dõi bấm gọi Hotline (Gửi sự kiện Contact & Lead)
+      document.querySelectorAll('a[href^="tel:"]').forEach(callBtn => {
+        callBtn.addEventListener("click", () => {
+          fbq('track', 'Contact', { content_name: 'Click Gọi Hotline', content_category: 'Phone Call' });
+          fbq('track', 'Lead', { content_name: 'Đặt xe qua Hotline' });
+        });
+      });
+
+      // 2. Theo dõi bấm nhắn Zalo (Gửi sự kiện Contact & Lead)
+      document.querySelectorAll('a[href*="zalo.me"]').forEach(zaloBtn => {
+        zaloBtn.addEventListener("click", () => {
+          fbq('track', 'Contact', { content_name: 'Click Nhắn Zalo', content_category: 'Zalo Chat' });
+          fbq('track', 'Lead', { content_name: 'Đặt xe qua Zalo' });
+        });
+      });
+
+      // 3. Theo dõi bấm Xem chi tiết xe / dịch vụ (Gửi sự kiện ViewContent)
+      document.querySelectorAll('.btn-detail, a[href="xe-hoa.html"], a[href="xe-sieu-sang.html"]').forEach(detailBtn => {
+        detailBtn.addEventListener("click", () => {
+          fbq('track', 'ViewContent', { content_name: detailBtn.getAttribute('href') });
+        });
       });
     }
   </script>
