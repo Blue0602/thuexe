@@ -79,57 +79,6 @@
     next.onerror = () => { vipPhoto.style.opacity = '1'; notice('Ảnh này chưa tải được, vui lòng thử lại.'); };
     next.src = button.dataset.src;
   }));
-  // Calendar IDs taken from the existing Thuê VF3 Click website (public embed URLs).
-  const CALENDARS = {
-    vf3: { label: 'VinFast VF3 VIP', id: '843d638500b7ef85f9c2c3cc055e6dcb571e61a302bab2009712eefa66237130@group.calendar.google.com' },
-    vf8: { label: 'VinFast VF8', id: 'cb52e60b56c12100ea7bbca515b5a54ecd0744f4215201e7097f7ce4f55a503f@group.calendar.google.com' },
-    kia: { label: 'KIA K5', id: '6807c75d3a83c1625bf60a70da45822f1657d675df1b78763b4ed0c4d105d509@group.calendar.google.com' }
-  };
-  let selectedCalendar = 'vf3';
-  let calendarLoaded = false;
-  const calendarFrame = $('#calendar-frame');
-  const calendarLabel = $('#calendar-label');
-  const calendarExternal = $('#calendar-external');
-  const emptyCalendarHTML = calendarFrame?.innerHTML || '';
-  function calendarUrl(key) {
-    const entry = CALENDARS[key];
-    return 'https://calendar.google.com/calendar/embed?src=' + encodeURIComponent(entry.id) + '&ctz=Asia%2FHo_Chi_Minh&mode=MONTH';
-  }
-  function showCalendar() {
-    const entry = CALENDARS[selectedCalendar];
-    if (!entry || !calendarFrame) return;
-    calendarLoaded = true;
-    calendarFrame.innerHTML = '';
-    const iframe = document.createElement('iframe');
-    iframe.title = 'Google Calendar - ' + entry.label;
-    iframe.src = calendarUrl(selectedCalendar);
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.allow = 'fullscreen';
-    iframe.loading = 'lazy';
-    calendarFrame.appendChild(iframe);
-    calendarExternal.href = calendarUrl(selectedCalendar);
-  }
-  function setCalendar(key) {
-    if (!CALENDARS[key]) return;
-    selectedCalendar = key;
-    $$('[data-calendar]').forEach(button => {
-      const active = button.dataset.calendar === key;
-      button.classList.toggle('active', active);
-      button.setAttribute('aria-selected', String(active));
-    });
-    calendarLabel.textContent = 'Lịch ' + CALENDARS[key].label;
-    calendarExternal.href = calendarUrl(key);
-    if (calendarLoaded) showCalendar();
-    else {
-      calendarFrame.innerHTML = emptyCalendarHTML;
-      const b = $('#load-calendar');
-      if (b) b.innerHTML = 'Mở lịch ' + CALENDARS[key].label + ' <svg class="icon"><use href="#i-arrow"/></svg>';
-    }
-  }
-  $$('[data-calendar]').forEach(button => button.addEventListener('click', () => setCalendar(button.dataset.calendar)));
-  calendarFrame?.addEventListener('click', event => {
-    if (event.target.closest('#load-calendar')) showCalendar();
-  });
   // Booking form is an honest message composer, NOT a server-side reservation or deposit engine.
   const booking = $('#booking-dialog');
   const bookingForm = $('#booking-form');

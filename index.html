@@ -14,7 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="/trang-chu/images/vf3-hero.webp" type="image/webp">
   <link rel="stylesheet" href="/trang-chu/style.css">
-  <script src="/trang-chu/app.js" defer></script>
+ 
+<script defer src="/trang-chu/app.js"></script>
+  <script defer src="/assets/js/smart-calendar.js?v=3"></script>
 </head>
 <body id="top">
   <svg class="svg-sprites" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -59,7 +61,7 @@
           <div class="eyebrow"><span class="dash"></span> VF3 VIP · VF8 · KIA K5 <span class="tiny-pill">ĐỘI XE THỰC TẾ</span></div>
           <h1 id="hero-title">Thuê xe tự lái <span class="hero-em">đúng gu.</span><br><span class="hero-sml">Chọn xe đẹp,<br>lên đường ngay.</span></h1>
           <p class="hero-sub">VF3 VIP nổi bật với bản độ công nghệ. VF8 cho chuyến đi rộng rãi. KIA K5 dành cho phong cách lịch lãm. <b>Xem xe thật, kiểm tra lịch và liên hệ trực tiếp chỉ trong vài thao tác.</b></p>
-          <div class="hero-bullets" aria-label="Điểm nổi bật"><span><svg class="icon"><use href="#i-check"/></svg> Ảnh xe thực tế</span><span><svg class="icon"><use href="#i-check"/></svg> Lịch xe Google</span><span><svg class="icon"><use href="#i-check"/></svg> Tư vấn trực tiếp</span></div>
+          <div class="hero-bullets" aria-label="Điểm nổi bật"><span><svg class="icon"><use href="#i-check"/></svg> Ảnh xe thực tế</span><span><svg class="icon"><use href="#i-check"/></svg> Lịch xe trực tiếp</span><span><svg class="icon"><use href="#i-check"/></svg> Tư vấn trực tiếp</span></div>
           <div class="hero-buttons"><button type="button" class="btn btn-primary btn-large js-book">Nhận tư vấn & đặt xe <svg class="icon"><use href="#i-arrow"/></svg></button><a class="btn btn-outline btn-large" href="#lich-xe"><svg class="icon"><use href="#i-calendar"/></svg> Kiểm tra lịch xe</a></div>
           <div class="hero-assurance"><span class="assurance-avatar"><img src="/trang-chu/images/vf3-street.webp" alt="Ảnh VF3 thực tế" width="36" height="36"></span><div><b>VF3 VIP – lựa chọn nổi bật</b><span>Màn hình Samsung DeX 14” 2K · JBL + Sub DLS · Ghế Nappa</span></div></div>
         </div>
@@ -77,7 +79,7 @@
     </section>
 
     <!-- Quick contact CTA -->
-    <div class="shell"><div class="service-rail"><div class="rail-item"><div class="rail-icon"><svg class="icon"><use href="#i-camera"/></svg></div><div><b>Xe thật, ảnh thật</b><small>Xem đúng mẫu xe đang giới thiệu</small></div></div><div class="rail-item"><div class="rail-icon"><svg class="icon"><use href="#i-calendar"/></svg></div><div><b>Lịch xe dễ kiểm tra</b><small>Chọn từng xe để xem Google Calendar</small></div></div><div class="rail-item"><div class="rail-icon"><svg class="icon"><use href="#i-phone"/></svg></div><div><b>Liên hệ nhanh</b><small>Thuận 0837 892 579 · Ngọc 0328 520 813</small></div></div></div></div>
+    <div class="shell"><div class="service-rail"><div class="rail-item"><div class="rail-icon"><svg class="icon"><use href="#i-camera"/></svg></div><div><b>Xe thật, ảnh thật</b><small>Xem đúng mẫu xe đang giới thiệu</small></div></div><div class="rail-item"><div class="rail-icon"><svg class="icon"><use href="#i-calendar"/></svg></div><div><b>Lịch xe dễ kiểm tra</b><small>Chọn từng xe để xem lịch D1</small></div></div><div class="rail-item"><div class="rail-icon"><svg class="icon"><use href="#i-phone"/></svg></div><div><b>Liên hệ nhanh</b><small>Thuận 0837 892 579 · Ngọc 0328 520 813</small></div></div></div></div>
 
     <!-- FLEET -->
     <section class="section fleet-section" id="dong-xe">
@@ -106,10 +108,54 @@
       <div class="video-grid"><button class="video-card" type="button" data-video="/trang-chu/videos/vf3-den-led.mp4" aria-label="Phát video đèn VF3"><img src="/trang-chu/images/vf3-den-led-poster.webp" alt="Ảnh bìa video đèn LED VF3" loading="lazy"><span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span><span class="video-meta">01 · NGOẠI HÌNH & ĐÈN</span><b>Đèn VF3 lên hình thế nào?</b></button><button class="video-card" type="button" data-video="/trang-chu/videos/vf3-man-hinh.mp4" aria-label="Phát video màn hình VF3"><img src="/trang-chu/images/vf3-man-hinh-poster.webp" alt="Ảnh bìa video màn hình trong xe VF3" loading="lazy"><span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span><span class="video-meta">02 · MÀN HÌNH & CÔNG NGHỆ</span><b>Công nghệ trong cabin VF3</b></button><button class="video-card" type="button" data-video="/trang-chu/videos/vf3-chuyen-di.mp4" aria-label="Phát video trải nghiệm đi VF3"><img src="/trang-chu/images/vf3-chuyen-di-poster.webp" alt="Ảnh bìa video trải nghiệm VF3" loading="lazy"><span class="video-play"><svg class="icon"><use href="#i-play"/></svg></span><span class="video-meta">03 · TRẢI NGHIỆM THỰC TẾ</span><b>Một chuyến đi cùng VF3 VIP</b></button></div>
       <p class="video-note">Video chỉ tải khi bạn bấm xem, giúp trang chủ mở nhanh hơn trên điện thoại.</p></div></section>
 
-    <!-- CALENDAR -->
-    <section class="section calendar-section" id="lich-xe"><div class="shell calendar-grid"><div class="calendar-copy" data-reveal><p class="eyebrow">04 / TRA CỨU LỊCH XE</p><h2>Kiểm tra lịch trước.<br><span>Chủ động chọn ngày.</span></h2><p>Chọn chiếc xe bạn quan tâm và mở Google Calendar để xem các lịch đã được cập nhật. Nếu cần xác nhận chính xác khung giờ, chỉ cần gọi hoặc nhắn Zalo.</p><div class="calendar-help"><svg class="icon"><use href="#i-shield"/></svg><span>Thông tin trên lịch mang tính tham khảo. Đơn thuê chỉ được giữ chỗ khi được xác nhận.</span></div><button type="button" class="btn btn-primary btn-large js-book"><svg class="icon"><use href="#i-phone"/></svg> Hỏi lịch & đặt xe</button></div>
-      <div class="calendar-app" data-reveal><div class="calendar-top"><div><span class="muted-overline">GOOGLE CALENDAR</span><h3 id="calendar-label">Lịch VinFast VF3 VIP</h3></div><span class="source-dot"><span></span> Nguồn: Google Calendar</span></div><div class="calendar-tabs" role="tablist" aria-label="Chọn lịch theo xe"><button type="button" role="tab" aria-selected="true" class="active" data-calendar="vf3">VF3 VIP</button><button type="button" role="tab" aria-selected="false" data-calendar="vf8">VF8</button><button type="button" role="tab" aria-selected="false" data-calendar="kia">KIA K5</button></div><div class="calendar-frame" id="calendar-frame"><div class="calendar-empty"><div class="calendar-symbol"><svg class="icon"><use href="#i-calendar"/></svg></div><h4>Mở lịch khi bạn cần</h4><p>Xem lịch Google theo đúng dòng xe. Chỉ tải lịch khi bấm, để website nhẹ hơn.</p><button class="btn btn-primary" id="load-calendar" type="button">Mở lịch VF3 VIP <svg class="icon"><use href="#i-arrow"/></svg></button></div></div><div class="calendar-foot"><span><svg class="icon"><use href="#i-clock"/></svg> Múi giờ Việt Nam (GMT+7)</span><a id="calendar-external" href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer">Xem trên Google Calendar <svg class="icon"><use href="#i-arrow"/></svg></a></div></div>
-    </div></section>
+    
+<!-- LICH THUE XE THONG MINH - CLOUDFLARE D1 -->
+<section class="section calendar-section" id="lich-xe">
+  <div class="shell calendar-grid">
+
+    <div class="calendar-copy" data-reveal>
+      <p class="eyebrow">
+        04 / TRA CỨU LỊCH XE TRỰC TIẾP
+      </p>
+
+      <h2>
+        Kiểm tra lịch trước.<br>
+        <span>Chủ động chọn ngày.</span>
+      </h2>
+
+      <p>
+        Chọn dòng xe và xem tình trạng lịch thuê
+        được cập nhật từ hệ thống Cloudflare D1.
+        Những ngày đã có đơn hoặc bị khóa sẽ
+        không thể chọn.
+      </p>
+
+      <div class="calendar-help">
+        <span>
+          Lịch được kiểm tra trực tiếp từ hệ thống.
+          Việc chọn ngày chưa tự động giữ xe.
+          Nhân viên sẽ xác nhận khi tiếp nhận yêu cầu.
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary btn-large js-book"
+      >
+        Gửi yêu cầu thuê xe ↗
+      </button>
+    </div>
+
+    <div class="calendar-app" data-smart-calendar="home" data-vehicle="vf3">
+      <p style="padding:24px">
+        Đang tải lịch xe từ Cloudflare D1...
+      </p>
+    </div>
+
+  </div>
+</section>
+<!-- KET THUC LICH THONG MINH -->
+
 
     <!-- PROCESS -->
     <section class="section process-section" id="quy-trinh"><div class="shell"><div class="process-head" data-reveal><div><p class="eyebrow">05 / QUY TRÌNH THUÊ XE</p><h2>Ba bước rõ ràng.<br><span>Thuê xe dễ dàng.</span></h2></div><p>Hiện tại việc đặt xe và xác nhận cọc được trao đổi trực tiếp. Hệ thống tự động đang được phát triển.</p></div><div class="process-grid"><div class="process-item" data-reveal><div class="process-no">01</div><div class="process-icon"><svg class="icon"><use href="#i-spark"/></svg></div><h3>Chọn chiếc xe</h3><p>Khám phá VF3 VIP, VF8, KIA K5 và xe sự kiện. Xem ảnh, video, trang bị thực tế.</p></div><div class="process-item" data-reveal><div class="process-no">02</div><div class="process-icon"><svg class="icon"><use href="#i-calendar"/></svg></div><h3>Kiểm tra lịch</h3><p>Mở lịch xe, chọn thời gian dự kiến và nhắn Thuận/Ngọc để xác nhận.</p></div><div class="process-item" data-reveal><div class="process-no">03</div><div class="process-icon"><svg class="icon"><use href="#i-check"/></svg></div><h3>Thống nhất & nhận xe</h3><p>Xác nhận chi phí, điều kiện thuê và cọc trực tiếp trước khi nhận xe.</p></div></div><div class="process-banner"><svg class="icon"><use href="#i-zap"/></svg><strong>Hướng phát triển tiếp theo:</strong><span>AI hỗ trợ tư vấn, đặt xe và đối soát cọc tự động. Chưa triển khai.</span></div></div></section>
@@ -124,7 +170,7 @@
   <div class="mobile-bottom"><a href="tel:0837892579"><svg class="icon"><use href="#i-phone"/></svg> Gọi ngay</a><button type="button" class="js-book"><svg class="icon"><use href="#i-calendar"/></svg> Đặt xe</button></div>
 
   <!-- Booking enquiry dialog: no database, no deposits -->
-  <dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-title"><div class="dialog-head"><div><span class="muted-overline">YÊU CẦU THUÊ XE</span><h2 id="booking-title">Chọn xe. Gửi lịch. Nhận tư vấn.</h2></div><button class="modal-close" id="booking-close" type="button" aria-label="Đóng biểu mẫu"><svg class="icon"><use href="#i-close"/></svg></button></div><form id="booking-form"><p class="dialog-help">Đây là mẫu soạn tin nhắn. Thông tin chưa được gửi lên máy chủ; bạn sẽ sao chép nội dung và gửi cho Thuận qua Zalo.</p><div class="form-grid"><label>Dòng xe quan tâm<select name="car" required><option value="VF3 VIP">VF3 VIP</option><option value="VF8">VinFast VF8</option><option value="KIA K5">KIA K5</option><option value="Xe hoa / sự kiện">Xe hoa / sự kiện</option></select></label><label>Khu vực nhận xe<select name="location"><option value="Tân Uyên">Tân Uyên</option><option value="TP.HCM">TP.HCM</option><option value="Khu vực khác (trao đổi)">Khu vực khác (trao đổi)</option></select></label><label>Ngày nhận xe dự kiến<input name="start" type="date" required></label><label>Ngày trả xe dự kiến<input name="end" type="date" required></label><label class="span-full">Tên liên hệ<input name="customer" autocomplete="name" placeholder="Tên của bạn" maxlength="70" required></label><label class="span-full">Lời nhắn thêm (không bắt buộc)<textarea name="message" rows="2" maxlength="280" placeholder="Giờ nhận xe, số người, nhu cầu khác..."></textarea></label></div><button class="btn btn-primary form-submit" type="submit">Tạo nội dung nhắn Zalo <svg class="icon"><use href="#i-arrow"/></svg></button></form><div id="enquiry-result" class="enquiry-result" hidden><label for="enquiry-text">Nội dung nhắn Thuận</label><textarea id="enquiry-text" readonly rows="7"></textarea><div class="result-actions"><button class="btn btn-dark" id="copy-enquiry" type="button">Sao chép tin nhắn</button><a class="btn btn-primary" href="https://zalo.me/0837892579" rel="noopener noreferrer" target="_blank">Mở Zalo Thuận <svg class="icon"><use href="#i-arrow"/></svg></a></div><p class="result-hint">Dán tin nhắn vào Zalo để được tư vấn. Việc giữ lịch và đặt cọc chỉ được xác nhận khi hai bên thống nhất.</p></div></dialog>
+  <dialog class="booking-dialog" id="booking-dialog" aria-labelledby="booking-title"><div class="dialog-head"><div><span class="muted-overline">YÊU CẦU THUÊ XE</span><h2 id="booking-title">Chọn xe. Gửi lịch. Nhận tư vấn.</h2></div><button class="modal-close" id="booking-close" type="button" aria-label="Đóng biểu mẫu"><svg class="icon"><use href="#i-close"/></svg></button></div><form id="booking-form"><p class="dialog-help">Đây là mẫu soạn tin nhắn. Thông tin chưa được gửi lên máy chủ; bạn sẽ sao chép nội dung và gửi cho Thuận qua Zalo.</p><div class="form-grid"><label>Dòng xe quan tâm<select name="car" required><option value="VF3 VIP">VF3 VIP</option><option value="VF8">VinFast VF8</option><option value="KIA K5">KIA K5</option><option value="VinFast Limo Green">VinFast Limo Green</option><option value="Xe hoa / sự kiện">Xe hoa / sự kiện</option></select></label><label>Khu vực nhận xe<select name="location"><option value="Tân Uyên">Tân Uyên</option><option value="TP.HCM">TP.HCM</option><option value="Khu vực khác (trao đổi)">Khu vực khác (trao đổi)</option></select></label><label>Ngày nhận xe dự kiến<input name="start" type="date" required></label><label>Ngày trả xe dự kiến<input name="end" type="date" required></label><label class="span-full">Tên liên hệ<input name="customer" autocomplete="name" placeholder="Tên của bạn" maxlength="70" required></label><label class="span-full">Lời nhắn thêm (không bắt buộc)<textarea name="message" rows="2" maxlength="280" placeholder="Giờ nhận xe, số người, nhu cầu khác..."></textarea></label></div><button class="btn btn-primary form-submit" type="submit">Tạo nội dung nhắn Zalo <svg class="icon"><use href="#i-arrow"/></svg></button></form><div id="enquiry-result" class="enquiry-result" hidden><label for="enquiry-text">Nội dung nhắn Thuận</label><textarea id="enquiry-text" readonly rows="7"></textarea><div class="result-actions"><button class="btn btn-dark" id="copy-enquiry" type="button">Sao chép tin nhắn</button><a class="btn btn-primary" href="https://zalo.me/0837892579" rel="noopener noreferrer" target="_blank">Mở Zalo Thuận <svg class="icon"><use href="#i-arrow"/></svg></a></div><p class="result-hint">Dán tin nhắn vào Zalo để được tư vấn. Việc giữ lịch và đặt cọc chỉ được xác nhận khi hai bên thống nhất.</p></div></dialog>
   <dialog class="video-dialog" id="video-dialog" aria-label="Xem video xe thực tế"><button class="modal-close video-close" type="button" aria-label="Đóng video"><svg class="icon"><use href="#i-close"/></svg></button><video id="video-player" controls playsinline preload="none"></video></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>

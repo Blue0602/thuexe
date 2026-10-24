@@ -1,0 +1,246 @@
+
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kiểm tra giữ chỗ VF8</title>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef5fc;color:#14253c;font:15px/1.6 system-ui,sans-serif}
+main{max-width:580px;margin:32px auto;padding:24px;background:white;border-radius:20px}
+h1{font-size:26px;margin:0 0 8px}
+label{display:block;margin:14px 0 4px;font-weight:700}
+input{width:100%;padding:12px;border:1px solid #ccd7e6;border-radius:9px;font:inherit}
+button{margin-top:16px;background:#076be9;color:white;border:0;border-radius:10px;padding:13px 18px;font:inherit;font-weight:700}
+button:disabled{opacity:.5}
+.notice{background:#fff1dc;padding:12px;border-radius:10px}
+.result{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f7ff;padding:15px;border-radius:12px;margin-top:20px}
+.timer{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
+@media(max-width:620px){main{margin:12px;padding:18px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Kiểm tra giữ chỗ 15 phút</h1>
+<p class="notice">
+  <strong>TRANG THỬ NGHIỆM.</strong>
+  Chưa kết nối SePay. Không chuyển tiền.
+  Không chia sẻ đường dẫn cho khách.
+</p>
+
+<form id="holdForm">
+  <p>Xe: <strong>VinFast VF8 Plus</strong></p>
+  <p>Gói: <strong>Standard</strong></p>
+
+  <label for="customer">Họ tên</label>
+  <input id="customer" required maxlength="80">
+
+  <label for="phone">Số điện thoại</label>
+  <input id="phone" type="tel" required>
+
+  <label for="pickup">Ngày giờ nhận xe</label>
+  <input id="pickup" type="datetime-local" required>
+
+  <label for="dropoff">Ngày giờ trả xe</label>
+  <input id="dropoff" type="datetime-local" required>
+
+  <p>Chọn ngày cuối tuần đang trống trên lịch VF8.</p>
+
+  <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAAFkPoLZT2Nng9z5_"
+    data-action="rent_hold">
+  </div>
+
+  <button id="submitBtn" type="submit">
+    Giữ VF8 trong 15 phút
+  </button>
+</form>
+
+<div class="result" id="result">
+  Chưa tạo đơn.
+</div>
+
+<div id="statusArea" hidden>
+  <p>Thời gian còn lại:
+    <strong class="timer" id="timer">15:00</strong>
+  </p>
+  <button id="checkBtn" type="button">
+    Kiểm tra trạng thái
+  </button>
+</div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const API =
+    "https://thuevf3click-api.hgpure2003.workers.dev";
+
+  const $ = id => document.getElementById(id);
+  const form = $("holdForm");
+  const output = $("result");
+  let bookingId = "";
+  let accessToken = "";
+  let expiryMs = 0;
+
+  const money = value =>
+    Number(value).toLocaleString("vi-VN") + "đ";
+
+  function show(message) {
+    output.textContent = message;
+  }
+
+  function updateTimer() {
+    if (!expiryMs) return;
+
+    const seconds = Math.max(
+      0,
+      Math.ceil((expiryMs - Date.now()) / 1000)
+    );
+
+    $("timer").textContent =
+      String(Math.floor(seconds / 60)).padStart(2, "0") +
+      ":" +
+      String(seconds % 60).padStart(2, "0");
+  }
+
+  setInterval(updateTimer, 1000);
+
+  async function checkStatus() {
+    if (!bookingId || !accessToken) return;
+
+    try {
+      const response = await fetch(
+        API + "/api/bookings/status?id=" +
+        encodeURIComponent(bookingId),
+        {
+          headers: {
+            "X-Booking-Token": accessToken
+          },
+          cache: "no-store"
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        show(
+          "Lỗi kiểm tra trạng thái: " +
+          (data.message || response.status)
+        );
+        return;
+      }
+
+      show(
+        "Mã đơn: " + bookingId +
+        "\nTrạng thái: " + data.status +
+        "\nTiền cọc: " +
+        money(data.expected_amount_vnd) +
+        "\nThanh toán: " + data.payment_status
+      );
+
+      if (data.status !== "held") {
+        expiryMs = 0;
+        $("timer").textContent = "00:00";
+      }
+    } catch (error) {
+      show("Lỗi kết nối: " + error.message);
+    }
+  }
+
+  $("checkBtn").addEventListener("click", checkStatus);
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const token = document.querySelector(
+      '[name="cf-turnstile-response"]'
+    )?.value;
+
+    if (!token) {
+      show("Bạn cần hoàn tất Turnstile.");
+      return;
+    }
+
+    $("submitBtn").disabled = true;
+    show("Đang tạo giữ chỗ...");
+
+    const payload = {
+      vehicle_id: "vf8",
+      package_code: "standard",
+      customer_name: $("customer").value.trim(),
+      customer_phone: $("phone").value.trim(),
+      start_local: $("pickup").value,
+      end_local: $("dropoff").value,
+      turnstile_token: token
+    };
+
+    try {
+      const response = await fetch(
+        API + "/api/bookings/hold",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload),
+          cache: "no-store"
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        show(
+          "Không tạo được giữ chỗ." +
+          "\nHTTP: " + response.status +
+          "\nMã lỗi: " + (data.code || "UNKNOWN") +
+          "\nChi tiết: " + (data.message || "Không rõ")
+        );
+
+        if (window.turnstile) {
+          window.turnstile.reset();
+        }
+        return;
+      }
+
+      bookingId = data.booking_id;
+      accessToken = data.status_token;
+
+      expiryMs = Date.parse(
+        data.hold_expires_at_utc
+          .replace(" ", "T") + "Z"
+      );
+
+      $("statusArea").hidden = false;
+
+      show(
+        "GIỮ CHỖ THÀNH CÔNG" +
+        "\nMã đơn: " + bookingId +
+        "\nTrạng thái: " + data.status +
+        "\nSố ngày: " + data.rental_days +
+        "\nTổng tiền: " + money(data.total_vnd) +
+        "\nTỷ lệ cọc: " +
+        (data.deposit_bps / 100) + "%" +
+        "\nTiền cọc: " + money(data.deposit_vnd) +
+        "\n\nChưa thu tiền. Không chuyển khoản."
+      );
+
+      updateTimer();
+
+    } catch (error) {
+      show("Lỗi kết nối API: " + error.message);
+    } finally {
+      $("submitBtn").disabled = Boolean(bookingId);
+    }
+  });
+})();
+</script>
+</body>
+</html>

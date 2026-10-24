@@ -1,0 +1,53 @@
+/* Shared date picker for VF3, VF8 and KIA K5. Does not change other V5 sections. */
+#bookingForm .rental-date {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  border: 1px solid #cbd8e6;
+  border-radius: 12px;
+  background: #fff;
+  color: #172435;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+#bookingForm .rental-date::placeholder { color: #76879b; font-weight: 400; opacity: 1; }
+#bookingForm .rental-date:focus { border-color: #1674d1; outline: 2px solid #1674d1; outline-offset: 1px; }
+#bookingForm .rental-date[readonly] { cursor: pointer; }
+#bookingForm .rental-calendar-feedback {
+  display: block;
+  margin: 12px 0 16px;
+  padding: 13px 15px;
+  border: 1px solid #cbdff5;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #20568a;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.65;
+}
+#bookingForm .rental-calendar-feedback[data-state="success"] { background: #eaf8f0; border-color: #c0e6d1; color: #14663e; }
+#bookingForm .rental-calendar-feedback[data-state="error"] { background: #fff0ee; border-color: #f4cfc7; color: #a63e30; }
+#bookingForm button[type="submit"]:disabled { opacity: 0.55; cursor: not-allowed; filter: grayscale(0.2); }
+/* Calendar is portal-style: allow responsive placement above existing form sections. */
+.flatpickr-calendar { font-family: "Be Vietnam Pro", system-ui, sans-serif; max-width: calc(100vw - 20px); border-radius: 14px; box-shadow: 0 18px 45px rgba(15,45,80,.18); }
+.flatpickr-day.selected, .flatpickr-day.selected:hover { background: #156dd3; border-color: #156dd3; }
+.flatpickr-day.rental-busy-day, .flatpickr-day.rental-busy-day.flatpickr-disabled {
+  background: #fff0ee !important;
+  color: #ae4b3b !important;
+  border-color: transparent !important;
+  text-decoration: line-through;
+  cursor: not-allowed !important;
+}
+@media (max-width: 600px) {
+  #bookingForm .rental-date { min-height: 52px; font-size: 16px; }
+  #bookingForm .rental-calendar-feedback { font-size: 12px; }
+  .flatpickr-calendar { font-size: 14px; }
+}

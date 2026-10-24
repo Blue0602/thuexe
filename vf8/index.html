@@ -19,6 +19,14 @@
   <meta property="og:description" content="VF8 Plus AWD, 5 ghế, không giới hạn km. Xem clip VF8 thực tế và đặt lịch tư vấn.">
   <meta property="og:image" content="https://thuevf3hcm.click/vf8/media/vf8-hero.webp">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Thuê VinFast VF8 Plus tự lái","provider":{"@type":"Organization","name":"Thuê VF3 Click","url":"https://thuevf3hcm.click/","telephone":"+84837892579"},"areaServed":["Tân Uyên","Thành phố Hồ Chí Minh"],"url":"https://thuevf3hcm.click/vf8/","offers":{"@type":"Offer","priceCurrency":"VND","price":"1600000","description":"Giá thuê tham khảo theo ngày; xác nhận theo lịch thực tế"}}</script>
+
+  <!-- Lich thue xe chung: Flatpickr 4.6.13 va Cloudflare D1 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="/assets/css/rental-calendar.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/vn.js"></script>
+  <script defer src="/assets/js/rental-calendar.js"></script>
+  <script defer src="/assets/js/smart-calendar.js?v=3"></script>
 </head>
 <body>
   <a class="skip" href="#noi-dung">Bỏ qua menu đến nội dung</a>
@@ -96,12 +104,24 @@
       <div class="wrap terms-panel"><div><strong>Phụ phí từ chính sách hiện tại</strong><p>Quá giờ: 100.000đ/giờ; trễ quá 5 giờ tính thêm một ngày. Vệ sinh: 120.000đ. Khử mùi: 400.000đ. Chênh lệch pin: theo thực tế.</p></div><a href="/chinh-sach/">Đọc chính sách đầy đủ ↗</a></div>
     </section>
 
-    <section class="section booking-section" id="dat-xe"><div class="wrap booking-layout">
+    <section class="smc-detail-section" id="lich-xe" aria-label="Lịch thuê VinFast VF8 Plus trực tiếp">
+   <div class="smc-detail-container">
+     <div class="smc-detail-copy">
+       <span class="smc-detail-eyebrow">LỊCH THUÊ XE · CLOUDFLARE D1</span>
+       <h2>Kiểm tra ngày trống của VinFast VF8 Plus</h2>
+       <p>Chọn ngày nhận và trả trên lịch. Ngày bị khóa, có đơn thuê hoặc đang giữ chỗ sẽ không thể chọn. Lịch không tự động giữ xe.</p>
+     </div>
+     <div class="smc-detail-box" data-smart-calendar="detail" data-vehicle="vf8">
+       <p style="padding:24px">Đang tải lịch xe từ D1...</p>
+     </div>
+   </div>
+ </section>
+ <section class="section booking-section" id="dat-xe"><div class="wrap booking-layout">
       <div><p class="kicker">NHẬN TƯ VẤN ĐẶT XE</p><h2>Đã ưng VF8?<br><span>Gửi lịch trình ngay.</span></h2><p class="booking-desc">Cho mình biết ngày nhận, ngày trả và nơi nhận xe. Chỉ mất khoảng một phút để chuẩn bị thông tin; Thuận hoặc Ngọc sẽ xác nhận lịch trống và báo giá phù hợp.</p><div class="booking-contact"><a href="tel:0837892579"><small>GỌI THUẬN</small><strong>0837 892 579 ↗</strong></a><a href="tel:0328520813"><small>GỌI NGỌC</small><strong>0328 520 813 ↗</strong></a></div><p class="minor-note">Việc đặt cọc và khóa lịch tự động hiện chưa kích hoạt trên trang này.</p></div>
-      <form class="booking-form" id="bookingForm"><div class="form-head"><div><strong>Yêu cầu thuê VinFast VF8 Plus</strong><span>Không cần tạo tài khoản</span></div><span class="form-car">VF8 PLUS</span></div>
-        <div class="form-grid"><label>Ngày nhận xe <input type="date" id="startDate" required></label><label>Ngày trả xe <input type="date" id="endDate" required></label><label>Hình thức thuê <select id="rentalType"><option>Tự lái</option><option>Có tài xế</option></select></label><label>Địa điểm nhận xe <input id="pickup" type="text" placeholder="Ví dụ: Tân Uyên, Bình Thạnh" required maxlength="120"></label></div>
+      <form class="booking-form" id="bookingForm" data-rental-car="vf8"><div class="form-head"><div><strong>Yêu cầu thuê VinFast VF8 Plus</strong><span>Không cần tạo tài khoản</span></div><span class="form-car">VF8 PLUS</span></div>
+        <div class="form-grid"><label>Ngày nhận xe <input type="text" id="startDate" required class="rental-date" placeholder="Chọn ngày nhận xe" autocomplete="off" readonly></label><label>Ngày trả xe <input type="text" id="endDate" required class="rental-date" placeholder="Chọn ngày trả xe" autocomplete="off" readonly></label><label>Hình thức thuê <select id="rentalType"><option>Tự lái</option><option>Có tài xế</option></select></label><label>Địa điểm nhận xe <input id="pickup" type="text" placeholder="Ví dụ: Tân Uyên, Bình Thạnh" required maxlength="120"></label></div>
         <label>Họ tên <input id="customerName" type="text" required placeholder="Tên người liên hệ" maxlength="70"></label><label>Số điện thoại <input id="customerPhone" type="tel" required inputmode="tel" placeholder="09xxxxxxxx" pattern="[0-9+(). -]{9,18}"></label><label>Ghi chú (không bắt buộc) <textarea id="notes" rows="2" maxlength="500" placeholder="Giờ nhận xe, chuyến đi, câu hỏi cần tư vấn..."></textarea></label>
-        <button class="btn primary full" type="submit">Soạn yêu cầu đặt VF8 <span>↗</span></button><p class="form-note">Biểu mẫu chỉ tạo nội dung tin nhắn trên máy của bạn, không tự gửi hay giữ lịch.</p>
+        <div id="rentalCalendarFeedback" class="rental-calendar-feedback" role="status" aria-live="polite">Đang tải lịch từ Cloudflare D1…</div><button class="btn primary full" type="submit">Soạn yêu cầu đặt VF8 <span>↗</span></button><p class="form-note">Biểu mẫu chỉ tạo nội dung tin nhắn trên máy của bạn, không tự gửi hay giữ lịch.</p>
         <div id="bookingResult" class="booking-result" hidden aria-live="polite"><p><strong>Nội dung sẵn sàng:</strong> sao chép rồi dán vào Zalo để nhân viên nhận được yêu cầu.</p><textarea id="messagePreview" readonly rows="7"></textarea><div class="result-actions"><button class="btn primary" id="copyMessage" type="button">Sao chép nội dung</button><a class="btn secondary" href="https://zalo.me/0837892579" target="_blank" rel="noopener noreferrer">Mở Zalo Thuận ↗</a></div><small id="copyStatus" aria-live="polite"></small></div>
       </form>
     </div></section>
