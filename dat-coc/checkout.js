@@ -164,7 +164,7 @@
     $('booking-panel').hidden = true;
     renderTimer();
     if (!timerId) timerId = setInterval(renderTimer, 1000);
-    if (!pollId) pollId = setInterval(checkStatus, 5000);
+    if (!pollId) pollId = setInterval(() => { if (!document.hidden) checkStatus(); }, 15000);
     $('payment-panel').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function completeState(state, message) {
@@ -354,8 +354,21 @@
       if (saved) {
         try {
           const candidate = JSON.parse(saved);
-          if (candidate?.booking_id && candidate?.status_token && candidate?.qr_url && candidate.expiry > Date.now() - 7*86400000) {
+          const phoneNorm = v => String(v || '').replace(/[\s.\-]/g, '');
+          const sameRequest = !autoMode || !autoPayload || (
+            candidate.vehicle_id === autoPayload.vehicle_id &&
+            candidate.package_code === autoPayload.package_code &&
+            String(candidate.start_local || '').slice(0, 10) === autoPayload.start &&
+            String(candidate.end_local || '').slice(0, 10) === autoPayload.end &&
+            phoneNorm(candidate.customer_phone) === phoneNorm(autoPayload.customer_phone)
+          );
+          if (candidate?.booking_id && candidate?.status_token && candidate?.qr_url &&
+              candidate.expiry > Date.now() - 7*86400000 && sameRequest) {
             hold = candidate; displayHold(); await checkStatus();
+          } else if (candidate?.booking_id && !sameRequest) {
+            // An hien thi QR cu, KHONG xoa don dang giu cho trong D1.
+            // Don moi co the bi chan vi moi SDT chi duoc 1 hold con han.
+            sessionStorage.removeItem(storageKey);
           } else sessionStorage.removeItem(storageKey);
         } catch { sessionStorage.removeItem(storageKey); }
       }
@@ -365,6 +378,9 @@
   }
   $('vehicle').addEventListener('change',()=>fillPackages(''));
   for (const id of ['start','end','rentalPackage']) $(id).addEventListener('change',estimate);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && hold) checkStatus();
+  });
   $('booking').addEventListener('submit',submit);
   $('refresh').addEventListener('click',checkStatus);
   $('copy-code').addEventListener('click', () => copyValue($('payment-code').textContent, 'nội dung chuyển khoản'));
