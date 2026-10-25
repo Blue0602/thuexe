@@ -1,5 +1,5 @@
 /*
- * Thuê VF3 Click — Smart Calendar (D1), v3.1 — chú thích trạng thái
+ * Thuê VF3 Click — Smart Calendar (D1), v3.2 — chú thích trạng thái
  * Hien thi o trang chu + VF3/VF8/K5, khong can iframe
  * JavaScript V5 cũ. Chỉ đọc lịch, KHÔNG giữ chỗ và KHÔNG thu cọc.
  * File: /assets/js/smart-calendar.js
@@ -156,11 +156,11 @@
       .smc__price{display:block;font-size:11px;line-height:1.1;font-weight:900;white-space:nowrap;color:#126947;letter-spacing:-.02em}
       .smc__price--holiday{color:#af4f18}
       .smc__day--blocked .smc__price,.smc__day--booked .smc__price,.smc__day--held .smc__price{color:#536074}
-      .smc__day--outside .smc__price{color:#9aa7b8}
+      .smc__day--outside .smc__price,.smc__day--unknown .smc__price{color:#9aa7b8}
       .smc__day span{font-size:9px;line-height:1.2;overflow-wrap:anywhere}
       .smc__day--empty{border:0;background:transparent;cursor:default}
-      .smc__day--outside{background:#f7f9fb;color:#a6b0be;cursor:default}
-      .smc__day--outside b{color:#9baabd}
+      .smc__day--outside,.smc__day--unknown{background:#f7f9fb;color:#a6b0be;cursor:default}
+      .smc__day--outside b,.smc__day--unknown b{color:#9baabd}
       .smc__day--blocked{background:#edf0f6;color:#66758b;cursor:not-allowed}
       .smc__day--booked{background:#fff0ed;color:#bb4935;cursor:not-allowed}
       .smc__day--held{background:#fff6de;color:#9d6b12;cursor:not-allowed}
@@ -259,7 +259,7 @@
       titleEl.textContent = NAMES[vehicle];
       prev.disabled = month <= firstMonth;
       next.disabled = month >= maxMonth;
-      apply.disabled = !days || !start || !end;
+      apply.disabled = !days || !prices.size || !start || !end;
       const [year, m] = month.split('-').map(Number);
       const blanks = (new Date(Date.UTC(year, m - 1, 1)).getUTCDay() + 6) % 7;
       const limit = new Date(Date.UTC(year, m, 0)).getUTCDate();
@@ -272,15 +272,22 @@
       }
       for (let d = 1; d <= limit; d++) {
         const day = `${month}-${String(d).padStart(2, '0')}`;
+        // Neu API loi thi la CHUA TAI, khong duoc ghi nham 'Ngoai 90 ngay'.
         const type = day < today || day > lastDay ? 'outside'
-          : days ? (days.get(day) || 'available') : 'outside';
-        const labels = { outside: day < today ? 'Đã qua' : 'Ngoài 90 ngày', available: 'Chưa có lịch', blocked: 'Khóa cố định', booked: 'Đã có đơn', held: 'Đang giữ' };
+          : days ? (days.get(day) || 'available') : 'unknown';
+        const labels = {
+          outside: day < today ? 'Đã qua' : 'Ngoài 90 ngày',
+          unknown: 'Chưa tải lịch',
+          available: 'Chưa có lịch', blocked: 'Khóa cố định',
+          booked: 'Đã có đơn', held: 'Đang giữ'
+        };
         const cell = document.createElement('button');
         cell.type = 'button';
         cell.dataset.day = day;
         cell.className = `smc__day smc__day--${type}`;
-        cell.disabled = type !== 'available';
         const price=prices.get(day);
+        // Khong cho chot ngay khi gia tu D1 chua tai thanh cong.
+        cell.disabled = type !== 'available' || !price;
         const tag=price ? formatPrice(price.amount_vnd) : '—';
         cell.setAttribute('aria-label', `${day}, giá ${price ? Number(price.amount_vnd).toLocaleString('vi-VN')+' đồng/ngày' : 'chưa tải'}, ${type === 'blocked' ? 'Khóa cố định (lịch xe tháng)' : labels[type]}`);
         const priceClass = price?.is_holiday ? 'smc__price smc__price--holiday' : 'smc__price';
@@ -299,24 +306,28 @@
       start = end = null;
       note('Đang tải lịch và giá từng ngày từ D1...');
       paint();
-      try {
-        const [data, daily] = await Promise.all([
-          fetchOccupied(vehicle, force), fetchDailyPrices(vehicle, force)
-        ]);
-        if (activeToken !== token) return;
-        days = data;
-        prices = daily;
-        note('Đã tải giá dưới mỗi ngày. Chọn ngày nhận và trả; ngày đã có đơn hoặc khóa không thể chọn.');
-      } catch (e) {
-        if (activeToken !== token) return;
-        console.error('SMART_CALENDAR_ERROR', e);
-        note('Không tải được dữ liệu D1. Để tránh nhận sai lịch, vui lòng thử lại hoặc liên hệ Zalo.', true);
+      const [calendarResult, pricesResult] = await Promise.allSettled([
+        fetchOccupied(vehicle, force), fetchDailyPrices(vehicle, force)
+      ]);
+      if (activeToken !== token) return;
+      if (calendarResult.status === 'fulfilled') days = calendarResult.value;
+      if (pricesResult.status === 'fulfilled') prices = pricesResult.value;
+      if (calendarResult.status === 'fulfilled' && pricesResult.status === 'fulfilled') {
+        note('Đã tải lịch và giá từng ngày. Chọn ngày nhận/trả; ngày bận hoặc khóa không thể chọn.');
+      } else {
+        if (calendarResult.status === 'rejected') console.error('SMART_CALENDAR_OCCUPIED_ERROR', calendarResult.reason);
+        if (pricesResult.status === 'rejected') console.error('SMART_CALENDAR_PRICES_ERROR', pricesResult.reason);
+        if (calendarResult.status === 'rejected') {
+          note('Không đọc được lịch xe D1. Tạm khóa chọn ngày để tránh đặt trùng. Kiểm tra /api/occupied.', true);
+        } else {
+          note('Đã đọc được lịch xe nhưng CHƯA tải được giá. Tạm khóa chọn ngày để tránh báo sai tiền cọc. Kiểm tra /api/prices và bảng vehicle_rates.', true);
+        }
       }
       paint();
     }
 
     function selectDay(day) {
-      if (!days || days.has(day) || day < today || day > lastDay) return;
+      if (!days || !prices.has(day) || days.has(day) || day < today || day > lastDay) return;
       if (!start || end || day < start) {
         start = day;
         end = null;
