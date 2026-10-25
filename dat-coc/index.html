@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eff7ff">
+<meta name="description" content="Thuê VF3 Click - giữ xe 15 phút và thanh toán cọc 30% bằng QR ngân hàng an toàn.">
+<meta name="robots" content="noindex, nofollow">
+<title>Đặt cọc 30% & Giữ xe 15 phút | Thuê VF3 Click</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./checkout.css?v=42">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script src="./checkout.js?v=42" defer></script>
+</head>
+<body>
+<header class="site-top">
+ <a href="/" class="brand" aria-label="Trang chủ Thuê VF3 Click"><span class="brand-icon">🚘</span><span>Thuê VF3 <b>Click</b><small>TRANG THANH TOÁN AN TOÀN</small></span></a>
+ <nav><a href="/">Trang chủ</a><a href="/#lich-xe">Lịch xe</a><a href="https://zalo.me/0837892579" target="_blank" rel="noopener">Hỗ trợ Zalo ↗</a></nav>
+</header>
+<main class="wrap">
+ <div class="intro"><p class="eyebrow">ĐẶT XE TRỰC TIẾP · CLOUDFLARE D1</p><h1>Giữ xe 15 phút.<br><em>Cọc 30% qua VietQR.</em></h1><p>Chọn thời gian thuê và xác minh bảo mật. Khi giữ lịch thành công, hệ thống sẽ tạo QR đúng số tiền và nội dung chuyển khoản. Đơn được xác nhận tự động sau khi ngân hàng báo tiền về đúng hạn.</p></div>
+ <div id="alert" class="alert" role="status" aria-live="polite">Đang kiểm tra cấu hình thanh toán...</div>
+ <div class="layout">
+ <section class="panel" id="booking-panel"><h2>01. Thông tin thuê xe</h2>
+ <form id="booking" novalidate>
+ <div class="field"><label for="vehicle">Dòng xe</label><select id="vehicle" required><option value="">Đang tải xe...</option></select></div>
+ <div class="field"><label for="rentalPackage">Gói thuê</label><select id="rentalPackage" required><option value="">Chọn xe trước</option></select></div>
+ <div class="cols"><div class="field"><label for="start">Ngày giờ nhận</label><input id="start" type="datetime-local" required></div><div class="field"><label for="end">Ngày giờ trả</label><input id="end" type="datetime-local" required></div></div>
+ <div class="cols"><div class="field"><label for="customer">Họ và tên</label><input id="customer" maxlength="80" autocomplete="name" required placeholder="Tên người thuê"></div><div class="field"><label for="phone">Số điện thoại</label><input id="phone" autocomplete="tel" inputmode="tel" type="tel" maxlength="20" required placeholder="09xxxxxxxx"></div></div>
+ <div class="quote" id="quote">Chọn xe, gói thuê và thời gian để xem tiền cọc dự kiến.</div>
+ <div id="turnstile-box" class="turnstile"></div>
+ <label class="agree"><input id="agree" type="checkbox" required><span>Tôi xác nhận thông tin thuê xe và hiểu rằng hệ thống giữ xe 15 phút kể từ lúc tạo đơn. Thanh toán chuyển khoản có thể mất thời gian; trường hợp tiền về trễ sẽ được nhân viên đối soát, không tự động giữ lại xe.</span></label>
+ <button id="submit" class="primary" type="submit" disabled>Giữ xe 15 phút & tạo QR cọc 30% ↗</button>
+ <p class="fine">Đơn giá là giá thuê cơ bản, chưa gồm phí giao nhận/phụ phí phát sinh nếu có. Nếu không đồng ý, hãy liên hệ Zalo trước khi đặt cọc.</p>
+ </form></section>
+ <section class="panel pay" id="payment-panel"><h2>02. Thanh toán cọc</h2>
+ <div class="empty" id="payment-empty"><div class="empty-ico">▦</div><b>Chưa tạo đơn giữ xe</b><p>QR được tạo riêng cho mỗi đơn sau khi xác nhận lịch trống.</p></div>
+ <div id="payment-active" hidden>
+  <div class="state" id="order-state">Đang giữ xe <strong id="countdown">15:00</strong></div>
+  <img id="qr" class="qr" alt="Mã VietQR thanh toán cọc thuê xe" loading="lazy" referrerpolicy="no-referrer">
+  <div class="pay-field"><span>Tiền cọc 30%</span><strong id="deposit">—</strong></div>
+  <div class="pay-field"><span>Ngân hàng</span><strong id="bank">—</strong></div>
+  <div class="pay-field"><span>Chủ tài khoản</span><strong id="holder">—</strong></div>
+  <div class="pay-field"><span>Số tài khoản</span><strong id="account">—</strong></div>
+  <div class="pay-field"><span>Nội dung chuyển khoản</span><strong id="payment-code">—</strong></div>
+  <button type="button" class="secondary" id="copy-code">Sao chép nội dung chuyển khoản</button>
+  <a id="qr-open" class="qr-link" target="_blank" rel="noopener noreferrer">Mở ảnh QR kích thước lớn ↗</a>
+  <p class="fine">Vui lòng chuyển đúng số tiền và giữ nguyên nội dung. <b>Không chuyển lại nếu chưa rõ trạng thái:</b> ngân hàng có thể đã trừ tiền trước khi website cập nhật.</p>
+  <button type="button" class="secondary" id="refresh">Kiểm tra trạng thái thanh toán</button>
+ </div>
+ <div id="pay-message" class="pay-message" role="status" aria-live="polite"></div>
+ <a class="help" href="https://zalo.me/0837892579" target="_blank" rel="noopener">Cần hỗ trợ? Nhắn Zalo Thuận ↗</a>
+ </section>
+ </div>
+</main>
+<footer>Thuê VF3 Click · Thanh toán qua tài khoản ngân hàng đã cấu hình tại hệ thống · <a href="/chinh-sach/">Chính sách thuê xe</a></footer>
+</body>
+</html>

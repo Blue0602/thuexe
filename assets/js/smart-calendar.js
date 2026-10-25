@@ -36,6 +36,31 @@
   const maxMonth = lastDay.slice(0, 7);
   const firstMonth = today.slice(0, 7);
   const cache = new Map();
+  const priceCache = new Map();
+  const priceFrom = `${firstMonth}-01`;
+  const priceTo = (() => {
+    const [y,m] = maxMonth.split('-').map(Number);
+    return new Date(Date.UTC(y,m,0)).toISOString().slice(0,10);
+  })();
+  const formatPrice = v => Number.isFinite(v) ? Math.round(v/1000).toLocaleString('vi-VN') + 'k' : '—';
+  // Mac dinh gia K5 tren lich la goi 400km; goi unlimited duoc tinh tai form.
+  async function fetchDailyPrices(car, force=false) {
+    const old=priceCache.get(car);
+    if (!force && old && Date.now()-old.at<45000) return old.values;
+    const url=new URL(`${API}/api/prices`);
+    url.searchParams.set('vehicle',car);
+    url.searchParams.set('package',car==='kia-k5'?'400km':'standard');
+    url.searchParams.set('from',priceFrom);
+    url.searchParams.set('to',priceTo);
+    const response=await fetch(url,{cache:'no-store'});
+    if(!response.ok) throw new Error('Khong tai duoc gia: HTTP '+response.status);
+    const data=await response.json();
+    if(data.success!==true || !Array.isArray(data.prices)) throw new Error('Du lieu gia khong hop le');
+    const values=new Map(data.prices.map(p=>[p.date,p]));
+    priceCache.set(car,{at:Date.now(),values});
+    return values;
+  }
+
 
   function parseUTC(v) {
     if (typeof v !== 'string') return NaN;
@@ -126,8 +151,12 @@
       .smc__week,.smc__days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;padding:0 12px}
       .smc__week{margin:12px 0 8px;color:#67809b;text-align:center;font-size:11px;font-weight:850}
       .smc__days{padding-bottom:12px}
-      .smc__day{min-width:0;min-height:72px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:6px;background:#effaf4;border:1px solid #dcedf0;border-radius:10px;padding:7px 6px;text-align:left;cursor:pointer;color:#1e7a58}
+      .smc__day{min-width:0;min-height:79px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:6px;background:#effaf4;border:1px solid #dcedf0;border-radius:10px;padding:7px 6px;text-align:left;cursor:pointer;color:#1e7a58}
       .smc__day b{font-size:13px;color:#24364c}
+      .smc__price{display:block;font-size:11px;line-height:1.1;font-weight:900;white-space:nowrap;color:#126947;letter-spacing:-.02em}
+      .smc__price--holiday{color:#af4f18}
+      .smc__day--blocked .smc__price,.smc__day--booked .smc__price,.smc__day--held .smc__price{color:#536074}
+      .smc__day--outside .smc__price{color:#9aa7b8}
       .smc__day span{font-size:9px;line-height:1.2;overflow-wrap:anywhere}
       .smc__day--empty{border:0;background:transparent;cursor:default}
       .smc__day--outside{background:#f7f9fb;color:#a6b0be;cursor:default}
@@ -161,7 +190,7 @@
       .smc-detail-eyebrow{font-size:11px;font-weight:900;letter-spacing:.1em;color:#146fe4}
       .smc-detail-box{border:1px solid #dce8f7;box-shadow:0 18px 45px #173e6717;border-radius:22px;overflow:hidden;min-width:0}
       @media(max-width:950px){.smc-detail-container{grid-template-columns:1fr;gap:22px}.smc-detail-section{padding:46px 0}}
-      @media(max-width:600px){.smc__head,.smc__tools{padding:13px 11px}.smc__week,.smc__days{gap:3px;padding-left:6px;padding-right:6px}.smc__day{min-height:65px;padding:5px 3px;border-radius:7px}.smc__day b{font-size:12px}.smc__day span{font-size:8px}.smc__pager strong{font-size:12px;min-width:90px}.smc__legend{padding:11px 9px}.smc__legend-grid{gap:5px}.smc__legend-item{padding:7px;gap:6px}.smc__legend-item b{font-size:10px}.smc__legend-item small{font-size:9px}.smc__select{min-width:130px}}
+      @media(max-width:600px){.smc__head,.smc__tools{padding:13px 11px}.smc__week,.smc__days{gap:3px;padding-left:6px;padding-right:6px}.smc__day{min-height:75px;padding:5px 3px;border-radius:7px}.smc__day b{font-size:12px}.smc__day span{font-size:8px}.smc__day .smc__price{font-size:9px}.smc__pager strong{font-size:12px;min-width:90px}.smc__legend{padding:11px 9px}.smc__legend-grid{gap:5px}.smc__legend-item{padding:7px;gap:6px}.smc__legend-item b{font-size:10px}.smc__legend-item small{font-size:9px}.smc__select{min-width:130px}}
     `;
     document.head.append(style);
   }
@@ -183,7 +212,7 @@
           <div class="smc__legend-item"><i style="background:#fff0ed"></i><div><b>Đã có đơn thuê</b><small>Khách đã xác nhận lịch thuê</small></div></div>
           <div class="smc__legend-item"><i style="background:#fff6de"></i><div><b>Đang giữ chỗ</b><small>Giữ tạm tối đa 15 phút</small></div></div>
         </div>
-        <p class="smc__legend-note">Màu xám là khóa cố định (lịch xe tháng), không phải đơn khách thuê. Ngày xanh chỉ là chưa ghi nhận lịch bận, chưa giữ chỗ tự động.</p>
+        <p class="smc__legend-note">Giá thuê/ngày nằm ngay dưới số ngày, kể cả ngày đã khóa hoặc có đơn. Lễ/Tết +50%; K5 hiển thị gói 400 km. Giá cọc cuối cùng được máy chủ tính lại khi Chốt xe.</p>
       </div>
       <div class="smc__week">${WEEKDAYS.map(s => `<span>${s}</span>`).join('')}</div>
       <div class="smc__days" data-role="days"></div>
@@ -213,6 +242,7 @@
     let start = null;
     let end = null;
     let days = null;
+    let prices = new Map();
     let message = '';
     let error = false;
     let token = 0;
@@ -250,8 +280,11 @@
         cell.dataset.day = day;
         cell.className = `smc__day smc__day--${type}`;
         cell.disabled = type !== 'available';
-        cell.setAttribute('aria-label', `${day}: ${type === 'blocked' ? 'Khóa cố định (lịch xe tháng)' : labels[type]}`);
-        cell.innerHTML = `<b>${d}</b><span>${labels[type]}</span>`;
+        const price=prices.get(day);
+        const tag=price ? formatPrice(price.amount_vnd) : '—';
+        cell.setAttribute('aria-label', `${day}, giá ${price ? Number(price.amount_vnd).toLocaleString('vi-VN')+' đồng/ngày' : 'chưa tải'}, ${type === 'blocked' ? 'Khóa cố định (lịch xe tháng)' : labels[type]}`);
+        const priceClass = price?.is_holiday ? 'smc__price smc__price--holiday' : 'smc__price';
+        cell.innerHTML = `<b>${d}</b><strong class="${priceClass}">${tag}</strong><span>${labels[type]}</span>`;
         if (day === today) cell.classList.add('smc__day--today');
         if (start && (day === start || day === end)) cell.classList.add('smc__day--selected');
         if (start && end && day > start && day < end) cell.classList.add('smc__day--inrange');
@@ -262,14 +295,18 @@
     async function load(force = false) {
       const activeToken = ++token;
       days = null;
+      prices = new Map();
       start = end = null;
-      note('Đang đối chiếu lịch thực tế từ D1...');
+      note('Đang tải lịch và giá từng ngày từ D1...');
       paint();
       try {
-        const data = await fetchOccupied(vehicle, force);
+        const [data, daily] = await Promise.all([
+          fetchOccupied(vehicle, force), fetchDailyPrices(vehicle, force)
+        ]);
         if (activeToken !== token) return;
         days = data;
-        note('Đã tải lịch. Chọn ngày nhận và ngày trả; ngày đã có đơn hoặc khóa cố định không thể chọn.');
+        prices = daily;
+        note('Đã tải giá dưới mỗi ngày. Chọn ngày nhận và trả; ngày đã có đơn hoặc khóa không thể chọn.');
       } catch (e) {
         if (activeToken !== token) return;
         console.error('SMART_CALENDAR_ERROR', e);
