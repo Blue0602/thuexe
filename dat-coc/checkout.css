@@ -6,3 +6,7 @@
 .vfc-auto-mode .layout{grid-template-columns:minmax(0,1fr);max-width:650px;margin:0 auto}
 .vfc-auto-mode #turnstile-box{margin:12px auto;display:flex;justify-content:center}
 .vfc-auto-mode #payment-panel{width:100%}
+
+.qr-links{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}.qr-links a{border:1px solid #c9dcee;border-radius:12px;padding:10px 12px;background:#f5f9ff;flex:1;min-width:170px}.copy-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.copy-grid .secondary{margin:6px 0}.mobile-guide,.qr-fallback{margin:12px 0;padding:13px 15px;border-radius:13px;background:#eaf4ff;color:#164775;border:1px solid #cddff3}.mobile-guide strong{display:block;font-size:12px}.mobile-guide p{margin:6px 0 0;font-size:12px}.qr-fallback{background:#fff2df;color:#8e4912;border-color:#f0d6b2}@media(max-width:410px){.copy-grid{grid-template-columns:1fr}.qr-links{display:block}.qr-links a{display:block;margin:6px 0}}
+
+.receipt{background:#e9f9f0;border:1px solid #b4e5c8;border-radius:14px;padding:17px;margin:14px 0;color:#145e3b}.receipt strong{font-size:16px}.receipt p{white-space:pre-line;line-height:1.85;margin:9px 0 0}

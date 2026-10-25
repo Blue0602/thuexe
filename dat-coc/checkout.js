@@ -21,6 +21,7 @@
   let timerId = null;
   let pollId = null;
   const storageKey = 'vfc_checkout_pending_live';
+  const autoKey = 'vfc_checkout_autostart_v3';
   let estimateSerial = 0;
 
   function setAlert(message, error = false, ok = false) {
@@ -122,18 +123,38 @@
       $('order-state').firstChild.textContent = 'Hết thời gian giữ chỗ. ';
       $('qr').hidden = true;
       $('qr-open').hidden = true;
+      $('qr-save').hidden = true;
+      $('mobile-guide').hidden = true;
       $('pay-message').textContent = 'Hết 15 phút. Không chuyển khoản theo mã QR này. Hãy kiểm tra lại trạng thái đơn.';
       checkStatus();
     }
+  }
+  function copyValue(value, label) {
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(value).then(() => {
+        $('pay-message').textContent = 'Đã sao chép ' + label + '. Mở ứng dụng ngân hàng và dán vào đúng trường.';
+      }).catch(() => { window.prompt('Sao chép ' + label + ':', value); });
+    } else window.prompt('Sao chép ' + label + ':', value);
   }
   function displayHold() {
     $('payment-empty').hidden = true;
     $('payment-active').hidden = false;
     $('order-state').dataset.state = '';
     $('order-state').firstChild.textContent = 'Đang giữ xe '; 
+    $('qr').onerror = () => {
+      $('qr').hidden = true;
+      $('qr-fallback').hidden = false;
+      $('qr-fallback').textContent = 'Không tải được hình QR từ máy chủ ảnh. Bạn vẫn có thể chuyển khoản thủ công bằng thông tin chính xác bên dưới. Không tự ý thay đổi số tiền hoặc mã đơn.';
+    };
+    $('qr-fallback').hidden = true;
     $('qr').src = hold.qr_url;
     $('qr').hidden = false;
     $('qr-open').href = hold.qr_url;
+    const download = new URL(hold.qr_url);
+    download.searchParams.set('download', 'true');
+    $('qr-save').href = download.toString();
+    $('qr-save').hidden = false;
+    $('mobile-guide').hidden = false;
     $('qr-open').hidden = false;
     $('deposit').textContent = money(hold.deposit_vnd);
     $('bank').textContent = hold.bank_code;
@@ -155,9 +176,22 @@
     $('countdown').textContent = state === 'confirmed' ? '✓' : '00:00';
     $('qr').hidden = true;
     $('qr-open').hidden = true;
+    $('qr-save').hidden = true;
+    $('mobile-guide').hidden = true;
     $('pay-message').textContent = message;
     setAlert(message, state !== 'confirmed', state === 'confirmed');
-    sessionStorage.removeItem(storageKey);
+    if (state === 'confirmed' && hold) {
+      $('receipt').hidden = false;
+      const fields = [
+        'Mã đơn: ' + hold.booking_id,
+        'Xe: ' + (hold.vehicle_id || ''),
+        'Thời gian nhận: ' + (hold.start_local || 'Xem trên phiếu đặt xe'),
+        'Thời gian trả: ' + (hold.end_local || 'Xem trên phiếu đặt xe'),
+        'Đã đặt cọc: ' + money(hold.deposit_vnd)
+      ];
+      $('receipt-info').textContent = fields.join('\n');
+      try { sessionStorage.setItem(storageKey, JSON.stringify(hold)); } catch {}
+    } else sessionStorage.removeItem(storageKey);
   }
   async function checkStatus() {
     if (!hold || busy) return;
@@ -210,11 +244,19 @@
         token = '';
         throw new Error((data.code ? data.code+' — ' : '') + (data.message || 'Không giữ được xe'));
       }
-      hold = {...data,expiry:sqlExpiryToMs(data.hold_expires_at_utc)};
+      hold = {...data, expiry: sqlExpiryToMs(data.hold_expires_at_utc),
+        customer_name: name, customer_phone: phone,
+        start_local: $('start').value, end_local: $('end').value};
+      // A completed hold no longer needs the earlier hand-off data.
+      sessionStorage.removeItem(autoKey);
       sessionStorage.setItem(storageKey,JSON.stringify(hold));
       displayHold();
       setAlert('Đã giữ lịch trong 15 phút. Quét QR và chuyển đúng số tiền cọc 30%.',false,true);
     } catch(error) {
+      if (autoMode) {
+        $('payment-empty').querySelector('b').textContent = 'Chưa giữ xe – chưa có QR để chuyển cọc';
+        $('payment-empty').querySelector('p').textContent = 'Chi tiết: ' + error.message + '. Quay lại lịch để chọn ngày khác hoặc liên hệ Zalo. Không chuyển khoản khi chưa có mã đơn.';
+      }
       setAlert('Chưa tạo được đơn: '+error.message+'. Nếu xe đã khóa lịch, chọn thời gian khác.',true);
       $('submit').disabled = false;
     } finally { busy = false; }
@@ -249,7 +291,7 @@
     entry.hidden = true;
     const turnstile = $('turnstile-box');
     wait.querySelector('b').textContent = 'Đang xác minh và giữ xe...';
-    wait.querySelector('p').textContent = 'Hệ thống tự tạo mã QR khi giữ xe thành công. Bạn không cần bấm thêm nút nào.';
+    wait.querySelector('p').textContent = 'Đang hoàn tất xác minh Cloudflare. QR chỉ xuất hiện khi Worker đã giữ xe thành công. Nếu cần xác minh thủ công, hãy chạm vào ô kiểm tra ngay bên dưới.';
     wait.appendChild(turnstile);
     const intro = document.querySelector('.intro');
     if (intro) intro.hidden = true;
@@ -263,6 +305,20 @@
     launchAutoIfReady();
   });
   async function init() {
+    if (autoMode) {
+      try {
+        const handoff = JSON.parse(sessionStorage.getItem(autoKey) || 'null');
+        if (handoff?.payload && Date.now() - handoff.created_at < 15 * 60 * 1000) {
+          autoPayload = handoff.payload;
+        }
+      } catch {}
+      if (!autoPayload) {
+        setAlert('Phiên chuyển từ nút Chốt xe đã hết hạn. Vui lòng quay lại lịch và chốt lại.', true);
+        $('payment-empty').querySelector('b').textContent = 'Chưa nhận được thông tin thuê xe';
+        $('payment-empty').querySelector('p').textContent = 'Không có đơn đặt cọc hoặc mã QR nào được tạo. Hãy quay lại trang xe.';
+        return;
+      }
+    }
     setDateValues();
     try {
       const res = await fetch(API+'/api/checkout/config',{cache:'no-store'});
@@ -281,7 +337,11 @@
       configReady = true;
       if (autoPayload) populateAuto(autoPayload);
       if (!data.payment_ready) {
-        setAlert('Thanh toán chưa được kích hoạt: cần cấu hình ngân hàng, SePay webhook và Turnstile trên Cloudflare.',true);
+        setAlert('Worker hiện báo payment_ready=false. Chưa tạo đơn, chưa có QR. Hãy kiểm tra biến SEPAY_PAYMENT_ENABLED và bộ Secrets trên Worker đang Deploy.',true);
+        if (autoMode) {
+          $('payment-empty').querySelector('b').textContent = 'Chưa thể tạo QR thanh toán';
+          $('payment-empty').querySelector('p').textContent = 'Máy chủ hiện chưa cho phép nhận cọc. Không chuyển tiền khi chưa có mã đơn. Vui lòng liên hệ người quản lý.';
+        }
       } else if (!supported.size) {
         setAlert('Chưa có dòng xe nào được bật thanh toán trên D1. Vui lòng liên hệ Zalo.',true);
       } else {
@@ -294,7 +354,7 @@
       if (saved) {
         try {
           const candidate = JSON.parse(saved);
-          if (candidate?.booking_id && candidate?.status_token && candidate?.qr_url && candidate.expiry > Date.now()) {
+          if (candidate?.booking_id && candidate?.status_token && candidate?.qr_url && candidate.expiry > Date.now() - 7*86400000) {
             hold = candidate; displayHold(); await checkStatus();
           } else sessionStorage.removeItem(storageKey);
         } catch { sessionStorage.removeItem(storageKey); }
@@ -307,10 +367,8 @@
   for (const id of ['start','end','rentalPackage']) $(id).addEventListener('change',estimate);
   $('booking').addEventListener('submit',submit);
   $('refresh').addEventListener('click',checkStatus);
-  $('copy-code').addEventListener('click',async()=>{
-    const code = $('payment-code').textContent;
-    try { await navigator.clipboard.writeText(code); $('copy-code').textContent = 'Đã sao chép ✓'; }
-    catch { window.prompt('Sao chép nội dung chuyển khoản:',code); }
-  });
+  $('copy-code').addEventListener('click', () => copyValue($('payment-code').textContent, 'nội dung chuyển khoản'));
+  $('copy-account').addEventListener('click', () => copyValue($('account').textContent, 'số tài khoản'));
+  $('copy-amount').addEventListener('click', () => copyValue(String(hold?.deposit_vnd || ''), 'số tiền cọc'));
   init();
 })();

@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./checkout.css?v=42">
+<link rel="stylesheet" href="./checkout.css?v=57">
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-<script src="./checkout.js?v=42" defer></script>
+<script src="./checkout.js?v=57" defer></script>
 </head>
 <body>
 <header class="site-top">
@@ -39,18 +39,29 @@
  <div class="empty" id="payment-empty"><div class="empty-ico">▦</div><b>Chưa tạo đơn giữ xe</b><p>QR được tạo riêng cho mỗi đơn sau khi xác nhận lịch trống.</p></div>
  <div id="payment-active" hidden>
   <div class="state" id="order-state">Đang giữ xe <strong id="countdown">15:00</strong></div>
-  <img id="qr" class="qr" alt="Mã VietQR thanh toán cọc thuê xe" loading="lazy" referrerpolicy="no-referrer">
+  <img id="qr" class="qr" alt="Mã VietQR thanh toán cọc thuê xe" referrerpolicy="no-referrer">
+  <p id="qr-fallback" class="qr-fallback" hidden></p>
+  <div class="receipt" id="receipt" hidden><strong>ĐẶT XE ĐÃ XÁC NHẬN ✓</strong><p id="receipt-info"></p><p>Chủ xe có thể kiểm tra đơn đã thanh toán trong hệ thống quản trị. Hãy giữ mã đơn và liên hệ nếu cần thay đổi lịch.</p></div>
   <div class="pay-field"><span>Tiền cọc 30%</span><strong id="deposit">—</strong></div>
   <div class="pay-field"><span>Ngân hàng</span><strong id="bank">—</strong></div>
   <div class="pay-field"><span>Chủ tài khoản</span><strong id="holder">—</strong></div>
   <div class="pay-field"><span>Số tài khoản</span><strong id="account">—</strong></div>
   <div class="pay-field"><span>Nội dung chuyển khoản</span><strong id="payment-code">—</strong></div>
+  <div class="copy-grid">
+    <button type="button" class="secondary" id="copy-account">Sao chép tài khoản</button>
+    <button type="button" class="secondary" id="copy-amount">Sao chép số tiền</button>
+  </div>
   <button type="button" class="secondary" id="copy-code">Sao chép nội dung chuyển khoản</button>
-  <a id="qr-open" class="qr-link" target="_blank" rel="noopener noreferrer">Mở ảnh QR kích thước lớn ↗</a>
+  <div class="qr-links">
+    <a id="qr-save" class="qr-link" target="_blank" rel="noopener noreferrer">Lưu ảnh QR vào điện thoại ↗</a>
+    <a id="qr-open" class="qr-link" target="_blank" rel="noopener noreferrer">Mở QR kích thước lớn ↗</a>
+  </div>
+  <div id="mobile-guide" class="mobile-guide" hidden><strong>Chuyển cọc bằng chính điện thoại đang xem web</strong><p>Bước 1: Chọn “Lưu ảnh QR” phía trên. Bước 2: Mở ứng dụng ngân hàng → Quét QR → Chọn ảnh từ thư viện. Nếu ứng dụng ngân hàng không có chức năng chọn ảnh, dùng 3 nút sao chép số tài khoản, số tiền và nội dung chuyển khoản. Quay lại trang này để xem xác nhận tự động.</p></div>
   <p class="fine">Vui lòng chuyển đúng số tiền và giữ nguyên nội dung. <b>Không chuyển lại nếu chưa rõ trạng thái:</b> ngân hàng có thể đã trừ tiền trước khi website cập nhật.</p>
   <button type="button" class="secondary" id="refresh">Kiểm tra trạng thái thanh toán</button>
  </div>
  <div id="pay-message" class="pay-message" role="status" aria-live="polite"></div>
+ <p class="fine"><strong>Lưu ý:</strong> QR chỉ có giá trị khi đơn đang giữ chỗ và còn trong 15 phút. Hãy kiểm tra trạng thái trước khi chuyển khoản. Nếu đã bị trừ tiền, không chuyển lần hai.</p>
  <a class="help" href="https://zalo.me/0837892579" target="_blank" rel="noopener">Cần hỗ trợ? Nhắn Zalo Thuận ↗</a>
  </section>
  </div>
