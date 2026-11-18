@@ -59,3 +59,16 @@
  #vf3-ai-widget .vf3-ai-message{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){#vf3-ai-widget .vf3-ai-launcher,#vf3-ai-widget .vf3-ai-eye,#vf3-ai-widget .vf3-ai-teaser,#vf3-ai-widget[data-open="true"] .vf3-ai-panel{animation:none!important}}
+
+/* Phase 1: hamster mascot on launcher and in chat; old logo remains until art files exist. */
+#vf3-ai-widget .vf3-ai-mascot-avatar{position:absolute;inset:-10px;z-index:4;pointer-events:none}
+#vf3-ai-widget .vf3-ai-mascot-avatar .vf3-mascot{width:100%;max-width:unset;height:100%}
+#vf3-ai-widget .vf3-ai-launcher.vf3-ai-mascot-ready{overflow:visible}
+#vf3-ai-widget .vf3-ai-launcher.vf3-ai-mascot-ready .vf3-ai-car,
+#vf3-ai-widget .vf3-ai-launcher.vf3-ai-mascot-ready .vf3-ai-face{display:none}
+#vf3-ai-widget .vf3-ai-mascot-stage{width:148px;height:148px;margin:-7px auto -14px;align-self:center}
+#vf3-ai-widget .vf3-ai-mascot-stage .vf3-mascot{width:100%;height:100%}
+@media(max-width:720px){
+ #vf3-ai-widget .vf3-ai-mascot-avatar{inset:-8px}
+ #vf3-ai-widget .vf3-ai-mascot-stage{width:124px;height:124px;margin:-4px auto -12px}
+}
