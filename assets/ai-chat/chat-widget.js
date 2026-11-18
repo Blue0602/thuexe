@@ -60,6 +60,31 @@
   const launcher = root.querySelector("#vf3-ai-launcher");
   const teaser = root.querySelector("#vf3-ai-teaser");
   let busy = false;
+  // Phase 1 expressive mascot. Wait for image layers so older logo remains as fallback.
+  let miniMascot = null, launcherMascot = null;
+  const mascotStage = document.createElement("div");
+  mascotStage.className = "vf3-ai-mascot-stage";
+  const mascotButtonStage = document.createElement("div");
+  mascotButtonStage.className = "vf3-ai-mascot-avatar";
+  const preload = new Image();
+  preload.onload = () => {
+    if (!window.VF3Mascot) return;
+    feed.prepend(mascotStage);
+    launcher.prepend(mascotButtonStage);
+    miniMascot = VF3Mascot.mount(mascotStage, { mood: "welcome" });
+    launcherMascot = VF3Mascot.mount(mascotButtonStage, { mood: "idle" });
+    launcher.classList.add("vf3-ai-mascot-ready");
+  };
+  preload.onerror = () => { /* Image layers not uploaded yet; retain original logo. */ };
+  preload.src = "/assets/ai-chat/mascot/hamster-head.webp";
+  function mascotMood(mood, speakFor) {
+    if (miniMascot) {
+      miniMascot.setMood(mood);
+      if (speakFor) miniMascot.previewTalk(speakFor);
+    }
+    if (launcherMascot) launcherMascot.setMood(mood === "thinking" ? "thinking" : "idle");
+  }
+
 
   function sessionId() {
     try {
@@ -93,6 +118,7 @@
     launcher.setAttribute("aria-label", open ? "Đóng trợ lý AI" : "Mở trợ lý AI tư vấn thuê xe");
     if (open) {
       teaser.hidden = true;
+      mascotMood("welcome");
       input.focus({ preventScroll: true });
     } else {
       launcher.focus({ preventScroll: true });
@@ -118,6 +144,7 @@
     const message = raw.trim().slice(0, 350);
     if (!message || busy) return;
     busy = true;
+    mascotMood("thinking");
     input.value = "";
     input.disabled = true;
     submit.disabled = true;
@@ -145,11 +172,14 @@
       const reply = typeof data.reply === "string" ? data.reply.trim() : "";
       if (data.success === true && data.action !== "IGNORE" && reply) {
         loading.textContent = reply.slice(0, 1800);
+        mascotMood(data.action === "ASK_CLARIFY" ? "plead" : "happy", Math.min(3500, Math.max(900, reply.length * 36)));
       } else {
         loading.textContent = "Em chưa thể trả lời tự động trên website lúc này. Anh/chị có thể xem lịch xe hoặc liên hệ Zalo để được hỗ trợ nhé! 💙";
+        mascotMood("sad");
       }
     } catch (error) {
       loading.textContent = "Kết nối tư vấn AI đang gián đoạn. Mình xem lịch xe trực tiếp hoặc nhắn Zalo giúp em nhé! 💙";
+      mascotMood("sad");
       console.warn("VF3_CHAT_REQUEST_ERROR", error instanceof Error ? error.message : "unknown");
     } finally {
       clearTimeout(timeout);
