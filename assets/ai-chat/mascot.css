@@ -1,0 +1,36 @@
+/* VF3 Click expressive hamster mascot: 2.5D CSS layer animation. */
+.vf3-mascot{position:relative;aspect-ratio:1;width:100%;max-width:420px;display:block;isolation:isolate;flex-shrink:0}
+.vf3-mascot *, .vf3-mascot *::before{box-sizing:border-box}
+.vf3-mascot .vf3-mascot-car-wrap{position:absolute;inset:0;transform-origin:50% 85%;animation:vf3-mascot-float 3s ease-in-out infinite}
+.vf3-mascot .vf3-mascot-layer{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;user-select:none;object-fit:contain}
+.vf3-mascot .vf3-mascot-head{position:absolute;inset:0;width:100%;height:100%;transform-origin:55% 37%;animation:vf3-mascot-head-idle 4.5s ease-in-out infinite}
+.vf3-mascot .vf3-mascot-eyes,.vf3-mascot .vf3-mascot-lids{opacity:0}
+.vf3-mascot[data-blink="1"] .vf3-mascot-eyes,.vf3-mascot[data-blink="1"] .vf3-mascot-lids{opacity:1}
+.vf3-mascot .vf3-mascot-speech-mouth{transform-origin:534px 351px;opacity:0}
+.vf3-mascot[data-speaking="1"] .vf3-mascot-speech-mouth{opacity:1;animation:vf3-mascot-mouth .32s ease-in-out infinite alternate}
+.vf3-mascot .vf3-mascot-sparkle{position:absolute;z-index:2;font-size:clamp(12px,5%,24px);color:#46adff;text-shadow:0 2px 9px #fff;opacity:0;pointer-events:none}
+.vf3-mascot .vf3-mascot-sparkle--left{top:23%;left:24%}
+.vf3-mascot .vf3-mascot-sparkle--right{top:16%;right:19%;color:#ffd67b}
+.vf3-mascot .vf3-mascot-thought{position:absolute;z-index:2;right:15%;top:5%;padding:2px 10px;border:1px solid #b6d9fb;border-radius:999px;color:#2873cb;font-size:clamp(11px,3%,15px);letter-spacing:4px;background:white;box-shadow:0 5px 15px #3b72ac28;opacity:0}
+.vf3-mascot[data-mood="welcome"] .vf3-mascot-head{animation:vf3-mascot-head-hello 2.9s ease-in-out infinite}
+.vf3-mascot[data-mood="plead"] .vf3-mascot-head{animation:vf3-mascot-head-plead 2.6s ease-in-out infinite}
+.vf3-mascot[data-mood="plead"] .vf3-mascot-sparkle{opacity:1;animation:vf3-mascot-sparkle 1.3s ease-in-out infinite alternate}
+.vf3-mascot[data-mood="thinking"] .vf3-mascot-head{animation:vf3-mascot-head-think 3.2s ease-in-out infinite}
+.vf3-mascot[data-mood="thinking"] .vf3-mascot-thought{opacity:1;animation:vf3-mascot-dots 1.3s ease-in-out infinite}
+.vf3-mascot[data-mood="happy"] .vf3-mascot-car-wrap{animation:vf3-mascot-happy .85s ease-in-out infinite}
+.vf3-mascot[data-mood="happy"] .vf3-mascot-sparkle{opacity:1;animation:vf3-mascot-sparkle .8s ease-in-out infinite alternate}
+.vf3-mascot[data-mood="sad"] .vf3-mascot-head{animation:vf3-mascot-head-sad 3s ease-in-out infinite}
+.vf3-mascot[data-mood="sad"] .vf3-mascot-car-wrap{animation:vf3-mascot-float 4.5s ease-in-out infinite}
+.vf3-mascot[data-speaking="1"] .vf3-mascot-head{animation:vf3-mascot-head-talking .64s ease-in-out infinite alternate}
+@keyframes vf3-mascot-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-1.4%) rotate(.4deg)}}
+@keyframes vf3-mascot-head-idle{0%,100%{transform:rotate(0)}50%{transform:rotate(1.2deg)}}
+@keyframes vf3-mascot-head-hello{0%,100%{transform:rotate(-1deg)}42%{transform:rotate(2.8deg)}70%{transform:rotate(-2deg)}}
+@keyframes vf3-mascot-head-plead{0%,100%{transform:rotate(-4.5deg) translateY(0)}50%{transform:rotate(-6deg) translateY(1%)}}
+@keyframes vf3-mascot-head-think{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(3deg) translateY(-.65%)}}
+@keyframes vf3-mascot-head-sad{0%,100%{transform:rotate(4deg) translateY(1%)}50%{transform:rotate(5deg) translateY(1.7%)}}
+@keyframes vf3-mascot-head-talking{from{transform:rotate(-1.5deg) translateY(0)}to{transform:rotate(1deg) translateY(-.5%)}}
+@keyframes vf3-mascot-mouth{0%{transform:scaleY(.5) scaleX(.82)}47%{transform:scaleY(1.1) scaleX(1)}100%{transform:scaleY(.65) scaleX(.86)}}
+@keyframes vf3-mascot-happy{0%,100%{transform:translateY(0) rotate(-.4deg)}55%{transform:translateY(-2.5%) rotate(.8deg)}}
+@keyframes vf3-mascot-sparkle{from{transform:scale(.72) rotate(-15deg);filter:brightness(.9)}to{transform:scale(1.25) rotate(10deg);filter:brightness(1.2)}}
+@keyframes vf3-mascot-dots{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-5px);opacity:1}}
+@media(prefers-reduced-motion:reduce){.vf3-mascot *, .vf3-mascot *::before{animation:none!important}.vf3-mascot[data-speaking="1"] .vf3-mascot-speech-mouth{opacity:1}}
