@@ -4,7 +4,7 @@
   if (document.getElementById("vf3-ai-widget")) return;
 
   const SETTINGS = window.VF3_CHAT_CONFIG || {};
-  const API = SETTINGS.endpoint || "https://thuevf3click-ai.hgpure2003.workers.dev/api/ai/consult";
+  const API = SETTINGS.endpoint || "https://thuevf3click-ai.hgpure2003.workers.dev/api/ai/website";
   const CHANNEL = SETTINGS.channel || "website";
   const root = document.createElement("aside");
   root.id = "vf3-ai-widget";
