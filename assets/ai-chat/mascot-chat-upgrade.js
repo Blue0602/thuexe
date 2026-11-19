@@ -92,7 +92,7 @@
         body.className = 'vf3-ai-bot-body';
         const name = document.createElement('span');
         name.className = 'vf3-ai-bot-name';
-        name.textContent = '🐹 Hamster VF3 Click';
+        name.textContent = '🐹 Trợ lý tư vấn';
         const parent = bubble.parentElement;
         if (!parent) continue;
         parent.insertBefore(row, bubble);
@@ -133,7 +133,7 @@
       if (row) {
         row.dataset.mood = mood;
         const name = row.querySelector('.vf3-ai-bot-name');
-        if (name) name.textContent = mood === 'sad' ? '🥺 Hamster VF3 Click' : mood === 'plead' ? '🥹 Hamster VF3 Click' : mood === 'happy' ? '🥳 Hamster VF3 Click' : '🐹 Hamster VF3 Click';
+        if (name) name.textContent = mood === 'sad' ? '🥺 Trợ lý tư vấn' : mood === 'plead' ? '🥹 Trợ lý tư vấn' : mood === 'happy' ? '🥳 Trợ lý tư vấn' : '🐹 Trợ lý tư vấn';
       }
       displayMood();
       // Return to blinking, calm idle after showing the reaction; don't interrupt next user turn.
