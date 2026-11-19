@@ -1,0 +1,51 @@
+/* VF3 Click: mascot always visible during chat. Safe additive layer. */
+#vf3-ai-widget .vf3-ai-mascot-dock{
+  display:flex;align-items:center;gap:8px;position:relative;flex:0 0 81px;
+  min-height:81px;width:100%;padding:5px 15px 5px 8px;
+  overflow:hidden;background:linear-gradient(105deg,#e5f4ff,#f1f8ff 63%,#fff);
+  border-bottom:1px solid #deebfc;
+}
+#vf3-ai-widget .vf3-ai-mascot-dock::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 50%,#d8efff88,transparent 43%)}
+#vf3-ai-widget .vf3-ai-mascot-dock .vf3-ai-mascot-stage{
+  position:relative;z-index:1;display:block;flex:0 0 93px;width:93px!important;height:93px!important;
+  margin:-7px 0 -6px -6px!important;align-self:center;overflow:visible;transform:translateZ(0);
+}
+#vf3-ai-widget .vf3-ai-mascot-dock .vf3-ai-mascot-stage.vf3-mascot{max-width:none}
+#vf3-ai-widget .vf3-ai-mascot-copy{position:relative;z-index:1;display:flex;flex:1;min-width:0;flex-direction:column;justify-content:center;gap:2px;padding-right:7px}
+#vf3-ai-widget .vf3-ai-mascot-eyebrow{font-size:9px;font-weight:900;color:#2c73bd;letter-spacing:.065em}
+#vf3-ai-widget .vf3-ai-mascot-status{display:block;font-weight:900;font-size:13px;line-height:1.3;color:#174a8e}
+#vf3-ai-widget .vf3-ai-mascot-hint{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.48;color:#547698;font-weight:500;font-size:10px}
+#vf3-ai-widget .vf3-ai-mascot-live{flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:#54bb8f;box-shadow:0 0 0 4px #54bb8f1b}
+#vf3-ai-widget .vf3-ai-mascot-live[data-speaking='1']{background:#f8a22d;animation:vf3-chat-speaking .65s ease-in-out infinite alternate}
+#vf3-ai-widget .vf3-ai-mascot-dock[data-mood='sad']{background:linear-gradient(105deg,#f4f3f9,#f9faff)}
+#vf3-ai-widget .vf3-ai-mascot-dock[data-mood='happy']{background:linear-gradient(105deg,#e7f9f4,#effcff 70%,#fff)}
+#vf3-ai-widget .vf3-ai-mascot-dock[data-mood='thinking']{background:linear-gradient(105deg,#fff4df,#f7faff 80%)}
+@keyframes vf3-chat-speaking{to{transform:scale(1.4);opacity:.55}}
+/* New message layout: hamster avatar + the original, live-updating bubble. */
+#vf3-ai-widget .vf3-ai-bot-row{align-self:flex-start;display:flex;gap:7px;align-items:flex-end;max-width:99%;min-width:0;animation:vf3-chat-enter .36s cubic-bezier(.22,1,.36,1) both}
+#vf3-ai-widget .vf3-ai-bot-body{min-width:0;max-width:calc(100% - 44px);display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+#vf3-ai-widget .vf3-ai-bot-row .vf3-ai-message--bot{align-self:auto;max-width:100%;width:fit-content}
+#vf3-ai-widget .vf3-ai-bot-name{font-size:9px;font-weight:800;letter-spacing:.02em;color:#4b7dba;margin-left:4px}
+#vf3-ai-widget .vf3-ai-bot-avatar{position:relative;display:block;flex:0 0 34px;width:34px;height:34px;border-radius:13px;overflow:hidden;background:linear-gradient(#e4f4ff,#ffffff);border:1px solid #d1e6fc;box-shadow:0 2px 5px #1b5a9b19}
+#vf3-ai-widget .vf3-ai-bot-avatar img{position:absolute;left:50%;top:-7px;width:94px;height:94px;max-width:none;transform:translateX(-52%);object-fit:contain;user-select:none;pointer-events:none}
+#vf3-ai-widget .vf3-ai-bot-row[data-mood='sad'] .vf3-ai-bot-avatar{background:#f3eff8;transform:rotate(6deg)}
+#vf3-ai-widget .vf3-ai-bot-row[data-mood='happy'] .vf3-ai-bot-avatar{background:#e4fff1;animation:vf3-chat-happy .6s cubic-bezier(.34,1.56,.64,1) both}
+#vf3-ai-widget .vf3-ai-bot-row[data-mood='plead'] .vf3-ai-bot-avatar{background:#fff0f6;transform:rotate(-7deg)}
+#vf3-ai-widget .vf3-ai-bot-row:has(.vf3-ai-typing) .vf3-ai-bot-avatar{animation:vf3-chat-thinking 1.4s ease-in-out infinite}
+@keyframes vf3-chat-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes vf3-chat-thinking{50%{transform:rotate(8deg) translateY(-2px)}}
+@keyframes vf3-chat-happy{0%{transform:translateY(0) scale(.95)}55%{transform:translateY(-7px) scale(1.09)}100%{transform:none}}
+/* Keep chat readable on small phones. */
+@media(max-width:720px){
+  #vf3-ai-widget .vf3-ai-mascot-dock{min-height:70px;flex-basis:70px;padding-right:10px}
+  #vf3-ai-widget .vf3-ai-mascot-dock .vf3-ai-mascot-stage{flex-basis:79px;width:79px!important;height:79px!important;margin:-5px 0 -4px -3px!important}
+  #vf3-ai-widget .vf3-ai-mascot-status{font-size:12px}
+  #vf3-ai-widget .vf3-ai-mascot-hint{font-size:9px}
+  #vf3-ai-widget .vf3-ai-bot-avatar{flex-basis:30px;width:30px;height:30px}
+  #vf3-ai-widget .vf3-ai-bot-body{max-width:calc(100% - 38px)}
+}
+@media(prefers-reduced-motion:reduce){
+  #vf3-ai-widget .vf3-ai-mascot-live,
+  #vf3-ai-widget .vf3-ai-bot-row,
+  #vf3-ai-widget .vf3-ai-bot-avatar{animation:none!important;transition:none!important}
+}
