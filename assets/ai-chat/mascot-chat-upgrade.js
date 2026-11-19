@@ -92,7 +92,7 @@
         body.className = 'vf3-ai-bot-body';
         const name = document.createElement('span');
         name.className = 'vf3-ai-bot-name';
-        name.textContent = '🐹 Trợ lý tư vấn';
+        name.textContent = '🐹 Bé Click · Trợ lý tư vấn';
         const parent = bubble.parentElement;
         if (!parent) continue;
         parent.insertBefore(row, bubble);
@@ -126,14 +126,16 @@
       }
       lastProcessed = lastBot;
       const text = lastBot.textContent.trim();
-      let mood = inferMood(text);
+      // Emotion from the D1-backed Worker is authoritative; text inference is fallback.
+      let mood = ["welcome","plead","thinking","happy","sad","idle"].includes(lastBot.dataset.mood)
+        ? lastBot.dataset.mood : inferMood(text);
       if (/kết nối tư vấn ai đang gián đoạn|chưa thể trả lời tự động/.test(text.toLocaleLowerCase('vi-VN'))) mood = 'sad';
       mascot.setMood(mood);
       const row = lastBot.closest('.vf3-ai-bot-row');
       if (row) {
         row.dataset.mood = mood;
         const name = row.querySelector('.vf3-ai-bot-name');
-        if (name) name.textContent = mood === 'sad' ? '🥺 Trợ lý tư vấn' : mood === 'plead' ? '🥹 Trợ lý tư vấn' : mood === 'happy' ? '🥳 Trợ lý tư vấn' : '🐹 Trợ lý tư vấn';
+        if (name) name.textContent = mood === 'sad' ? '🥺 Bé Click' : mood === 'plead' ? '🥹 Bé Click' : mood === 'happy' ? '🥳 Bé Click' : '🐹 Bé Click';
       }
       displayMood();
       // Return to blinking, calm idle after showing the reaction; don't interrupt next user turn.

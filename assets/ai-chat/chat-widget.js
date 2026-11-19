@@ -174,7 +174,14 @@
       const reply = typeof data.reply === "string" ? data.reply.trim() : "";
       if (data.success === true && data.action !== "IGNORE" && reply) {
         loading.textContent = reply.slice(0, 1800);
-        mascotMood(data.action === "ASK_CLARIFY" ? "plead" : "happy", Math.min(3500, Math.max(900, reply.length * 36)));
+        // Prefer the Worker-provided emotion over generic action heuristics.
+        const safeMoods = new Set(["welcome", "plead", "thinking", "happy", "sad", "idle"]);
+        const replyMood = safeMoods.has(data.mood) ? data.mood : (
+          /FULLY_BLOCKED|CONFLICT|CAR_BUSY|UNAVAILABLE|LIMIT|ERROR/.test(String(data.reason_code || "")) ? "sad" :
+          data.action === "ASK_CLARIFY" ? "plead" : "happy"
+        );
+        loading.dataset.mood = replyMood;
+        mascotMood(replyMood, Math.min(3500, Math.max(900, reply.length * 36)));
       } else {
         loading.textContent = "Em chưa thể trả lời tự động trên website lúc này. Anh/chị có thể xem lịch xe hoặc liên hệ Zalo để được hỗ trợ nhé! 💙";
         mascotMood("sad");
