@@ -1,33 +1,43 @@
-/* VF3 Click — live mascot dock for chat (add-on, no API / DB changes).
+/* VF3 Click — live mascot dock for chat V4 Ultimate (reads authoritative backend mood).
    Place after chat-widget.js. Safe if widget / image layers load later. */
 (() => {
   'use strict';
   if (window.__VF3_MASCOT_CHAT_UPGRADE__) return;
   window.__VF3_MASCOT_CHAT_UPGRADE__ = true;
 
-  const STYLE_URL = '/assets/ai-chat/mascot-chat-upgrade.css?v=2';
-  const path = '/assets/ai-chat/mascot/hamster-head.webp';
-  const css = document.createElement('link');
-  css.rel = 'stylesheet';
-  css.href = STYLE_URL;
-  document.head.appendChild(css);
+  const STYLE_URL = '/assets/ai-chat/mascot-chat-upgrade.css?v=4';
+  const AVATAR_PATH = '/assets/ai-chat/mascot/hamster-head.webp';
+  const VALID_MOODS = new Set(['idle', 'welcome', 'plead', 'thinking', 'happy', 'sad']);
+
+  if (!document.querySelector('link[href*="/assets/ai-chat/mascot-chat-upgrade.css"]')) {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = STYLE_URL;
+    document.head.appendChild(css);
+  }
 
   const statusByMood = {
-    welcome: ['👋', 'Sẵn sàng tư vấn', 'Mình cứ hỏi em về VF3, VF8 hoặc KIA K5 nhé!'],
-    plead: ['🥹', 'Đang hỏi mình một chút', 'Em cần thêm một chi tiết để tư vấn chính xác ạ.'],
-    thinking: ['🤔', 'Đang tìm thông tin…', 'Em đang kiểm tra câu hỏi của mình.'],
-    happy: ['🥳', 'Đã có thông tin rồi!', 'Em vừa trả lời, mình xem tin nhắn ngay bên dưới nhé.'],
-    sad: ['🥺', 'Tiếc quá…', 'Mình có thể chọn phương án hoặc lịch thuê khác ạ.'],
-    idle: ['😊', 'Em vẫn ở đây nhé', 'Mình cần hỏi thêm gì, cứ nhắn em ạ.']
+    welcome: ['👋', 'Bé Click sẵn sàng!', 'Hỏi bé lịch xe VF3, VF8, KIA K5 hoặc tán gẫu nha!'],
+    plead: ['🥹', 'Bé hỏi thêm xíu nha', 'Cho bé thêm chút thông tin để soi lịch thật chuẩn ạ.'],
+    thinking: ['🤔', 'Bé đang soi lịch…', 'Chờ bé vài giây kiểm tra dữ liệu hệ thống nha.'],
+    happy: ['🥳', 'Có tín hiệu ngon lành!', 'Bé vừa trả lời ngay bên dưới, mình xem nhé!'],
+    sad: ['🥺', 'Tiếc quá đi…', 'Mình thử đổi ngày hoặc dòng xe khác với bé nha.'],
+    idle: ['😊', 'Bé vẫn trực ở đây nè', 'Cần hỏi thêm gì cứ nhắn bé bất cứ lúc nào!']
   };
 
-  function inferMood(text) {
+  function inferMoodFallback(text) {
     const content = String(text || '').toLocaleLowerCase('vi-VN');
-    // Only specific unavailability phrases, not generic "không" / "chưa".
-    if (/tiếc quá|hết xe|hết lịch|hết chỗ|lịch (?:đã )?kín|không còn (?:xe |lịch |ngày )?trống|không có xe trống|đã có khách thuê|không còn xe|không khả dụng|đã được thuê|đã được đặt/.test(content)) return 'sad';
-    if (/ngày nào|giờ nào|mấy giờ|cho em (?:xin|biết)|mình dự kiến|anh\/chị (?:muốn|dự kiến)|mình có thể cho em/.test(content) && /\?/.test(content)) return 'plead';
-    if (/tuyệt quá|rất vui|thành công|còn lịch trống|đã tìm thấy|cảm ơn mình/.test(content)) return 'happy';
+    if (/chưa ghi nhận lịch bận|tín hiệu ngon lành|đúng bài|tin vui|còn kha khá ngày đẹp|kèo .* đẹp/.test(content)) return 'happy';
+    if (/tiếc quá|hết xe|hết lịch|bị khóa lịch|khóa cả ngày|kín lịch|gián đoạn|chưa trả lời tự động|bất tiện/.test(content)) return 'sad';
+    if (/ngày nào|giờ nào|mấy giờ|cho bé xin|mình dự kiến|chọn lại|đã qua/.test(content) && /\?/.test(content)) return 'plead';
     return 'welcome';
+  }
+
+  function badgeName(mood) {
+    if (mood === 'sad') return '🥺 Bé Click';
+    if (mood === 'plead') return '🥹 Bé Click';
+    if (mood === 'happy') return '🥳 Bé Click';
+    return '🐹 Bé Click';
   }
 
   function install() {
@@ -39,20 +49,19 @@
     if (!panel || !feed || !stage || !window.VF3Mascot) return false;
 
     widget.dataset.mascotChatUpgrade = '1';
-    // KEEP the mascot outside the scrolling feed, but inside the chat window.
     const dock = document.createElement('div');
     dock.className = 'vf3-ai-mascot-dock';
-    dock.setAttribute('aria-label', 'Biểu cảm trực tiếp của trợ lý VF3 Click');
+    dock.setAttribute('aria-label', 'Biểu cảm trực tiếp của Bé Click');
     dock.innerHTML = [
       '<div class="vf3-ai-mascot-copy">',
-      '<span class="vf3-ai-mascot-eyebrow">TRỢ LÝ HAMSTER VF3</span>',
-      '<strong class="vf3-ai-mascot-status" aria-live="polite">👋 Sẵn sàng tư vấn</strong>',
-      '<small class="vf3-ai-mascot-hint">Mình cứ hỏi em về VF3, VF8 hoặc KIA K5 nhé!</small>',
+      '<span class="vf3-ai-mascot-eyebrow">TRỢ LÝ BÉ CLICK</span>',
+      '<strong class="vf3-ai-mascot-status" aria-live="polite">👋 Bé Click sẵn sàng!</strong>',
+      '<small class="vf3-ai-mascot-hint">Hỏi bé lịch xe VF3, VF8, KIA K5 hoặc tán gẫu nha!</small>',
       '</div>',
       '<span class="vf3-ai-mascot-live" aria-hidden="true"></span>'
     ].join('');
     panel.insertBefore(dock, feed);
-    dock.prepend(stage); // move the EXISTING animated mascot, don't create a second one
+    dock.prepend(stage);
 
     const mascot = window.VF3Mascot.mount(stage);
     const stateTitle = dock.querySelector('.vf3-ai-mascot-status');
@@ -67,13 +76,12 @@
       const mood = stage.dataset.mood || 'idle';
       const [emoji, label, details] = statusByMood[mood] || statusByMood.idle;
       const speaking = stage.dataset.speaking === '1';
-      stateTitle.textContent = emoji + ' ' + (speaking ? 'Đang diễn đạt câu trả lời…' : label);
-      hint.textContent = speaking ? 'Miệng chuyển động minh họa theo nội dung chat; chưa phát giọng nói.' : details;
+      stateTitle.textContent = emoji + ' ' + (speaking ? 'Bé đang trả lời…' : label);
+      hint.textContent = speaking ? 'Chuyển động minh họa theo nội dung phản hồi.' : details;
       dock.dataset.mood = mood;
       liveDot.dataset.speaking = speaking ? '1' : '0';
     }
 
-    // Bot message row, keeping original bubble element so loading updates still work.
     function decorate() {
       const messages = feed.querySelectorAll('.vf3-ai-message--bot:not([data-mascot-decorated])');
       for (const bubble of messages) {
@@ -84,7 +92,7 @@
         avatar.className = 'vf3-ai-bot-avatar';
         avatar.setAttribute('aria-hidden', 'true');
         const img = document.createElement('img');
-        img.src = path;
+        img.src = AVATAR_PATH;
         img.alt = '';
         img.loading = 'lazy';
         avatar.appendChild(img);
@@ -92,7 +100,7 @@
         body.className = 'vf3-ai-bot-body';
         const name = document.createElement('span');
         name.className = 'vf3-ai-bot-name';
-        name.textContent = '🐹 Hamster VF3 Click';
+        name.textContent = '🐹 Bé Click';
         const parent = bubble.parentElement;
         if (!parent) continue;
         parent.insertBefore(row, bubble);
@@ -107,7 +115,6 @@
       const pending = feed.querySelector('.vf3-ai-message--bot.vf3-ai-typing');
       if (pending) {
         window.clearTimeout(idleTimer);
-        // The original chat-widget already does setMood('thinking').
         if (stage.dataset.mood !== 'thinking') mascot.setMood('thinking');
         displayMood();
         return;
@@ -118,32 +125,35 @@
         displayMood();
         return;
       }
-      // The first greeting is not an AI API reply; don't trigger an extra reaction.
       if (botMessages.length === 1) {
         lastProcessed = lastBot;
         displayMood();
         return;
       }
       lastProcessed = lastBot;
-      const text = lastBot.textContent.trim();
-      let mood = inferMood(text);
-      if (/kết nối tư vấn ai đang gián đoạn|chưa thể trả lời tự động/.test(text.toLocaleLowerCase('vi-VN'))) mood = 'sad';
-      mascot.setMood(mood);
+
+      // Priority 1: Authoritative backend mood passed from chat-widget.js
+      const serverMood = lastBot.dataset.serverMood;
+      const mood = VALID_MOODS.has(serverMood) ? serverMood : inferMoodFallback(lastBot.textContent.trim());
+
+      if (stage.dataset.mood !== mood) mascot.setMood(mood);
       const row = lastBot.closest('.vf3-ai-bot-row');
       if (row) {
         row.dataset.mood = mood;
         const name = row.querySelector('.vf3-ai-bot-name');
-        if (name) name.textContent = mood === 'sad' ? '🥺 Hamster VF3 Click' : mood === 'plead' ? '🥹 Hamster VF3 Click' : mood === 'happy' ? '🥳 Hamster VF3 Click' : '🐹 Hamster VF3 Click';
+        if (name) name.textContent = badgeName(mood);
       }
       displayMood();
-      // Return to blinking, calm idle after showing the reaction; don't interrupt next user turn.
+
       window.clearTimeout(idleTimer);
-      if (!prefersReduced) idleTimer = window.setTimeout(() => {
-        if (!feed.querySelector('.vf3-ai-typing') && stage.dataset.speaking !== '1') {
-          mascot.setMood('idle');
-          displayMood();
-        }
-      }, 6500);
+      if (!prefersReduced) {
+        idleTimer = window.setTimeout(() => {
+          if (!feed.querySelector('.vf3-ai-typing') && stage.dataset.speaking !== '1') {
+            mascot.setMood('idle');
+            displayMood();
+          }
+        }, 7000);
+      }
     }
 
     function scheduleStateUpdate() {
@@ -151,8 +161,9 @@
       updatePending = true;
       window.requestAnimationFrame(updateConversationState);
     }
+
     const messagesObserver = new MutationObserver(scheduleStateUpdate);
-    messagesObserver.observe(feed, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class']});
+    messagesObserver.observe(feed, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class', 'data-server-mood'] });
     const mascotObserver = new MutationObserver(displayMood);
     mascotObserver.observe(stage, { attributes: true, attributeFilter: ['data-mood', 'data-speaking'] });
     decorate();
@@ -162,7 +173,7 @@
 
   if (!install()) {
     const observer = new MutationObserver(() => { if (install()) observer.disconnect(); });
-    observer.observe(document.documentElement, {childList: true, subtree: true});
-    window.addEventListener('load', install, {once:true});
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    window.addEventListener('load', install, { once: true });
   }
 })();
