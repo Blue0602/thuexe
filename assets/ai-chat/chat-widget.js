@@ -119,7 +119,7 @@
     if (open) {
       teaser.hidden = true;
       mascotMood("welcome");
-      input.focus({ preventScroll: true });
+      if (window.innerWidth > 720) input.focus({ preventScroll: true });
     } else {
       launcher.focus({ preventScroll: true });
     }
@@ -169,6 +169,8 @@
       });
       if (!response.ok) throw new Error("HTTP " + response.status);
       const data = await response.json();
+      // Diagnostic only: no messages, tokens or customer data are logged.
+      console.info("VF3_AI_RESULT", { action: data.action, reason_code: data.reason_code || "UNKNOWN" });
       const reply = typeof data.reply === "string" ? data.reply.trim() : "";
       if (data.success === true && data.action !== "IGNORE" && reply) {
         loading.textContent = reply.slice(0, 1800);
@@ -188,7 +190,7 @@
       busy = false;
       input.disabled = false;
       submit.disabled = false;
-      if (root.dataset.open === "true") input.focus({ preventScroll: true });
+      if (root.dataset.open === "true" && window.innerWidth > 720) input.focus({ preventScroll: true });
     }
   }
 
