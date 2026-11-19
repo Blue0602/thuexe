@@ -194,7 +194,7 @@
     if (chatHistory.length > HISTORY_LIMIT) chatHistory.splice(0, chatHistory.length - HISTORY_LIMIT);
   }
 
-  const greeting = "Xin chào! 🐹💙 Em là Bé Click — trợ lý tư vấn xe VF3 VIP, VF8 Plus và KIA K5. Hôm nay anh/chị muốn xem lịch hay tán gẫu với bé nè?";
+  const greeting = "Chào anh/chị! 🐹💙 Bé Click của thuevf3.click có mặt rồi đây. Em trực 24/7 để hỗ trợ mình xem lịch xe, báo giá và giải đáp thắc mắc ạ!";
   addMessage(greeting, "bot", "welcome");
 
   // Mobile virtual keyboard viewport adaptation
