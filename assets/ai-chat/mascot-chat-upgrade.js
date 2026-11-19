@@ -5,6 +5,40 @@
   if (window.__VF3_MASCOT_CHAT_UPGRADE__) return;
   window.__VF3_MASCOT_CHAT_UPGRADE__ = true;
 
+  // V4: Enrich only the existing website chatbot request with last 8 turns.
+  // This is conversational context, NOT authority for pricing / D1 bookings.
+  if (!window.__VF3_V4_CHAT_HISTORY__) {
+    window.__VF3_V4_CHAT_HISTORY__ = true;
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = (resource, options) => {
+      try {
+        const url = typeof resource === 'string' ? resource : resource?.url || '';
+        const target = new URL(url, window.location.href);
+        if (target.pathname === '/api/ai/website'
+          && target.hostname === 'thuevf3click-ai.hgpure2003.workers.dev'
+          && String(options?.method || 'GET').toUpperCase() === 'POST'
+          && typeof options?.body === 'string') {
+          const data = JSON.parse(options.body);
+          if (data?.channel === 'website' && typeof data.message === 'string') {
+            const feed = document.querySelector('#vf3-ai-feed');
+            const turns = Array.from(feed?.querySelectorAll('.vf3-ai-message') || [])
+              .filter(el => !el.classList.contains('vf3-ai-typing'))
+              .map(el => ({
+                role: el.classList.contains('vf3-ai-message--user') ? 'user' : 'assistant',
+                text: String(el.textContent || '').slice(0, 260)
+              }))
+              .filter(x => x.text.trim().length > 0);
+            if (turns.length && turns[turns.length - 1].role === 'user'
+              && turns[turns.length - 1].text.trim() === data.message.trim()) turns.pop();
+            data.history = turns.slice(-16);
+            return originalFetch(resource, {...options, body: JSON.stringify(data)});
+          }
+        }
+      } catch (_) { /* Original request remains intact. */ }
+      return originalFetch(resource, options);
+    };
+  }
+
   const STYLE_URL = '/assets/ai-chat/mascot-chat-upgrade.css?v=2';
   const path = '/assets/ai-chat/mascot/hamster-head.webp';
   const css = document.createElement('link');
@@ -154,7 +188,7 @@
       window.requestAnimationFrame(updateConversationState);
     }
     const messagesObserver = new MutationObserver(scheduleStateUpdate);
-    messagesObserver.observe(feed, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class']});
+    messagesObserver.observe(feed, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['class', 'data-mood']});
     const mascotObserver = new MutationObserver(displayMood);
     mascotObserver.observe(stage, { attributes: true, attributeFilter: ['data-mood', 'data-speaking'] });
     decorate();
