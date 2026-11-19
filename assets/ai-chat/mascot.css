@@ -1,36 +1,189 @@
-/* VF3 Click expressive hamster mascot: 2.5D CSS layer animation. */
-.vf3-mascot{position:relative;aspect-ratio:1;width:100%;max-width:420px;display:block;isolation:isolate;flex-shrink:0}
-.vf3-mascot *, .vf3-mascot *::before{box-sizing:border-box}
-.vf3-mascot .vf3-mascot-car-wrap{position:absolute;inset:0;transform-origin:50% 85%;animation:vf3-mascot-float 3s ease-in-out infinite}
-.vf3-mascot .vf3-mascot-layer{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;user-select:none;object-fit:contain}
-.vf3-mascot .vf3-mascot-head{position:absolute;inset:0;width:100%;height:100%;transform-origin:55% 37%;animation:vf3-mascot-head-idle 4.5s ease-in-out infinite}
-.vf3-mascot .vf3-mascot-eyes,.vf3-mascot .vf3-mascot-lids{opacity:0}
-.vf3-mascot[data-blink="1"] .vf3-mascot-eyes,.vf3-mascot[data-blink="1"] .vf3-mascot-lids{opacity:1}
-.vf3-mascot .vf3-mascot-speech-mouth{transform-origin:534px 351px;opacity:0}
-.vf3-mascot[data-speaking="1"] .vf3-mascot-speech-mouth{opacity:1;animation:vf3-mascot-mouth .32s ease-in-out infinite alternate}
-.vf3-mascot .vf3-mascot-sparkle{position:absolute;z-index:2;font-size:clamp(12px,5%,24px);color:#46adff;text-shadow:0 2px 9px #fff;opacity:0;pointer-events:none}
-.vf3-mascot .vf3-mascot-sparkle--left{top:23%;left:24%}
-.vf3-mascot .vf3-mascot-sparkle--right{top:16%;right:19%;color:#ffd67b}
-.vf3-mascot .vf3-mascot-thought{position:absolute;z-index:2;right:15%;top:5%;padding:2px 10px;border:1px solid #b6d9fb;border-radius:999px;color:#2873cb;font-size:clamp(11px,3%,15px);letter-spacing:4px;background:white;box-shadow:0 5px 15px #3b72ac28;opacity:0}
-.vf3-mascot[data-mood="welcome"] .vf3-mascot-head{animation:vf3-mascot-head-hello 2.9s ease-in-out infinite}
-.vf3-mascot[data-mood="plead"] .vf3-mascot-head{animation:vf3-mascot-head-plead 2.6s ease-in-out infinite}
-.vf3-mascot[data-mood="plead"] .vf3-mascot-sparkle{opacity:1;animation:vf3-mascot-sparkle 1.3s ease-in-out infinite alternate}
-.vf3-mascot[data-mood="thinking"] .vf3-mascot-head{animation:vf3-mascot-head-think 3.2s ease-in-out infinite}
-.vf3-mascot[data-mood="thinking"] .vf3-mascot-thought{opacity:1;animation:vf3-mascot-dots 1.3s ease-in-out infinite}
-.vf3-mascot[data-mood="happy"] .vf3-mascot-car-wrap{animation:vf3-mascot-happy .85s ease-in-out infinite}
-.vf3-mascot[data-mood="happy"] .vf3-mascot-sparkle{opacity:1;animation:vf3-mascot-sparkle .8s ease-in-out infinite alternate}
-.vf3-mascot[data-mood="sad"] .vf3-mascot-head{animation:vf3-mascot-head-sad 3s ease-in-out infinite}
-.vf3-mascot[data-mood="sad"] .vf3-mascot-car-wrap{animation:vf3-mascot-float 4.5s ease-in-out infinite}
-.vf3-mascot[data-speaking="1"] .vf3-mascot-head{animation:vf3-mascot-head-talking .64s ease-in-out infinite alternate}
-@keyframes vf3-mascot-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-1.4%) rotate(.4deg)}}
-@keyframes vf3-mascot-head-idle{0%,100%{transform:rotate(0)}50%{transform:rotate(1.2deg)}}
-@keyframes vf3-mascot-head-hello{0%,100%{transform:rotate(-1deg)}42%{transform:rotate(2.8deg)}70%{transform:rotate(-2deg)}}
-@keyframes vf3-mascot-head-plead{0%,100%{transform:rotate(-4.5deg) translateY(0)}50%{transform:rotate(-6deg) translateY(1%)}}
-@keyframes vf3-mascot-head-think{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(3deg) translateY(-.65%)}}
-@keyframes vf3-mascot-head-sad{0%,100%{transform:rotate(4deg) translateY(1%)}50%{transform:rotate(5deg) translateY(1.7%)}}
-@keyframes vf3-mascot-head-talking{from{transform:rotate(-1.5deg) translateY(0)}to{transform:rotate(1deg) translateY(-.5%)}}
-@keyframes vf3-mascot-mouth{0%{transform:scaleY(.5) scaleX(.82)}47%{transform:scaleY(1.1) scaleX(1)}100%{transform:scaleY(.65) scaleX(.86)}}
-@keyframes vf3-mascot-happy{0%,100%{transform:translateY(0) rotate(-.4deg)}55%{transform:translateY(-2.5%) rotate(.8deg)}}
-@keyframes vf3-mascot-sparkle{from{transform:scale(.72) rotate(-15deg);filter:brightness(.9)}to{transform:scale(1.25) rotate(10deg);filter:brightness(1.2)}}
-@keyframes vf3-mascot-dots{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-5px);opacity:1}}
-@media(prefers-reduced-motion:reduce){.vf3-mascot *, .vf3-mascot *::before{animation:none!important}.vf3-mascot[data-speaking="1"] .vf3-mascot-speech-mouth{opacity:1}}
+/* VF3 Click Mascot Motion Rig v2 — 600x600 photo-aligned facial rig.
+   Layer order: ears behind skull, skull, restored skin, floating eyes, mouth skin, SVG face.
+   Uses one-shot spring reactions with slow secondary motions; no perpetual whole-car bouncing. */
+.vf3-mascot{
+  --vf3-spring:cubic-bezier(.34,1.56,.64,1);
+  --vf3-smooth:cubic-bezier(.22,1,.36,1);
+  position:relative;display:block;isolation:isolate;width:100%;max-width:420px;
+  aspect-ratio:1/1;flex-shrink:0;overflow:visible;
+}
+.vf3-mascot *,.vf3-mascot *::before,.vf3-mascot *::after{box-sizing:border-box}
+.vf3-mascot .vf3-art,.vf3-mascot .vf3-face{
+  position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;
+  pointer-events:none;user-select:none;-webkit-user-drag:none;
+}
+.vf3-mascot .vf3-ground-shadow{
+  position:absolute;z-index:0;left:24%;right:18%;bottom:9.2%;height:5%;
+  background:radial-gradient(ellipse,rgba(16,65,103,.16),transparent 72%);
+  border-radius:100%;filter:blur(8px);transform:scale(1);
+  transition:transform .75s var(--vf3-smooth),opacity .6s ease;
+}
+.vf3-mascot .vf3-car-motion{
+  position:absolute;inset:0;z-index:1;transform-origin:50% 82%;
+  transition:transform 900ms var(--vf3-spring),filter 900ms ease;
+}
+.vf3-mascot .vf3-car{z-index:1}
+.vf3-mascot .vf3-head-motion{
+  position:absolute;inset:0;z-index:3;transform-origin:53% 37%;
+  transition:transform 900ms var(--vf3-smooth);
+}
+.vf3-mascot .vf3-breath{
+  position:absolute;inset:0;transform-origin:53% 38%;
+  animation:vf3-v2-breathe 4.5s ease-in-out infinite;
+}
+.vf3-mascot .vf3-ear{
+  z-index:1;will-change:transform;
+  transition:transform 920ms var(--vf3-spring),opacity .3s ease;
+}
+/* Full 600x600 artboard: origins target actual ear base, NOT the center of the image. */
+.vf3-mascot .vf3-ear-left{transform-origin:46.8% 22.5%;transform:rotate(-2deg)}
+.vf3-mascot .vf3-ear-right{transform-origin:63.4% 22.0%;transform:rotate(2deg)}
+.vf3-mascot .vf3-head-core{z-index:2}
+.vf3-mascot .vf3-eye-skin{z-index:3;opacity:1}
+.vf3-mascot .vf3-eye-sprite{
+  z-index:4;opacity:1;transition:transform 380ms var(--vf3-smooth),opacity 120ms ease;
+}
+.vf3-mascot .vf3-eye-left{transform:translate(0,0)}
+.vf3-mascot .vf3-eye-right{transform:translate(0,0)}
+.vf3-mascot .vf3-mouth-skin{z-index:5;opacity:0;transition:opacity 130ms ease}
+.vf3-mascot .vf3-face{z-index:6;overflow:visible}
+/* Face overlay: small photographic lines, not opaque emoji stickers */
+.vf3-mascot .vf3-face-welcome,.vf3-mascot .vf3-face-plead,
+.vf3-mascot .vf3-face-think,.vf3-mascot .vf3-face-happy,
+.vf3-mascot .vf3-face-sad,.vf3-mascot .vf3-face-blink,
+.vf3-mascot .vf3-face-talk{opacity:0;transition:opacity 175ms ease}
+.vf3-mascot .vf3-brow{fill:none;stroke:#aa794d;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
+.vf3-mascot .vf3-sad-brow{fill:none;stroke:#925d37;stroke-width:5;stroke-linecap:round}
+.vf3-mascot .vf3-sad-eye{fill:none;stroke:#82502f;stroke-width:5.1;stroke-linecap:round}
+.vf3-mascot .vf3-sad-frown{fill:none;stroke:#744236;stroke-width:4.3;stroke-linecap:round}
+.vf3-mascot .vf3-happy-eye{fill:none;stroke:#78502d;stroke-width:5.3;stroke-linecap:round}
+.vf3-mascot .vf3-cheek{fill:#f59ab0;filter:blur(3.5px);opacity:.47}
+.vf3-mascot .vf3-happy-cheek{opacity:.75;transform-origin:center;animation:vf3-v2-cheek 3.2s ease-in-out infinite}
+.vf3-mascot .vf3-tear{fill:#7dccff;stroke:#f3ffff;stroke-width:1.1;opacity:.89;filter:drop-shadow(0 1px 1.5px rgba(67,145,204,.3))}
+.vf3-mascot .vf3-tear-second{opacity:.66}
+.vf3-mascot .vf3-tear-glint{fill:none;stroke:#fff;stroke-width:1.4;stroke-linecap:round}
+.vf3-mascot .vf3-think-lid{fill:none;stroke:#a07852;stroke-width:2.8;stroke-linecap:round;opacity:.7}
+.vf3-mascot .vf3-blink-line{fill:none;stroke:#96613b;stroke-width:4.1;stroke-linecap:round}
+.vf3-mascot .vf3-viseme{fill:#4a2228;opacity:0;transition:opacity 70ms ease}
+.vf3-mascot .vf3-mouth-tongue{fill:#f28e96;opacity:0;transition:opacity 75ms ease}
+.vf3-mascot .vf3-viseme-rest{fill:none;stroke:#814439;stroke-width:3.6;stroke-linecap:round;opacity:0}
+/* Eyes are real image sprites, which can dart over an original-fur cover. */
+.vf3-mascot[data-gaze='left'] .vf3-eye-sprite{transform:translateX(-3px)}
+.vf3-mascot[data-gaze='right'] .vf3-eye-sprite{transform:translateX(3px)}
+.vf3-mascot[data-gaze='up-left'] .vf3-eye-sprite{transform:translate(-2px,-2px)}
+.vf3-mascot[data-gaze='up-right'] .vf3-eye-sprite{transform:translate(2px,-3px)}
+.vf3-mascot[data-gaze='center'] .vf3-eye-sprite{transform:translate(0,0)}
+.vf3-mascot[data-blink='1'] .vf3-eye-sprite,
+.vf3-mascot[data-mood='sad'] .vf3-eye-sprite,
+.vf3-mascot[data-mood='happy'] .vf3-eye-sprite{opacity:0}
+.vf3-mascot[data-blink='1']:not([data-mood='sad']):not([data-mood='happy']) .vf3-face-blink{opacity:1}
+.vf3-mascot[data-mood='welcome'] .vf3-face-welcome{opacity:.65}
+.vf3-mascot[data-mood='plead'] .vf3-face-plead{opacity:1}
+.vf3-mascot[data-mood='thinking'] .vf3-face-think{opacity:1}
+.vf3-mascot[data-mood='happy'] .vf3-face-happy{opacity:1}
+.vf3-mascot[data-mood='sad'] .vf3-face-sad{opacity:1}
+.vf3-mascot[data-mood='sad'] .vf3-mouth-skin,
+.vf3-mascot[data-speaking='1'] .vf3-mouth-skin{opacity:1}
+.vf3-mascot[data-speaking='1'] .vf3-face-sad .vf3-sad-frown{opacity:0}
+.vf3-mascot[data-speaking='1'] .vf3-face-talk{opacity:1}
+.vf3-mascot[data-speaking='1'][data-viseme='a'] .vf3-viseme-a,
+.vf3-mascot[data-speaking='1'][data-viseme='o'] .vf3-viseme-o,
+.vf3-mascot[data-speaking='1'][data-viseme='e'] .vf3-viseme-e,
+.vf3-mascot[data-speaking='1'][data-viseme='rest'] .vf3-viseme-rest{opacity:1}
+.vf3-mascot[data-speaking='1'][data-viseme='a'] .vf3-mouth-tongue,
+.vf3-mascot[data-speaking='1'][data-viseme='e'] .vf3-mouth-tongue{opacity:.64}
+
+/* Isolated source-photo hand (forearm stays in the car). The wrist is a real pivot. */
+.vf3-mascot .vf3-hand{z-index:3;transform-origin:75.3% 40%;transform:rotate(0);transition:transform 800ms var(--vf3-spring);will-change:transform}
+.vf3-mascot[data-mood='sad'] .vf3-hand{transform:rotate(17deg)}
+.vf3-mascot[data-mood='thinking'] .vf3-hand{transform:rotate(-7deg)}
+.vf3-mascot[data-mood='plead'] .vf3-hand{transform:rotate(-9deg)}
+.vf3-mascot[data-mood='welcome'] .vf3-hand{animation:vf3-v2-hand-hello 2.15s ease-in-out infinite}
+.vf3-mascot[data-mood='happy'] .vf3-hand{animation:vf3-v2-hand-wave .66s var(--vf3-spring) infinite}
+@keyframes vf3-v2-hand-hello{0%,74%,100%{transform:rotate(1deg)}83%{transform:rotate(-9deg)}92%{transform:rotate(6deg)}}
+@keyframes vf3-v2-hand-wave{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(15deg)}}
+/* expressive car LED. Photo headlamps remain in car asset; this adds bloom only. */
+.vf3-mascot .vf3-led{
+  position:absolute;z-index:2;top:61.8%;width:8%;height:2.5%;opacity:0;
+  background:#75d4ff;border-radius:60%;filter:blur(5px);
+  box-shadow:0 0 15px rgba(47,162,255,.74),0 0 25px rgba(44,156,255,.35);
+  pointer-events:none;
+}
+.vf3-mascot .vf3-led-left{left:26.2%}
+.vf3-mascot .vf3-led-right{left:80.4%}
+/* Particles, air-thoughts, optional sad sigh caption */
+.vf3-mascot .vf3-sparks{position:absolute;inset:0;z-index:9;pointer-events:none}
+.vf3-mascot .vf3-sparks i{position:absolute;font-style:normal;opacity:0;font-size:clamp(12px,5vw,25px);filter:drop-shadow(0 2px 4px rgba(255,255,255,.8))}
+.vf3-mascot .vf3-sparks i:nth-child(1){left:26%;top:20%;color:#68bbff;--dx:-14px;--dy:-27px;animation-delay:0ms}
+.vf3-mascot .vf3-sparks i:nth-child(2){right:26%;top:18%;color:#f792b9;--dx:16px;--dy:-31px;animation-delay:140ms}
+.vf3-mascot .vf3-sparks i:nth-child(3){right:16%;top:9%;color:#fbd36c;--dx:18px;--dy:-26px;animation-delay:230ms}
+.vf3-mascot .vf3-sparks i:nth-child(4){left:19%;top:35%;color:#54baf7;--dx:-19px;--dy:-13px;animation-delay:300ms}
+.vf3-mascot .vf3-sparks i:nth-child(5){left:41%;top:6%;color:#f994c3;--dx:7px;--dy:-19px;animation-delay:90ms}
+.vf3-mascot .vf3-sparks i:nth-child(6){right:37%;top:30%;color:#f3d16c;--dx:24px;--dy:-33px;animation-delay:400ms}
+.vf3-mascot .vf3-thought{position:absolute;z-index:8;right:13%;top:11%;opacity:0;display:flex;gap:5px;transition:opacity 240ms ease}
+.vf3-mascot .vf3-thought i{background:#6ba5e6;width:8px;height:8px;border-radius:50%;animation:vf3-v2-dots 1.25s ease-in-out infinite}
+.vf3-mascot .vf3-thought i:nth-child(2){animation-delay:130ms}
+.vf3-mascot .vf3-thought i:nth-child(3){animation-delay:260ms}
+.vf3-mascot .vf3-sigh{position:absolute;z-index:8;top:13%;right:12%;font-weight:800;color:#88a0b6;letter-spacing:.04em;font-size:clamp(11px,3.2vw,19px);opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity 700ms ease,transform 1.3s ease}
+/* Calm held poses */
+.vf3-mascot[data-mood='idle'] .vf3-head-motion{transform:translateY(0) rotate(0)}
+.vf3-mascot[data-mood='welcome'] .vf3-head-motion{transform:translateY(-.8%) rotate(-3.8deg)}
+.vf3-mascot[data-mood='plead'] .vf3-head-motion{transform:translateY(1.1%) rotate(-7deg)}
+.vf3-mascot[data-mood='thinking'] .vf3-head-motion{transform:translateY(-.8%) rotate(12deg)}
+.vf3-mascot[data-mood='happy'] .vf3-head-motion{transform:translateY(-1.4%) rotate(-2deg)}
+.vf3-mascot[data-mood='sad'] .vf3-head-motion{transform:translateY(4.5%) rotate(6.6deg) scale(.987,.965)}
+.vf3-mascot[data-mood='sad'] .vf3-car-motion{transform:translateY(1.1%) scale(1.006,.991);filter:saturate(.83) brightness(.91)}
+.vf3-mascot[data-mood='sad'] .vf3-ground-shadow{transform:scale(1.09);opacity:.72}
+/* Deep-pivot ears slide IN the skull; never levitate around center of image. */
+.vf3-mascot[data-mood='sad'] .vf3-ear-left{transform:rotate(-43deg) translate(-1%,1.5%)}
+.vf3-mascot[data-mood='sad'] .vf3-ear-right{transform:rotate(44deg) translate(1%,2%)}
+.vf3-mascot[data-mood='thinking'] .vf3-ear-left{transform:rotate(-9deg)}
+.vf3-mascot[data-mood='thinking'] .vf3-ear-right{transform:rotate(24deg)}
+.vf3-mascot[data-mood='happy'] .vf3-ear-left{transform:rotate(9deg) translateY(-1%)}
+.vf3-mascot[data-mood='happy'] .vf3-ear-right{transform:rotate(-7deg) translateY(-1%)}
+.vf3-mascot[data-mood='plead'] .vf3-ear-left{transform:rotate(-24deg)}
+.vf3-mascot[data-mood='plead'] .vf3-ear-right{transform:rotate(20deg)}
+.vf3-mascot[data-mood='welcome'] .vf3-ear-left{transform:rotate(-6deg)}
+.vf3-mascot[data-mood='welcome'] .vf3-ear-right{transform:rotate(10deg)}
+.vf3-mascot[data-ear='left']:not([data-mood='sad']) .vf3-ear-left{animation:vf3-v2-earleft 690ms ease-in-out both}
+.vf3-mascot[data-ear='right']:not([data-mood='sad']) .vf3-ear-right{animation:vf3-v2-earright 690ms ease-in-out both}
+.vf3-mascot[data-mood='thinking'] .vf3-thought{opacity:1}
+.vf3-mascot[data-mood='sad'] .vf3-sigh{opacity:.85;transform:translateY(-5px)}
+.vf3-mascot[data-mood='sad'] .vf3-breath{animation:vf3-v2-breathe-sad 5.8s ease-in-out infinite}
+.vf3-mascot.vf3-sob[data-mood='sad'] .vf3-breath{animation:vf3-v2-sob 710ms ease-in-out 1}
+.vf3-mascot[data-mood='happy'] .vf3-led{opacity:.62;animation:vf3-v2-led 1.6s ease-in-out infinite alternate}
+.vf3-mascot[data-mood='happy'] .vf3-sparks i{animation:vf3-v2-particle 2.6s ease-out infinite}
+.vf3-mascot[data-mood='happy'] .vf3-ear-right{animation:vf3-v2-happy-ear 1.8s ease-in-out infinite}
+/* One-shot squash-stretch reactions */
+.vf3-mascot.vf3-enter[data-mood='happy'] .vf3-head-motion{animation:vf3-v2-happy-head 1.42s var(--vf3-smooth) both}
+.vf3-mascot.vf3-enter[data-mood='happy'] .vf3-car-motion{animation:vf3-v2-car-hop 1.42s var(--vf3-smooth) both}
+.vf3-mascot.vf3-enter[data-mood='happy'] .vf3-sparks i{animation:vf3-v2-particle 1.3s ease-out both}
+.vf3-mascot.vf3-enter[data-mood='sad'] .vf3-head-motion{animation:vf3-v2-sad-head 1.22s var(--vf3-smooth) both}
+.vf3-mascot.vf3-enter[data-mood='sad'] .vf3-car-motion{animation:vf3-v2-sad-car 1.22s var(--vf3-smooth) both}
+.vf3-mascot.vf3-enter[data-mood='welcome'] .vf3-head-motion{animation:vf3-v2-hello 1s var(--vf3-spring) both}
+.vf3-mascot.vf3-enter[data-mood='plead'] .vf3-head-motion{animation:vf3-v2-plead 1.05s var(--vf3-smooth) both}
+.vf3-mascot.vf3-enter[data-mood='thinking'] .vf3-head-motion{animation:vf3-v2-thinking 1.03s var(--vf3-smooth) both}
+.vf3-mascot[data-speaking='1'] .vf3-breath{animation:vf3-v2-speaking 360ms ease-in-out infinite alternate}
+/* A moody reaction never speaks at the same time unless externally requested. */
+@keyframes vf3-v2-breathe{0%,100%{transform:translateY(0) scale(1)}48%{transform:translateY(-.24%) scale(1.005,1.004)}}
+@keyframes vf3-v2-breathe-sad{0%,100%{transform:scale(1)}56%{transform:translateY(.45%) scale(1.004,.997)}}
+@keyframes vf3-v2-sob{0%,100%{transform:translateY(0)}28%{transform:translateY(.8%)}56%{transform:translateY(.3%)}75%{transform:translateY(.6%)}}
+@keyframes vf3-v2-speaking{0%{transform:translateY(.12%) rotate(-.22deg)}100%{transform:translateY(-.28%) rotate(.22deg)}}
+@keyframes vf3-v2-cheek{0%,100%{opacity:.7}50%{opacity:.95}}
+@keyframes vf3-v2-earleft{0%,100%{transform:rotate(-4deg)}42%{transform:rotate(-16deg)}65%{transform:rotate(2deg)}}
+@keyframes vf3-v2-earright{0%,100%{transform:rotate(5deg)}42%{transform:rotate(16deg)}65%{transform:rotate(-4deg)}}
+@keyframes vf3-v2-happy-ear{0%,100%{transform:rotate(-7deg)}25%{transform:rotate(-17deg)}50%{transform:rotate(2deg)}76%{transform:rotate(-10deg)}}
+@keyframes vf3-v2-hello{0%{transform:translateY(.8%) rotate(0)}39%{transform:translateY(-1.8%) rotate(-7deg)}69%{transform:translateY(-.5%) rotate(-2deg)}100%{transform:translateY(-.8%) rotate(-3.8deg)}}
+@keyframes vf3-v2-thinking{0%{transform:rotate(0)}65%{transform:rotate(14.4deg) translateY(-.9%)}100%{transform:rotate(12deg) translateY(-.8%)}}
+@keyframes vf3-v2-plead{0%{transform:translateY(0) rotate(0)}65%{transform:translateY(1.7%) rotate(-9deg)}100%{transform:translateY(1.1%) rotate(-7deg)}}
+@keyframes vf3-v2-sad-head{0%{transform:translateY(-1%) rotate(-1deg) scale(1)}33%{transform:translateY(.6%) rotate(1deg) scale(1)}77%{transform:translateY(5.1%) rotate(7.2deg) scale(.984,.96)}100%{transform:translateY(4.5%) rotate(6.6deg) scale(.987,.965)}}
+@keyframes vf3-v2-sad-car{0%{transform:translateY(0) scale(1)}67%{transform:translateY(1.6%) scale(1.01,.985)}100%{transform:translateY(1.1%) scale(1.006,.991)}}
+@keyframes vf3-v2-happy-head{0%{transform:translateY(-1.4%) rotate(-2deg) scale(1)}13%{transform:translateY(1.5%) rotate(-4deg) scale(1.06,.93)}39%{transform:translateY(-6%) rotate(5deg) scale(.965,1.055)}58%{transform:translateY(-3.1%) rotate(0) scale(1)}77%{transform:translateY(0) rotate(-3deg) scale(1.02,.985)}91%{transform:translateY(-2%) rotate(0)}100%{transform:translateY(-1.4%) rotate(-2deg) scale(1)}}
+@keyframes vf3-v2-car-hop{0%,100%{transform:translateY(0) scale(1)}14%{transform:translateY(1.15%) scale(1.023,.978)}38%{transform:translateY(-2.15%) scale(.993,1.015)}57%{transform:translateY(-.8%) scale(1)}77%{transform:translateY(.58%) scale(1.006,.997)}89%{transform:translateY(-.35%)}}
+@keyframes vf3-v2-led{from{filter:blur(5px);opacity:.32}to{filter:blur(5px) drop-shadow(0 0 10px #73caff);opacity:.83}}
+@keyframes vf3-v2-dots{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-5px);opacity:1}}
+@keyframes vf3-v2-particle{0%{opacity:0;transform:translate(0,5px) scale(.45) rotate(-18deg)}19%{opacity:1}63%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.14) rotate(22deg)}}
+@media(max-width:750px){.vf3-mascot .vf3-sparks i{font-size:15px}.vf3-mascot .vf3-sigh{font-size:12px}}
+@media(prefers-reduced-motion:reduce){
+  .vf3-mascot *,.vf3-mascot *::before,.vf3-mascot *::after{animation:none!important;transition:none!important}
+}
