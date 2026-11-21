@@ -4,7 +4,7 @@
   if (document.getElementById("vf3-ai-widget")) return;
 
   const SETTINGS = window.VF3_CHAT_CONFIG || {};
-  const API = SETTINGS.endpoint || "https://thuevf3click-ai.hgpure2003.workers.dev/api/ai/website";
+  const API = SETTINGS.endpoint || "[https://ai.thuevf3.click/api/ai/website](https://ai.thuevf3.click/api/ai/website)";
   const CHANNEL = SETTINGS.channel || "website";
   const DRAFT_KEY = "vf3click_ai_draft_v4";
   const HISTORY_LIMIT = 16;
